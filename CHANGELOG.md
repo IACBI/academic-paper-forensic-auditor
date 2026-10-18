@@ -13,5 +13,9 @@
 - Add open-ended method routing for quantitative, qualitative, computational, formal, engineering, archival, synthesis, conceptual and interdisciplinary research.
 - Support offline source identifiers and optional research/issue context without rejecting earlier structured reports.
 - Expand synthetic method evaluations, reject duplicate policy sections/routing, remove provider-specific metadata and consolidate repeated documentation.
+- Add portable continuation templates, a checkpoint contract and local export/validation that preserve prior evidence identity and finding history.
+- Add a balanced 16-case blind evaluation suite, independent quote-backed judgement records and reproducible quick/master/skill comparisons.
+- Reject stale or altered evaluation packets, incomplete annotations and unsupported score inflation; require current reviewed baselines in project checks.
+- Isolate exported checkpoint reference lists from the prior report and document actual compatibility/scientific validation boundaries.
 
 This release does not claim professional certification, comprehensive forensic detection or verified scientific accuracy.

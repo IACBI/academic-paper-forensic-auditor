@@ -35,7 +35,7 @@ Keep linked references/assets and optional scripts together. No vendor metadata,
 
 ## Optional local helpers
 
-Python 3.10+ is needed only for helpers/development. Only validate-report needs the pinned jsonschema dependency. Hashing/arithmetic use the standard library. Helpers make no runtime network request and contain no telemetry; dependency installation contacts the package index.
+Python 3.10+ is needed only for helpers/development. Report/checkpoint validation and checkpoint conversion need the pinned jsonschema dependency. Hashing/arithmetic use the standard library. Helpers make no runtime network request and contain no telemetry; dependency installation contacts the package index.
 
 Use a suitable environment, for example `python -m venv .venv`. Its interpreter is `.venv/Scripts/python.exe` on Windows or `.venv/bin/python` on macOS/Linux; `python` below means the chosen interpreter:
 
@@ -61,7 +61,20 @@ JSON is optional. The [schema](../skills/academic-paper-audit/assets/report.sche
 
 Validation checks structure, timezones, links, coverage, derivation cycles, challenge/review requirements, source eligibility and some contradictions. It cannot establish truth, actual source access, authority, honest tool use or scientific accuracy. Invalid reports have null finding counts, not misleading zeros. The [synthetic example](../examples/synthetic-report.json) is a worked text/arithmetic case, not an accuracy benchmark.
 
-Exit codes: 0 successful command/valid report, 1 invalid report, 2 invalid input/unreadable file/missing dependency. An arithmetic mismatch is successful computation output, not a software failure.
+Exit codes: 0 successful command/valid report or checkpoint, 1 invalid report or checkpoint, 2 invalid input/unreadable file/missing dependency. An arithmetic mismatch is successful computation output, not a software failure.
+
+## Continue with another session or agent
+
+Use the [continuation template](../skills/academic-paper-audit/assets/continuation-template.md) for a plain-text handoff. Supply the source material separately. Preserve article/version, scope, evidence/source IDs, inspected locations, completed checks, finding IDs/status, limitations and pending work. Verify changed evidence before updating a finding; retain resolved findings as history and exclude them from active counts. Recheck relevant changes rather than automatically repeating unrelated completed work.
+
+An optional [checkpoint schema](../skills/academic-paper-audit/assets/checkpoint.schema.json) supports unknown timestamps/hashes with explicit limitations. From a valid structured report:
+
+```text
+python skills/academic-paper-audit/scripts/audit_tools.py checkpoint examples/synthetic-report.json
+python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint examples/synthetic-checkpoint.json
+```
+
+The first command prints JSON; save stdout as UTF-8 in an authorized location when needed. The [worked checkpoint](../examples/synthetic-checkpoint.json) summarizes the existing synthetic report without a new inspection or clock observation. Conversion preserves the prior record's time, identity and scope. A checkpoint is a resumable summary, not fresh evidence, authentication or permission to access new material.
 
 ## Optional distribution
 
@@ -73,6 +86,6 @@ python scripts/build_release.py --format skill --output-dir dist/skill
 python scripts/build_release.py --format plugin --output-dir dist/plugin
 ```
 
-The default archive contains the quick start, master, optional schema/template and MIT license. Skill archives contain runtime resources and LICENSE. Optional plugin.json targets compatible Agent Plugins hosts; it is not the universal entry point. Explicit allowlists, stable ZIP metadata and exclusive creation prevent arbitrary workspace inclusion and preserve existing outputs. Use a fresh output directory for rebuilding.
+The default archive contains the quick start, master, optional report/checkpoint schemas and templates, and MIT license. Skill archives contain runtime resources and LICENSE. Optional plugin.json targets compatible Agent Plugins hosts; it is not the universal entry point. Explicit allowlists, stable ZIP metadata and exclusive creation prevent arbitrary workspace inclusion and preserve existing outputs. Use a fresh output directory for rebuilding.
 
 No script installs globally, configures accounts, creates remotes or publishes. Native installation/approval and actual publisher identity/support/privacy information are separate gates. Recheck current listing and migration rules before publication, especially before adding hosted tools. See [validation](VALIDATION.md), [privacy](PRIVACY.md) and [detailed review](REVIEW_TR.md).

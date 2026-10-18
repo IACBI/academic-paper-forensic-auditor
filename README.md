@@ -27,6 +27,10 @@ Select checks by question, claims, methods and evidence. Routes include quantita
 
 Separate reporting gaps, methodological limitations, scholarly disagreement and integrity concerns. Trace findings to evidence, record coverage, test benign alternatives and identify the next human verification step. Applicability across fields does not establish equal expertise or measured detection accuracy across fields or models.
 
+For a new session or a different agent, carry the [continuation record](skills/academic-paper-audit/assets/continuation-template.md) together with the actual evidence. It preserves scope, versions, finding IDs/status and pending work; a summary does not replace the source material. Optional local helpers can export and validate a JSON checkpoint.
+
+The [reproducible evaluation](docs/EVALUATION.md) compares quick, master and skill routes on 16 synthetic cases, including legitimate controls, insufficient evidence and a resolved finding. Reviewed baseline records retain raw responses, independent model judgements and input/protocol hashes. These local acceptance checks do not establish native installation in other hosts or real-world scientific accuracy; see the [validation record](docs/VALIDATION.md).
+
 ## Türkçe kullanım
 
 Kullandığınız ajana [hızlı başlangıçtaki](QUICKSTART.md) isteği veya [tam promptu](master_prompt.md) verin, çıktı dilini Türkçe belirtin ve materyali ekleyin. Skill ve plugin isteğe bağlı dağıtım biçimleridir; çekirdek inceleme bir platforma bağlı değildir.

@@ -16,6 +16,7 @@ Başlangıç sürümünde bu iki hedefe ulaşmayı zorlaştıran gerçek eksikle
 - İddialar ile gerçekten uygulanan fonksiyonlar ayrıldı. Yardımcı kodun PDF/OCR/görsel adli inceleme veya ispat doğrulama motoru olmadığı doğrulandı.
 - Ajan bağımsızlığı açık Agent Skills biçimiyle; alan kapsamı disiplinler arası araştırma bütünlüğü ilkeleriyle karşılaştırıldı. Bu kaynaklar bir sertifika veya otomatik uygunluk denetimi olarak kullanılmadı.
 - Yapısal testlere ek olarak iki bağımsız değerlendiriciye, beklenen cevaplar verilmeden altı sentetik yöntem örneği sunuldu. Biri araçsız metin yolunu, diğeri dosya/hesaplama ve JSON yolunu kullandı.
+- Sonraki kabul seti 16 vakaya genişletildi: altı tutarsızlık, yedi meşru/sorunsuz kontrol, iki yetersiz kanıt durumu ve bir düzeltmeyle çözülen bulgu. Kısa istek, tam prompt ve skill ayrı kör paketlerle, cevapları bilmeyen değerlendiricilere verildi; ayrı model yargıcı gerçek yanıtları ortak ölçütlerle inceledi.
 - Gerçek makale, katılımcı verisi, dış hizmet yüklemesi, yayıncı teması veya kamuya yayın yapılmadı.
 
 ## 3. Öncelikli bulgular ve uygulanan düzeltmeler
@@ -32,6 +33,12 @@ Başlangıç sürümünde bu iki hedefe ulaşmayı zorlaştıran gerçek eksikle
 | Orta | Kısa rapor ile uzun zorunlu şablon arasında gerilim vardı | Basit incelemeler gereksiz uzuyordu | Kısa eşdeğer uyarı ve ortak statü/gerekçelerin gruplanması mümkün kılındı; önemli kapsam sınırları korundu |
 | Orta | Yedi sabit alanın isimleri biyomedikal kontrol listesi gibi okunabilirdi | İlgisiz kontroller veya yanlış not_applicable kullanımı | Alanların genel anlamı açıklandı; görülmeyen figür ile gerçekten uygulanamaz figür alanı ayrıldı |
 | Orta | Tek katılımcı-akışı örneği disiplinler arası davranışa kanıt oluşturmuyordu | Kapsam iddiası testlerden daha genişti | Formal, nitel, arşivsel, hesaplamalı, mühendislik ve sentez örnekleriyle bağımsız ileri test eklendi |
+| Orta | Yalnız sorun içeren örnekler yanlış alarm davranışını göstermiyordu | Meşru uygulamalar gereksiz şüpheye dönüşebilirdi | Yedi sorunsuz kontrol ve iki yetersiz kanıt vakası eklendi; yapılmayan kontroller başarılı sayılmıyor |
+| Orta | Denemelerin yanıtları ve puanlaması tekrar incelenebilir bir kayıtta tutulmuyordu | Sonuçlar yalnız anlatı düzeyinde kalıyordu | Gerçek yanıtlar, ayrı yargıcın alıntı/gerekçeleri ve kaynak hash'leriyle yerel değerlendirme kayıtları eklendi |
+| Orta | Oturum/ajan değiştirirken aktarılacak asgari kayıt biçimi belirsizdi | Bulgu kimlikleri, çözüm durumu ve geçmiş kontroller kaybolabilirdi | İnsan-okunur devam şablonu, isteğe bağlı JSON şeması, rapordan aktarım ve doğrulama komutları eklendi |
+| Orta | Bazı kısa yanıtlarda bağımsız insan incelemesi açıkça söylenmiyordu | Doğru ama sınırlı ön inceleme gereğinden güçlü algılanabilirdi | İki gerçek başarısız yanıt/gerekçe korundu; kısa ve bulgusuz raporlarda da açık insan incelemesi şartı netleştirildi; yeni kör paketlerle üç yol tekrar değerlendirildi |
+| Düşük | Değerlendirme aracı yalnız manifesti kontrol ediyordu | Sonradan değiştirilmiş paket içeriği aynı kayıtla kabul edilebilirdi | Gerçek protokol, vaka ve talimat baytları yanıtlar okunmadan karşılaştırılıyor; değişiklik reddi test edildi |
+| Düşük | Dışa aktarılan devam kaydı bazı referans listelerini raporla paylaşıyordu | Kaydı bellekte düzenlemek önceki raporu da değiştirebilirdi | Listeler ayrıldı; önceki raporun değişmediği davranış testiyle doğrulandı |
 | Orta | Referans üreticisinde aynı numaralı bölüm sözlükte sessizce ezilebilirdi | Politika kaybı güncel görünerek geçebilirdi | Yinelenen bölüm ve çift/eksik yönlendirme artık hata; her bölüm tam bir kez aktarılıyor |
 | Düşük | Geçersiz JSON için bulgu sayıları sıfır görünüyordu | Hatalı rapor, sorunsuz rapor gibi yorumlanabilirdi | Geçersiz raporda sayılar null oldu; davranış testi eklendi |
 | Düşük | Envanterde dosya yollarının köke göre olduğu yeterince açık değildi | İlk kullanımda gereksiz yol hatası | Root-relative ve mutlak yol örnekleri açıklandı |
@@ -73,6 +80,12 @@ Yapısal testler; eski raporların kabulünü, çevrimdışı kaynak kimliğini,
 
 Bu denemeler bağımsız yerel değerlendiricilerle sentetik veri üzerinde yapıldı. Ayrı ticari sağlayıcıların canlı ürünlerini test etmez; örneklerin basitliği nedeniyle gerçek literatürde doğruluk oranı, duyarlılık veya özgüllük hesaplanamaz.
 
+Tekrarlanabilir süreç [EVALUATION.md](EVALUATION.md) içinde tanımlı. Her yol için 16 gerçek yanıt ve 48 ölçüt değerlendirmesi kaydedilir. Eksik/yinelenen vaka, yapılmamış ölçüt, eski kaynak hash'i veya yanıtta bulunmayan alıntı geçerli başarı kaydı oluşturamaz. Önceki iki sunum hatasının gerçek çıktıları `evaluations/reviewed-regressions.json` içinde korunur; doğru sonuç sınıflandırması, eksik insan incelemesi ifadesini başarıya çevirmedi.
+
+Güncel yerel sonuç: **70 yazılım testi geçti**. Kısa istek, tam prompt ve skill'in her biri **16/16 vaka ve 48/48 ölçütü** geçti; üç yolun toplamı 48 yanıt ve 144 ölçüt kararıdır. Bunlar ayrı model yargıcının sentetik kabul sonuçlarıdır; tüm alanlarda bilimsel doğruluk oranı veya farklı ticari ürünlerin uyumluluk testi değildir.
+
+Devam kaydı için rapor kimliği, kapsam, sürüm, kanıt kimlikleri ve bulgu geçmişi korunur; dönüşüm yeni inceleme, kaynak okuma veya saat gözlemi üretmez. Önceki F001 bulgusunun sürüm-2 düzeltmesiyle çözülmesi, kör devam vakasında ayrıca değerlendirilir. Yapısal doğrulayıcı bilimsel doğruluğu veya önceki ajanın dürüstlüğünü kanıtlamaz.
+
 ## 7. Hâlâ doğrulanması gerekenler
 
 - Farklı gerçek hostlarda kurulum, dosya okuma, otomatik keşif ve bağlam davranışı. Hosta ait test yapılmadan o ürüne uyumluluk rozeti verilmemeli.
@@ -88,7 +101,7 @@ Bu sınırlar bilinen yazılım hatası olarak gizlenmedi veya genel bir "evrens
 
 Kaldırılan izlenen dosyalar: sağlayıcıya özgü agents/openai.yaml, yinelenen requirements-validation.txt, ayrı PUBLICATION.md ve VALIDATION_RESULTS.md. Gerekli kullanım/yayın bilgisi USAGE.md'ye, güncel doğrulama bilgisi VALIDATION.md'ye alındı. README'nin yinelenen tam rehberleri sadeleştirildi; 12 özgün dil tanıtımı korundu.
 
-Geçici deneme raporları, eski açılmış paket kopyaları, tekrar üretilebilir ZIP'ler, proje içindeki sanal ortam ve Python önbellekleri son doğrulamadan sonra temizlendi. Git geçmişi, kaynak kod, testler, sentetik veri, tek bağımlılık listesi, lisans ve skill'in gerekli üretilen referansları korunur. Proje dışındaki kullanıcı klasörlerine veya sistem/genel önbelleklerine dokunulmaz.
+Geçici deneme raporları, eski açılmış paket kopyaları, tekrar üretilebilir ZIP'ler, proje içindeki sanal ortam ve Python önbellekleri son doğrulamadan sonra temizlenir. Git geçmişi, kaynak kod, testler, sentetik veri, tek bağımlılık listesi, lisans, gerekli üretilen skill referansları ve sonuçları destekleyen asgari değerlendirme kayıtları korunur. Geçici paket kopyalarıyla, sonuçların dayanağı olan özgün yanıt kayıtları aynı şey değildir. Proje dışındaki kullanıcı klasörlerine veya sistem/genel önbelleklerine dokunulmaz.
 
 ## 9. Birincil kaynaklar ve kullanım sınırları
 
@@ -100,4 +113,4 @@ Geçici deneme raporları, eski açılmış paket kopyaları, tekrar üretilebil
 
 Erişim tarihi: 18 Ekim 2026. Kaynaklar tasarım kararlarını destekler; onay, sertifika veya projenin bu kuruluşlarca değerlendirilmesi anlamına gelmez. Context7 aracı bu oturumda sunulmadığından mevcut birincil belgeler doğrudan okundu.
 
-Temizlik doğrulaması: 7 geçici/üretilmiş dizin kaldırıldı; toplam 23699994 bayt. Bu sayı Git geçmişinin veya izlenen kaynak silmelerinin boyutunu içermez.
+Güncel test, paket ve değerlendirme sonuçları için [VALIDATION.md](VALIDATION.md) esas alınır. Şu aşamada uzak depo, paylaşım veya yayın oluşturulmadı.
