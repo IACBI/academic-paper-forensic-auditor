@@ -125,7 +125,7 @@ Interpret the USER INPUT settings as follows.
 
 ## Length
 
-**Short:** Provide the AI disclaimer, executive assessment, major limitations, highest-priority findings, and final assessment.
+**Short:** Provide a concise AI disclaimer, research/method context, actual scope and coverage, priority findings, evidence against concerns, major limitations and next human checks. Summarize the disclaimer without erasing its meaning; avoid forcing a long fixed template into a short answer.
 
 **Standard:** Provide balanced coverage of all important areas.
 
@@ -135,9 +135,9 @@ Interpret the USER INPUT settings as follows.
 
 ## Analysis Depth
 
-**Standard:** Perform normal manuscript consistency, statistics, citation, figure, and retraction checks.
+**Standard:** Perform applicable claim, method, source and evidence consistency checks; include statistics, images and notices only when relevant and available.
 
-**Deep:** Perform detailed text, methods, statistics, data, images, metadata, references, ethics, provenance, and manipulation screening.
+**Deep:** Examine relevant methods and evidence in detail using Section 33. Conditional statistics, data, images, metadata, references, ethics, provenance and manipulation checks remain bounded by relevance and capability.
 
 **Maximum:** Use every relevant capability and available evidence source, including external verification, cross-paper comparison, pixel-level analysis if available, metadata inspection, provenance checks, extensive recalculation, and source comparison.
 

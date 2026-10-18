@@ -2,7 +2,7 @@
 
 # 10. FIGURE INVENTORY
 
-Inspect every accessible figure and supplementary figure.
+Within the agreed scope, inspect relevant accessible figures and supplementary figures. If coverage is sampled or incomplete, list exactly what was inspected; do not claim all figures were checked. Distinguish evidentiary images from conceptual diagrams, artistic works, reconstructed illustrations, maps and simulation outputs before applying manipulation tests.
 
 Identify:
 
@@ -174,7 +174,7 @@ Where available, inspect:
 
 Do NOT rely on generic AI-image-detector percentages as proof.
 
-Do NOT classify an image as AI-generated solely because it looks synthetic.
+Do NOT classify an image as AI-generated solely because it looks synthetic. Do not infer AI authorship from polished prose, awkward translation, a writing-style detector or an unfamiliar image modality. Authorship/disclosure questions and the evidentiary validity of a research result are separate. A permitted generative illustration is not equivalent to fabricated empirical evidence.
 
 Allowed classifications:
 

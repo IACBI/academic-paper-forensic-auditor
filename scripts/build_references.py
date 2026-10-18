@@ -12,6 +12,8 @@ GROUPS = {
     "statistics": [8, 9],
     "images": [10, 11, 12, 13, 14, 15],
     "report": [30, 31],
+    "methods": [33],
+    "portability": [34],
 }
 
 
@@ -21,10 +23,16 @@ def expected_references():
     matches = list(re.finditer(r"^# (\d+)\. .+$", text, re.MULTILINE))
     sections = {}
     for index, match in enumerate(matches):
+        number = int(match.group(1))
+        if number in sections:
+            raise ValueError(f"Duplicate numbered master section: {number}")
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
-        sections[int(match.group(1))] = text[match.start():end].strip()
-    if set(sections) != set(range(33)):
-        raise ValueError("Master prompt must contain exactly numbered sections 0 through 32")
+        sections[number] = text[match.start():end].strip()
+    if set(sections) != set(range(35)):
+        raise ValueError("Master prompt must contain exactly numbered sections 0 through 34")
+    routed = [number for numbers in GROUPS.values() for number in numbers]
+    if sorted(routed) != list(range(35)):
+        raise ValueError("Every master section must be routed exactly once")
     preamble = text[:matches[0].start()].strip()
     outputs = {}
     for name, numbers in GROUPS.items():
@@ -50,7 +58,7 @@ def main():
             path.write_text(expected, encoding="utf-8", newline="\n")
     if stale:
         parser.exit(1, "Stale references:\n" + "\n".join(stale) + "\n")
-    print("References are current." if args.check else "Built five skill references.")
+    print("References are current." if args.check else f"Built {len(GROUPS)} skill references.")
 
 
 if __name__ == "__main__":

@@ -8,6 +8,8 @@ This is an AI-assisted investigative screening, not a definitive forensic or mis
 
 Record audit ID, analysis timestamp/timezone, actual auditor/model identity when known, package version, article title/DOI/version, requested scope and confidentiality constraints. Use unknown explicitly where necessary.
 
+Identify disciplines, actual method families, claim/evidence types and the reasons each kind of check applies. Do not impose empirical or biomedical requirements on all scholarship. State specialist expertise and source-language limits. Unknown time, identity, DOI or article version must not be invented to fill the template.
+
 ## Evidence and capability inventory
 
 List artifact ID, relative label, original/derived status, parent IDs, transformation history, byte size, actually computed SHA-256 and limitations. List actual tools/versions, inputs, parameters and failures. Hashes identify bytes, not scientific authenticity.
@@ -34,13 +36,15 @@ State whether evidence was sufficient for the requested scope; count active Leve
 
 For each finding record: ID; category; active/resolved/withdrawn status; evidence level; observation confidence; artifact/source IDs; exact page/table/panel/region locator; observation; evidence; actual verification steps/inputs/outputs and assumptions; strongest benign explanation; self-challenge result; conclusion impact; what would confirm/refute it; human-review requirement; related finding IDs.
 
+Distinguish a reporting gap, methodological limitation, reproducible inconsistency, specific integrity concern and externally documented issue. Reasonable scholarly disagreement is not itself an integrity finding.
+
 ## Domain assessments
 
 Include applicable text/methods, statistics/data, figures/images, metadata/provenance, references/notices, ethics/registration and cross-paper assessments. State omissions explicitly. Distinguish visual suspicion from pixel-level testing; bibliographic metadata lookup from reading citation support; notice existence from its actual reason.
 
 ## External source register
 
-Record source ID, exact accessed URL, title/issuer, accessed timestamp/timezone, authoritative status, article/version match, relevant supported statement and access limitations. Do not count search snippets or inaccessible pages as verified evidence.
+Record source ID, actual URL or stable offline identifier (edition, archive, collection/folio, catalogue ID), title/issuer or custodian, observed access timestamp/timezone when available, authoritative status, article/version match, relevant supported statement and access limitations. Preserve original scripts and translation/edition details when necessary. Do not count search snippets or inaccessible pages as verified evidence. A legitimate source need not have a DOI or web URL.
 
 ## Evidence against concerns
 

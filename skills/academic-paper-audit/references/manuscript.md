@@ -225,7 +225,7 @@ Look especially for chronological contradictions.
 
 Example: **Participant recruitment predating the stated ethics approval.**
 
-Consider study design, jurisdiction, field, and historical period before deciding that ethics approval should have existed.
+Consider study design, jurisdiction, field, and historical period before deciding that ethics approval should have existed. Formal proofs, non-participant conceptual work and many archival analyses do not require a biomedical IRB number or clinical registration. Other obligations may apply: consent/confidentiality, community or Indigenous data governance, archive permissions, licenses, animal welfare, field permits, conflicts of interest and dual-use constraints. Verify the applicable obligation before alleging its absence. Restricted access can be legitimate; do not request disclosure that violates confidentiality or cultural restrictions.
 
 ---
 
