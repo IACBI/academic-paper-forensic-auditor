@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "academic-paper-forensic-auditor",
+  "version": "0.0.1",
+  "description": "Evidence-based academic paper screening with traceable findings, coverage and human review.",
+  "author": { "name": "𝓐.𝓒.𝓑" },
+  "license": "MIT",
+  "keywords": ["research-integrity", "academic-papers", "evidence", "peer-review"]
+}
