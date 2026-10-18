@@ -124,7 +124,7 @@ class ReportTests(unittest.TestCase):
         self.assert_invalid(self.report, "Additional properties")
 
     def test_timestamp_requires_timezone_and_real_date(self):
-        for value in ["2026-10-18T12:00:00", "yesterday", "2026-02-30T12:00:00Z"]:
+        for value in ["2026-10-18T12:00:00", "yesterday", "2026-02-30T12:00:00Z", "2026-10-18T12:00:00+00:99"]:
             with self.subTest(value=value):
                 self.report["audit"]["created_at"] = value
                 self.assert_invalid(self.report, "date-time")
@@ -202,6 +202,20 @@ class ReportTests(unittest.TestCase):
         item["derived_from"] = []
         self.assert_invalid(self.report, "requires parent")
 
+    def test_unavailable_source_is_not_assessed_evidence(self):
+        self.report["sources"] = [{
+            "id": "S001", "url": "https://example.invalid/unavailable",
+            "title": "Synthetic", "issuer": "Synthetic", "accessed_at": "2026-10-18T12:00:00Z",
+            "authoritative": False, "article_match": False, "access_status": "unavailable",
+            "statement": "Could not retrieve", "limitations": "Unavailable"
+        }]
+        for item in self.report["coverage"]:
+            if item["status"] in ("completed", "partial"):
+                item.update(artifact_ids=[], source_ids=["S001"])
+        self.report["findings"][0].update(artifact_ids=[], source_ids=["S001"])
+        self.assert_invalid(self.report, "unavailable sources alone")
+        self.assert_invalid(self.report, "requires available evidence")
+
     def test_hash_unavailability_requires_explanation(self):
         self.report["artifacts"][0]["sha256"] = None
         self.report["artifacts"][0]["limitation"] = ""
@@ -236,7 +250,7 @@ class CommandTests(unittest.TestCase):
         self.assertNotIn("Traceback", result.stderr)
 
     def test_json_rejects_duplicates_and_nonfinite_values(self):
-        for content in ['{"x": 1, "x": 2}', '{"x": NaN}']:
+        for content in ['{"x": 1, "x": 2}', '{"x": NaN}', '{"x": 1e9999}']:
             with self.subTest(content=content), tempfile.TemporaryDirectory() as temp:
                 path = Path(temp) / "bad.json"
                 path.write_text(content, encoding="utf-8")

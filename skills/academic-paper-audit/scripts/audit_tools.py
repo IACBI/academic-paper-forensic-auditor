@@ -11,6 +11,7 @@ from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -170,6 +171,8 @@ def validate_report(report):
             return True
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:[Zz]|[+-]\d{2}:\d{2})", value):
             return False
+        if value[-1].upper() != "Z" and (int(value[-5:-3]) > 23 or int(value[-2:]) > 59):
+            return False
         normalized = value.upper().replace("Z", "+00:00")
         parsed = datetime.fromisoformat(normalized)
         return parsed.utcoffset() is not None
@@ -197,6 +200,8 @@ def validate_report(report):
             parsed = urlsplit(item["url"])
             valid_url = parsed.scheme in ("http", "https") and parsed.hostname and not parsed.username and not parsed.password
             valid_url = valid_url and not any(char.isspace() for char in item["url"])
+            # Accessing port also rejects non-numeric/out-of-range ports.
+            parsed.port
         except ValueError:
             valid_url = False
         if not valid_url:
@@ -208,6 +213,12 @@ def validate_report(report):
         unknown = set(item[key]) - targets
         if unknown:
             errors.append(f"{item.get('id', item.get('domain'))}: unknown {key}: {', '.join(sorted(unknown))}")
+
+    def has_available_evidence(item):
+        return bool(set(item["artifact_ids"]) & artifacts) or any(
+            source_by_id[key]["access_status"] != "unavailable"
+            for key in item["source_ids"] if key in source_by_id
+        )
 
     for item in report["artifacts"]:
         check_links(item, "derived_from", artifacts)
@@ -235,6 +246,8 @@ def validate_report(report):
             assessed.add(item["domain"])
             if not item["artifact_ids"] and not item["source_ids"]:
                 errors.append(f"{item['domain']}: assessed scope requires evidence references")
+            elif not has_available_evidence(item):
+                errors.append(f"{item['domain']}: unavailable sources alone cannot establish assessed evidence")
     active = [item for item in report["findings"] if item["status"] == "active"]
     for item in report["findings"]:
         check_links(item, "artifact_ids", artifacts)
@@ -245,6 +258,8 @@ def validate_report(report):
         if not item["artifact_ids"] and not item["source_ids"]:
             errors.append(f"{item['id']}: finding requires evidence references")
         if item["status"] == "active":
+            if not has_available_evidence(item):
+                errors.append(f"{item['id']}: active finding requires available evidence")
             if item["category"] not in assessed:
                 errors.append(f"{item['id']}: active finding requires assessed domain coverage")
             if item["self_challenge"]["outcome"] == "resolved":
@@ -286,7 +301,13 @@ def load_json(path):
     def reject_constant(value):
         raise ValueError(f"Non-finite JSON value: {value}")
 
-    return json.loads(Path(path).read_text(encoding="utf-8-sig"), object_pairs_hook=unique_object, parse_constant=reject_constant)
+    def finite_float(value):
+        result = float(value)
+        if not math.isfinite(result):
+            raise ValueError("JSON numeric value exceeds finite floating-point range")
+        return result
+
+    return json.loads(Path(path).read_text(encoding="utf-8-sig"), object_pairs_hook=unique_object, parse_constant=reject_constant, parse_float=finite_float)
 
 
 def main(argv=None):
@@ -321,7 +342,7 @@ def main(argv=None):
             result = {"valid": not errors, "errors": errors, "active_finding_counts": {str(level): counts.get(level, 0) for level in range(1, 5)}}
             print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
             return 1 if errors else 0
-    except (OSError, ValueError) as exc:
+    except (OSError, ValueError, RecursionError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
