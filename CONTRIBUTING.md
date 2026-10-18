@@ -23,6 +23,8 @@ python scripts/build_references.py
 python scripts/check_project.py
 ```
 
+The [GitHub workflow](.github/workflows/validate.yml) checks Windows/Ubuntu on Python 3.10/3.14 and builds every distribution format. Keep pull-request checks passing. CI verifies committed acceptance evidence; protocol changes still require the fresh blind evaluation described below.
+
 Add behavior tests when arithmetic, file boundaries, schemas, validators or packaging behavior changes. A new review rule should have a realistic acceptance case and, where warranted, a fresh evaluator test. Do not replace substantive checks with tests that merely match headings or wording.
 
 Before the project check, rerun affected blind evaluations whenever protocol files, fixtures or rubrics change; see [EVALUATION.md](docs/EVALUATION.md). Baseline checks reject stale inputs and require all three current variants. A fresh responder must not see the expected answers, and a separate judge must inspect the actual output. Keep failures and uncertainty visible. Do not edit raw responses, relax an oracle or change hashes just to preserve a passing result. Scorer unit fixtures are explicitly fabricated plumbing tests and must never be reported as real model performance.

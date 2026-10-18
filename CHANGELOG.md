@@ -1,6 +1,6 @@
 # Changelog
 
-## v.0.0.1 — 2026-10-18
+## v.0.0.1 — 2026-10-19
 
 - Preserve the standalone master prompt and 12-language usage guide.
 - Add an operating contract for evidence identity, versioning, trust boundaries, privacy, coverage and reproducibility.
@@ -17,5 +17,7 @@
 - Add a balanced 16-case blind evaluation suite, independent quote-backed judgement records and reproducible quick/master/skill comparisons.
 - Reject stale or altered evaluation packets, incomplete annotations and unsupported score inflation; require current reviewed baselines in project checks.
 - Isolate exported checkpoint reference lists from the prior report and document actual compatibility/scientific validation boundaries.
+- Add public GitHub distribution, direct archive/checksum links, a focused bug-report form and pinned CI checks on Windows/Linux with Python 3.10/3.14.
+- Normalize the packaging test fixture's temporary root to handle Windows 8.3 path aliases consistently with the production root.
 
 This release does not claim professional certification, comprehensive forensic detection or verified scientific accuracy.

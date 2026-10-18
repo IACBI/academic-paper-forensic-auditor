@@ -113,4 +113,4 @@ Geçici deneme raporları, eski açılmış paket kopyaları, tekrar üretilebil
 
 Erişim tarihi: 18 Ekim 2026. Kaynaklar tasarım kararlarını destekler; onay, sertifika veya projenin bu kuruluşlarca değerlendirilmesi anlamına gelmez. Context7 aracı bu oturumda sunulmadığından mevcut birincil belgeler doğrudan okundu.
 
-Güncel test, paket ve değerlendirme sonuçları için [VALIDATION.md](VALIDATION.md) esas alınır. Şu aşamada uzak depo, paylaşım veya yayın oluşturulmadı.
+Güncel test, paket ve değerlendirme sonuçları için [VALIDATION.md](VALIDATION.md) esas alınır. İlk yerel inceleme tamamlandığında uzak depo veya yayın oluşturulmamıştı. Sahibinin sonraki yayın izniyle oluşturulan [GitHub deposu](https://github.com/IACBI/academic-paper-forensic-auditor) ve [sürüm sayfası](https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.1) güncel dağıtım noktalarıdır.

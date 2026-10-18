@@ -4,6 +4,8 @@ Display release: **v.0.0.1**; machine version: `0.0.1`.
 
 ## Start without installation
 
+Get the [v.0.0.1 prompt package](https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-prompt-0.0.1.zip), or read the files directly in the repository. The [release page](https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.1) also provides standalone skill/plugin archives and SHA256SUMS.txt. Compare an archive's SHA-256 with that file when verifying a download; matching bytes do not establish research authenticity or native host compatibility.
+
 Copy the request in [QUICKSTART.md](../QUICKSTART.md), or paste/attach [master_prompt.md](../master_prompt.md), into the chosen assistant. Supply readable material and state language, scope and length. A scoped text review needs no Python, plugin, API key, native skill loader or vendor command.
 
 If a file is unreadable, paste targeted excerpts. For limited context, use bounded passes and retain article/version, evidence IDs, inspected locations, findings, limitations and next steps. Do not treat an excerpt or a summary as the unseen full paper. The quick request is an orientation; the master contains the full protocol.
@@ -88,4 +90,4 @@ python scripts/build_release.py --format plugin --output-dir dist/plugin
 
 The default archive contains the quick start, master, optional report/checkpoint schemas and templates, and MIT license. Skill archives contain runtime resources and LICENSE. Optional plugin.json targets compatible Agent Plugins hosts; it is not the universal entry point. Explicit allowlists, stable ZIP metadata and exclusive creation prevent arbitrary workspace inclusion and preserve existing outputs. Use a fresh output directory for rebuilding.
 
-No script installs globally, configures accounts, creates remotes or publishes. Native installation/approval and actual publisher identity/support/privacy information are separate gates. Recheck current listing and migration rules before publication, especially before adding hosted tools. See [validation](VALIDATION.md), [privacy](PRIVACY.md) and [detailed review](REVIEW_TR.md).
+The supplied helper and build scripts do not install globally, configure accounts, create remotes or publish. Native installation/approval and current directory-listing requirements remain host-specific, especially before adding hosted tools. For reproducible problems use the repository's [bug report form](https://github.com/IACBI/academic-paper-forensic-auditor/issues/new?template=bug_report.yml), with synthetic or authorized shareable examples. See [validation](VALIDATION.md), [privacy](PRIVACY.md) and [detailed review](REVIEW_TR.md).

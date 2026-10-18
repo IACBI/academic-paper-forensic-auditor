@@ -22,9 +22,15 @@ The dependency is a standards-based JSON Schema validator rather than a homegrow
 
 Release: v.0.0.1. Date: 2026-10-18. Environment: Windows, Python 3.10.11, jsonschema 4.26.0. `python scripts/check_project.py` passed, including **70 tests** for arithmetic, evidence preservation/path boundaries, report and continuation semantics, CLI failures, offline sources, method context, reference generation, evaluation plumbing and packaging. Generated references, fixture identity, versions and linked local file paths passed their checks. The link check does not validate fragment targets or remote URLs.
 
-The earlier portable plugin manifest was checked against the upstream Agent Plugins schema. That manifest is unchanged; it is now an optional delivery format. Skill frontmatter validation and archive completeness are separate checks from native host installation. Tests do not establish cross-platform execution or scientific accuracy.
+The earlier portable plugin manifest was checked against the upstream Agent Plugins schema. That manifest is unchanged; it is now an optional delivery format. Skill frontmatter validation and archive completeness are separate checks from native host installation. Structural checks do not certify host integration or scientific accuracy.
 
 All three formats were built and extracted into isolated temporary directories. Every archived byte matched the explicit source allowlist: 7 prompt files, 15 skill files and 17 plugin files. Both extracted skill formats validated the worked report and continuation record and reproduced the checkpoint conversion. Skill Creator frontmatter validation passed. The prompt archive contained only its quick start, master protocol, optional report/continuation schemas and templates, and license. Runtime archives and extracted copies are reproducible build outputs and are removed during final cleanup rather than retained beside source.
+
+## GitHub execution record
+
+The [four-job CI run](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39165848404) passed on GitHub-hosted Windows and Ubuntu runners with Python 3.10 and 3.14. Each job ran the 70 tests, project contract/baseline checks and builds for all three distribution formats. All three archive hashes matched the local release builds across all four jobs. The first external run exposed a Windows 8.3 temporary-path alias in a test fixture; the fixture now mirrors the resolved production root, and all four jobs passed after that correction.
+
+The [validation workflow](../.github/workflows/validate.yml) runs on main-branch pushes, pull requests and manual dispatch. Official actions are pinned to verified commit SHAs and repository permissions are read-only. CI validates the stored model-judged baselines; it does not call models or independently repeat scientific reviews. These runs extend helper/packaging execution evidence to Linux, while native AI-host integration and macOS remain untested.
 
 ## Behavioral evaluation cases
 
@@ -93,12 +99,14 @@ Evaluator feedback led to concrete improvements: clarify Level 2/3 calibration f
 | Capability or claim | Evidence | Boundary |
 | --- | --- | --- |
 | Text protocol and skill resources | Local blind packets and retained responses | One local host; exact model identity not observed |
-| Python helpers | Windows/Python 3.10.11 tests and extracted-package checks | macOS/Linux execution not exercised |
+| Python helpers and packaging | Local Windows/Python 3.10.11 plus GitHub Windows/Ubuntu on Python 3.10/3.14 | macOS and native AI-host integration not exercised |
 | Native skill/plugin installation and discovery | Format/frontmatter/package checks only | No native host installation certification |
 | Scientific detection performance across disciplines | Synthetic method cases and controls | No expert-adjudicated real-world accuracy estimate |
 | Images, OCR and specialist execution | Instructions and bounded capability fallbacks | No new image/OCR/proof-checking analysis engine |
 
-## Manual checks before public release
+## Additional checks before broader compatibility or accuracy claims
+
+The initial source release distributes an inspectable screening protocol, optional helpers and recorded synthetic acceptance evidence. Publishing it does not certify native host integration, every language/modality or scientific detection performance. The following checks are required before making those additional claims:
 
 1. Install the ZIP in each claimed host and run the workflow in a fresh chat.
 2. Check explicit invocation, relevant implicit activation and ordinary-summary non-activation.

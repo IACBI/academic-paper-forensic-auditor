@@ -4,9 +4,15 @@
 **License:** MIT  
 **Version:** v.0.0.1
 
+[![Validate](https://github.com/IACBI/academic-paper-forensic-auditor/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/IACBI/academic-paper-forensic-auditor/actions/workflows/validate.yml)
+
 A provider-independent research-screening workflow for scholarly work across disciplines. Use readable evidence with your preferred AI agent; no plugin, Python or vendor integration is required for a scoped text review.
 
 **Start:** [Quick start](QUICKSTART.md) · [Full prompt](master_prompt.md) · [Usage](docs/USAGE.md) · [Detailed project review / Ayrıntılı inceleme](docs/REVIEW_TR.md)
+
+**Download v.0.0.1:** [Prompt package](https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-prompt-0.0.1.zip) · [Skill](https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-skill-0.0.1.zip) · [Optional plugin](https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-plugin-0.0.1.zip) · [SHA-256 checksums](https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/SHA256SUMS.txt)
+
+Start with the prompt package if your agent has no native skill loader. [Release notes](https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.1) describe the available formats and verification boundaries.
 
 This is AI-assisted investigative screening, not a definitive forensic or misconduct determination. Findings can be wrong and require independent human verification. No findings in the inspected scope do not establish authenticity.
 
