@@ -196,16 +196,17 @@ def validate_report(report):
     source_by_id = {item["id"]: item for item in report["sources"]}
     artifact_by_id = {item["id"]: item for item in report["artifacts"]}
     for item in report["sources"]:
-        try:
-            parsed = urlsplit(item["url"])
-            valid_url = parsed.scheme in ("http", "https") and parsed.hostname and not parsed.username and not parsed.password
-            valid_url = valid_url and not any(char.isspace() for char in item["url"])
-            # Accessing port also rejects non-numeric/out-of-range ports.
-            parsed.port
-        except ValueError:
-            valid_url = False
-        if not valid_url:
-            errors.append(f"{item['id']}: source URL must be HTTP(S) with a host and no embedded credentials")
+        if item["url"] is not None:
+            try:
+                parsed = urlsplit(item["url"])
+                valid_url = parsed.scheme in ("http", "https") and parsed.hostname and not parsed.username and not parsed.password
+                valid_url = valid_url and not any(char.isspace() for char in item["url"])
+                # Accessing port also rejects non-numeric/out-of-range ports.
+                parsed.port
+            except ValueError:
+                valid_url = False
+            if not valid_url:
+                errors.append(f"{item['id']}: source URL must be HTTP(S) with a host and no embedded credentials")
         if item["access_status"] != "read" and not item["limitations"].strip():
             errors.append(f"{item['id']}: incomplete source access requires limitations")
 
@@ -339,7 +340,7 @@ def main(argv=None):
             report = load_json(args.report)
             errors = validate_report(report)
             counts = Counter(item["level"] for item in report["findings"] if item["status"] == "active") if not errors else {}
-            result = {"valid": not errors, "errors": errors, "active_finding_counts": {str(level): counts.get(level, 0) for level in range(1, 5)}}
+            result = {"valid": not errors, "errors": errors, "active_finding_counts": {str(level): counts.get(level, 0) for level in range(1, 5)} if not errors else None}
             print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
             return 1 if errors else 0
     except (OSError, ValueError, RecursionError) as exc:

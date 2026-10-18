@@ -15,6 +15,15 @@
         "package_version": {"const": "0.0.1"},
         "analyst": {"type": ["string", "null"], "minLength": 1},
         "scope": {"$ref": "#/$defs/text"},
+        "research_context": {
+          "type": "object", "additionalProperties": false,
+          "required": ["disciplines", "method_families", "applicability_notes"],
+          "properties": {
+            "disciplines": {"$ref": "#/$defs/strings"},
+            "method_families": {"$ref": "#/$defs/strings"},
+            "applicability_notes": {"$ref": "#/$defs/text"}
+          }
+        },
         "article": {
           "type": "object", "additionalProperties": false,
           "required": ["title", "doi", "version"],
@@ -98,7 +107,8 @@
       "required": ["id", "url", "title", "issuer", "accessed_at", "authoritative", "article_match", "access_status", "statement", "limitations"],
       "properties": {
         "id": {"$ref": "#/$defs/id"},
-        "url": {"type": "string", "format": "uri", "pattern": "^https?://"},
+        "url": {"type": ["string", "null"], "format": "uri", "pattern": "^https?://"},
+        "identifier": {"type": ["string", "null"], "minLength": 1, "pattern": "\\S"},
         "title": {"$ref": "#/$defs/text"},
         "issuer": {"$ref": "#/$defs/text"},
         "accessed_at": {"type": "string", "format": "date-time"},
@@ -107,7 +117,9 @@
         "access_status": {"enum": ["read", "metadata_only", "unavailable"]},
         "statement": {"$ref": "#/$defs/text"},
         "limitations": {"type": "string"}
-      }
+      },
+      "if": {"properties": {"url": {"type": "null"}}},
+      "then": {"required": ["identifier"], "properties": {"identifier": {"$ref": "#/$defs/text"}}}
     },
     "finding": {
       "type": "object", "additionalProperties": false,
@@ -115,6 +127,7 @@
       "properties": {
         "id": {"$ref": "#/$defs/id"},
         "category": {"enum": ["text_methods", "statistics_data", "figures_images", "metadata_provenance", "references_notices", "ethics_registration", "cross_paper"]},
+        "issue_kind": {"enum": ["reporting_gap", "methodological_limitation", "reproducible_inconsistency", "integrity_concern", "externally_documented_issue"]},
         "status": {"enum": ["active", "resolved", "withdrawn"]},
         "level": {"type": "integer", "minimum": 1, "maximum": 4},
         "confidence": {"enum": ["low", "medium", "high"]},

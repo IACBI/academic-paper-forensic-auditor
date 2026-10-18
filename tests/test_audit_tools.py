@@ -225,6 +225,39 @@ class ReportTests(unittest.TestCase):
         self.report["assessment"]["status"] = "no_significant_anomaly"
         self.assert_invalid(self.report, "contradicts")
 
+    def test_offline_source_can_use_a_stable_identifier(self):
+        self.report["sources"] = [{
+            "id": "S001", "url": None, "identifier": "Fictional Borough Archive, collection B, volume 7, folio 12r",
+            "title": "Synthetic archival transcription", "issuer": "Fictional Borough Archive",
+            "accessed_at": "2026-10-18T12:00:00Z", "authoritative": False, "article_match": True,
+            "access_status": "read", "statement": "Supplied text says 1902.",
+            "limitations": "Supplied transcription only; original not independently authenticated."
+        }]
+        self.assertEqual(audit.validate_report(self.report), [])
+
+    def test_offline_source_requires_an_identifier(self):
+        source = {
+            "id": "S001", "url": None, "title": "Synthetic source", "issuer": "Synthetic custodian",
+            "accessed_at": "2026-10-18T12:00:00Z", "authoritative": False, "article_match": True,
+            "access_status": "read", "statement": "Supplied excerpt", "limitations": "Original unavailable."
+        }
+        self.report["sources"] = [source]
+        self.assert_invalid(self.report, "identifier")
+        for value in (None, "", "   "):
+            source["identifier"] = value
+            self.assertTrue(audit.validate_report(self.report))
+
+    def test_method_context_is_open_ended_and_optional(self):
+        self.report["audit"]["research_context"] = {
+            "disciplines": ["A new interdisciplinary field"],
+            "method_families": ["A method described in the supplied paper, outside built-in examples"],
+            "applicability_notes": "Check claims against this method; specialist validation is unavailable."
+        }
+        self.report["findings"][0]["issue_kind"] = "reproducible_inconsistency"
+        self.assertEqual(audit.validate_report(self.report), [])
+        self.report["findings"][0]["issue_kind"] = "fraud_proven_by_model"
+        self.assertTrue(audit.validate_report(self.report))
+
 
 class CommandTests(unittest.TestCase):
     def run_tool(self, *args):
@@ -242,6 +275,7 @@ class CommandTests(unittest.TestCase):
             result = self.run_tool("validate-report", str(path))
             self.assertEqual(result.returncode, 1)
             self.assertFalse(json.loads(result.stdout)["valid"])
+            self.assertIsNone(json.loads(result.stdout)["active_finding_counts"])
 
     def test_invalid_input_returns_two_without_traceback(self):
         result = self.run_tool("flow", "--initial", "10", "--excluded", "1", "--dropouts", "1", "--analyzed", "8")
