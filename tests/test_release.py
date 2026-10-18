@@ -41,7 +41,8 @@ class ReleaseTests(unittest.TestCase):
 
     def test_explicit_allowlist_excludes_secrets_reports_and_caches(self):
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
+            # Windows TEMP may use an 8.3 alias; mirror the canonical runtime ROOT.
+            root = Path(temp).resolve()
             skill = root / "skills/academic-paper-audit"
             for name in release.ROOT_FILES:
                 path = root / name
