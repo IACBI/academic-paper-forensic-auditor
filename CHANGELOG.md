@@ -6,6 +6,8 @@
 
 Restore complete, equivalent user guides in all 12 README languages, with the language menu directly below the title. Each guide covers setup, request settings, delivery formats, research methods, report interpretation, privacy, continuation and optional local tools. Consolidate user instructions into the README and evaluation procedures into the validation guide; remove the superseded usage manual, internal project review and obsolete standalone regression output. The runtime protocol and published v.0.0.1 archives are unchanged.
 
+Record the Windows/Python 3.14 inventory failure exposed by the documentation CI run and recommend Python 3.10 for Windows helpers while that compatibility limitation remains. Preserve the failed-run evidence separately from the earlier passing release checks.
+
 ## v.0.0.1 — 2026-10-19
 
 ### Review protocol

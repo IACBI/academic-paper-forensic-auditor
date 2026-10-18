@@ -20,6 +20,14 @@ Local packages were also extracted and compared byte-for-byte with their explici
 
 The link check resolves local file paths; it does not validate remote URLs or fragment targets. JSON Schema validation checks structure and additional local invariants, not source truth, authority, actual access or honest tool use. A matching file hash identifies bytes, not authenticity or legal chain of custody.
 
+### Current Windows/Python 3.14 limitation
+
+The [documentation-update run](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39168134821) at `57c5f2e` passed all 70 tests and packaging on Ubuntu/Python 3.10 and 3.14 and Windows/Python 3.10. Windows/Python 3.14.8 failed `test_hashes_bytes_without_modification`: inventory rejected the newly written fixture with `Evidence changed before hashing`. This is a helper compatibility limitation, even though the runtime code did not change in that documentation update. The earlier passing release run does not establish that this behavior is reliable.
+
+The symptom is consistent with [CPython issue 157671](https://github.com/python/cpython/issues/157671): Windows path-based `stat()` and descriptor-based `fstat()` can report different meanings for `st_ctime_ns`, while inventory compares those fields as part of its stability signature. The failed run did not capture each signature field, so this is a likely explanation rather than a confirmed diagnosis of that individual failure. A local Windows/Python 3.10.11 stress check completed 1,000 new-file inventory trials without this error; that is not a Python 3.14 fix or a general filesystem guarantee.
+
+Use Python 3.10 for Windows helpers while this limitation remains. Plain-text protocol use does not invoke inventory. A future repair should reproduce the timestamp difference, preserve file-identity and actual-change detection, and rerun the Windows/Python 3.14 checks; skipping the test or retrying until green would not establish a repair.
+
 ## Behavioral suite and current results
 
 The acceptance suite is defined in [suite.json](../evaluations/suite.json), with its [suite schema](../evaluations/suite.schema.json) and [run schema](../evaluations/run.schema.json). It contains synthetic material only:
