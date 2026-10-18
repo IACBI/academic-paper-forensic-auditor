@@ -34,7 +34,9 @@ def check():
     if f'  version: "{version}"' not in skill_text:
         errors.append("Skill metadata version differs from VERSION")
     for name in ("README.md", "master_prompt.md"):
-        if f"**Version:** v.{version}" not in (ROOT / name).read_text(encoding="utf-8"):
+        text = (ROOT / name).read_text(encoding="utf-8")
+        display_labels = (f"**Version:** v.{version}", f"![Version: v.{version}](")
+        if not any(label in text for label in display_labels):
             errors.append(f"Display version differs in {name}")
     references = load_module("build_references", ROOT / "scripts/build_references.py")
     for path, expected in references.expected_references().items():

@@ -8,6 +8,8 @@ Restore complete, equivalent user guides in all 12 README languages, with the la
 
 Record the Windows/Python 3.14 inventory failure exposed by the documentation CI run and recommend Python 3.10 for Windows helpers while that compatibility limitation remains. Preserve the failed-run evidence separately from the earlier passing release checks.
 
+Replace the README language table with inline navigation and present version, license, author and live CI status as linked badges. Explain analysis-depth and free-text settings in every language, and link recorded validation results without describing an older run as the latest check.
+
 ## v.0.0.1 — 2026-10-19
 
 ### Review protocol
