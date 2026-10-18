@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.0.1",
+  "schema_version": "0.0.2",
   "id": "SYNTHETIC_BALANCED_001",
   "description": "Synthetic acceptance exercises, not an expert-adjudicated accuracy benchmark.",
   "common_checks": [

@@ -3,7 +3,7 @@ name: academic-paper-audit
 description: Screen research and scholarly works across disciplines for evidence, argument, method and research-integrity concerns. Use for requested paper integrity audits, proof/claim consistency, qualitative or source-based analysis, computational results, figure reuse, statistics or cross-paper comparisons. Adapt to the actual methods and available capabilities; ordinary summaries do not require this workflow.
 license: MIT
 metadata:
-  version: "0.0.1"
+  version: "0.0.2"
 ---
 
 # Academic Paper Audit

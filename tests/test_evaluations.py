@@ -24,7 +24,7 @@ def fake_run(variant="quick"):
     suite = evaluation.load_suite()
     text = "SCORER UNIT FIXTURE ONLY. This is not an actual scientific evaluation."
     return {
-        "schema_version": "0.0.1", "suite_id": suite["id"], "suite_sha256": evaluation.digest(evaluation.SUITE.read_bytes()),
+        "schema_version": "0.0.2", "suite_id": suite["id"], "suite_sha256": evaluation.digest(evaluation.SUITE.read_bytes()),
         "variant": variant, "recorded_at": "2026-10-18T12:00:00Z", "host": "Unit fixture, not a real host run", "model": None,
         "judge": {"identity": "Unit fixture", "kind": "model", "notes": "Fabricated annotations for scorer tests only."},
         "protocol_hashes": {name: evaluation.digest(path.read_bytes()) for name, path in evaluation.protocol_sources(variant).items()},

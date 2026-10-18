@@ -100,7 +100,7 @@ class ReleaseTests(unittest.TestCase):
             result = subprocess.run(command, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             files = list(Path(temp).glob("*.zip"))
-            self.assertEqual([path.name for path in files], ["academic-paper-auditor-prompt-0.0.1.zip"])
+            self.assertEqual([path.name for path in files], ["academic-paper-auditor-prompt-0.0.2.zip"])
             original = files[0].read_bytes()
             second = subprocess.run(command, capture_output=True, text=True)
             self.assertEqual(second.returncode, 2)
@@ -112,7 +112,7 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(len(list(Path(temp).glob("*.zip"))), 3)
             for kind in ("prompt", "skill", "plugin"):
-                with zipfile.ZipFile(Path(temp) / f"academic-paper-auditor-{kind}-0.0.1.zip") as archive:
+                with zipfile.ZipFile(Path(temp) / f"academic-paper-auditor-{kind}-0.0.2.zip") as archive:
                     self.assertEqual(set(archive.namelist()), set(release.release_members(kind)))
                     self.assertIsNone(archive.testzip())
 

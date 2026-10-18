@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -58,6 +59,65 @@ class ArithmeticTests(unittest.TestCase):
 
 
 class InventoryTests(unittest.TestCase):
+    @staticmethod
+    def with_ctime(info, ctime):
+        return SimpleNamespace(st_dev=info.st_dev, st_ino=info.st_ino,
+                               st_size=info.st_size, st_mtime_ns=info.st_mtime_ns,
+                               st_ctime_ns=ctime)
+
+    def test_path_and_descriptor_ctime_may_have_different_meanings(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            payload = b"Stable evidence"
+            (root / "item").write_bytes(payload)
+            real_fstat = audit.os.fstat
+
+            def descriptor_stat(fd):
+                info = real_fstat(fd)
+                return self.with_ctime(info, info.st_ctime_ns + 1000000000)
+
+            with patch.object(audit.os, "fstat", side_effect=descriptor_stat):
+                item = audit.inventory(root, ["item"])["artifacts"][0]
+            self.assertEqual(item["sha256"], hashlib.sha256(payload).hexdigest())
+
+    def test_descriptor_ctime_change_is_still_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "item").write_bytes(b"Stable evidence")
+            real_fstat = audit.os.fstat
+            calls = 0
+
+            def descriptor_stat(fd):
+                nonlocal calls
+                calls += 1
+                info = real_fstat(fd)
+                return self.with_ctime(info, info.st_ctime_ns + (calls - 1))
+
+            with patch.object(audit.os, "fstat", side_effect=descriptor_stat):
+                with self.assertRaisesRegex(ValueError, "changed while hashing"):
+                    audit.inventory(root, ["item"])
+
+    def test_path_ctime_change_is_still_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "item").write_bytes(b"Stable evidence")
+            real_stat = Path.stat
+            real_fstat = audit.os.fstat
+            calls = 0
+
+            def descriptor_stat(fd):
+                nonlocal calls
+                calls += 1
+                return real_fstat(fd)
+
+            def path_stat(path, **kwargs):
+                info = real_stat(path, **kwargs)
+                return self.with_ctime(info, info.st_ctime_ns + 1) if calls == 2 else info
+
+            with patch.object(audit.os, "fstat", side_effect=descriptor_stat), patch.object(Path, "stat", path_stat):
+                with self.assertRaisesRegex(ValueError, "changed while hashing"):
+                    audit.inventory(root, ["item"])
+
     def test_hashes_bytes_without_modification(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

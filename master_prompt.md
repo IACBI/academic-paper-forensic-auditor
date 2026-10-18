@@ -2,7 +2,7 @@
 
 **Author:** 𝓐.𝓒.𝓑  
 **License:** MIT  
-**Version:** v.0.0.1
+**Version:** v.0.0.2
 
 ---
 

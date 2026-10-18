@@ -19,7 +19,7 @@ import stat
 import sys
 from urllib.parse import urlsplit
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 DOMAINS = (
     "text_methods", "statistics_data", "figures_images", "metadata_provenance",
     "references_notices", "ethics_registration", "cross_paper",
@@ -88,8 +88,9 @@ def flow_check(initial, excluded, dropouts, analyzed, *, disjoint=False):
     }
 
 
-def _file_signature(info):
-    return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+def _file_signature(info, *, include_ctime=True):
+    signature = (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
+    return signature + (info.st_ctime_ns,) if include_ctime else signature
 
 
 def inventory(root, files):
@@ -128,12 +129,14 @@ def inventory(root, files):
         digest = hashlib.sha256()
         with path.open("rb") as handle:
             opened = os.fstat(handle.fileno())
-            if _file_signature(before) != _file_signature(opened):
+            # Windows stat/fstat may give ctime different meanings. Compare it
+            # only within the same API; identity, size and mtime must match both.
+            if _file_signature(before, include_ctime=False) != _file_signature(opened, include_ctime=False):
                 raise ValueError("Evidence changed before hashing; retry on a stable copy")
             for chunk in iter(lambda: handle.read(1024 * 1024), b""):
                 digest.update(chunk)
             after = os.fstat(handle.fileno())
-        if _file_signature(opened) != _file_signature(after) or _file_signature(after) != _file_signature(path.stat()):
+        if _file_signature(opened) != _file_signature(after) or _file_signature(before) != _file_signature(path.stat()):
             raise ValueError("Evidence changed while hashing; retry on a stable copy")
         artifacts.append({
             "id": f"A{index:03d}", "label": label, "kind": "original",
