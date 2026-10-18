@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible problem with the protocol, helper tools or packaging.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use synthetic examples or material you are allowed to share. Remove confidential manuscripts, participant identifiers, credentials and private audit findings.
+        See the repository's docs/USAGE.md and docs/PRIVACY.md for scope and data handling.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v.0.0.1
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Agent, operating system and relevant tools
+      description: Include only versions and capabilities you actually know. For helpers, include the Python version.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps and minimal example
+      description: Identify the quick prompt, full prompt, skill, plugin or helper involved, and the smallest safe example that reproduces the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual result
+      description: Include relevant error output or evidence locators without private data.
+    validations:
+      required: true
