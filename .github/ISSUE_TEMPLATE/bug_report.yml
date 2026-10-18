@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Use synthetic examples or material you are allowed to share. Remove confidential manuscripts, participant identifiers, credentials and private audit findings.
-        See the repository's docs/USAGE.md and docs/PRIVACY.md for scope and data handling.
+        See the complete multilingual guide in README.md and the data-handling guidance in docs/PRIVACY.md.
   - type: input
     id: version
     attributes:

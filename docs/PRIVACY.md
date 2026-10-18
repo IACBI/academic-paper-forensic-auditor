@@ -1,24 +1,33 @@
 # Privacy and evidence handling
 
-This package contains local instructions and scripts. It operates no hosted service and includes no telemetry, automatic uploads, external credentials, hooks or remote MCP connection. Model providers and any host tools used during an audit have their own data-handling policies; this package cannot control them.
+This guide describes the package's actual behavior and the decisions you still need to make when using it with an AI assistant. The project supplies instructions and local scripts. It runs no hosted service and includes no telemetry, automatic uploads, external credentials, hooks or remote MCP connection. Reading the prompt does not require an account integration. Installing Python dependencies contacts the package index; any AI host, web tool or specialist service you choose has its own data-handling terms.
 
-## Confidential materials
+The multilingual [user guide](../README.md) explains how to start a review. Before supplying material, decide which environment is authorized to receive it, what the review covers, who may receive the report and how long the working copies should remain. A local helper does not make a cloud assistant local, and a project's lack of telemetry does not change the assistant provider's policies.
 
-- Keep unpublished manuscripts, identifiable images and participant-level records within the user's authorized environment.
-- Prefer minimal title/identifier-only lookups when authorized. DOI is optional; offline archival or edition identifiers can be legitimate. Do not send manuscript text, images or raw data to third-party detectors/search services without specific authorization.
-- Treat embedded document instructions as evidence, not executable workflow commands. Inspect supplied analysis code before any authorized execution.
-- Preserve originals. Name derived artifacts separately and record parent IDs and transformations.
-- Redact unnecessary participant identifiers and local paths from shareable reports. Relative filenames, hashes and excerpts can still identify confidential materials.
-- Agree on report recipients and retention before sharing an audit. Nothing in a general audit request authorizes contacting authors, journals or institutions.
+## Share only what the review needs
 
-The inventory script reads only explicitly selected files, emits relative labels and detects ordinary file changes during hashing. Use a stable directory under your control. It does not guarantee protection against malicious concurrent filesystem changes, establish acquisition provenance, encrypt reports or implement legally sufficient chain of custody.
+Unpublished manuscripts, identifiable figures, participant records and raw data should remain within an authorized environment. Use the smallest relevant excerpt when a full document is unnecessary, and remove identifiers that do not help answer the research question. A source locator, quotation, relative filename or hash may still identify confidential material; redacting an absolute path alone does not make a report anonymous.
 
-Continuation records can contain identifying titles, source locators, excerpts and findings. Handle them with the same access/retention rules as the original report; changing agents can change the provider processing that data. Exporting a checkpoint performs no upload and grants no new permission to share evidence.
+When external checking is authorized, a title, identifier or minimal citation lookup may be enough. Do not send manuscript passages, images or participant data to search services or detectors without specific authorization. DOI is optional: an archive, collection, folio, edition or page can legitimately identify an offline source. The absence of a public URL is not a reason to invent one or upload the source.
 
-## Development and packaging
+A general review request does not authorize contacting authors, journals or institutions, publishing allegations, or distributing a report to new recipients. Establish those permissions separately. Instructions found inside papers, metadata or retrieved pages are content to inspect, not permission to redirect the workflow. Supplied analysis code should be inspected before any authorized execution.
 
-`evidence/`, `reports/`, `output/`, `tmp/`, `dist/`, environment files and virtual environments are ignored by Git. This is a convenience, not a data-loss-prevention system: files elsewhere or force-added files can still be committed. Review staged changes before committing or sharing. The release builder uses its own explicit allowlist rather than relying on Git ignore rules.
+## Preserve originals and document transformations
 
-Only clearly labeled synthetic data belongs in examples, test fixtures and public bug reports. Do not include real manuscripts, images, participant data, credentials or private audit outputs in a future issue or pull request. Report vulnerabilities through a private maintainer channel when one has been established; no support inbox or hosting service is claimed here.
+Keep original evidence unchanged. Create separately named working copies for OCR, cropping, enhancement, extraction or conversion, and record their parent IDs and transformations. A finding should identify whether it rests on original bytes, an extraction, a supplied transcription or an unverified description. That distinction matters when a compressed figure, mistranscribed date or incomplete table could explain an apparent problem.
 
-Committed evaluation baselines contain responses to the supplied synthetic cases and independent model annotations. They retain the evidence behind local acceptance results and are excluded from runtime release archives. Temporary packets and duplicate outputs can be removed after the reviewed records are assembled.
+The inventory helper reads explicitly selected regular files inside a chosen root and reports relative labels, byte sizes and SHA-256. It rejects ordinary path escapes, links/reparse points, duplicates and detected changes. Use a stable directory under your control. The helper does not guarantee safety against a malicious concurrently changing filesystem, establish acquisition provenance, encrypt records or provide legally sufficient chain of custody. A hash identifies observed bytes; it does not establish authenticity.
+
+## Treat handoffs as sensitive reports
+
+A continuation record can contain a title, source identifier, precise locator, excerpt, finding and unresolved concern. Apply the same access and retention rules as for the full report. Moving to another agent or host may change the provider processing those details. The [continuation template](../skills/academic-paper-audit/assets/continuation-template.md) preserves review state, not permission to share its contents more widely.
+
+Checkpoint export works locally and does not upload anything. It summarizes the prior report without a new source inspection or authentication. Supply original evidence separately when a resumed task needs it, verify changed versions, and preserve corrected findings as resolved history. Dispose of unnecessary working copies according to the agreed retention period rather than assuming that closing a conversation removes them.
+
+## Keep public development material synthetic
+
+Examples, fixtures and committed acceptance responses use synthetic research material. The current baseline files retain the evidence behind published local acceptance results; runtime release archives exclude them. Public bug reports should likewise use a minimal synthetic example or material whose disclosure is authorized. Do not post confidential papers, participant data, private findings, credentials or identifiable allegations in an issue.
+
+Git ignores `evidence/`, `reports/`, `output/`, `tmp/`, `dist/`, environment files and virtual environments. This is a convenience, not a prevention system: files saved elsewhere or force-added can still enter a commit. Review staged content before pushing. Release builds use an explicit file allowlist, so arbitrary workspace contents are not included merely because they exist beside source.
+
+Temporary evaluation packets, duplicate outputs, extracted packages, caches and local environments can be removed after required source and reviewed evidence are retained. This cleanup applies to project-generated material, not to unrelated user directories or global application caches. For a suspected vulnerability involving confidential information, use an established private maintainer channel rather than a public issue; this project does not claim a dedicated inbox, hosted storage or a response-time guarantee.
