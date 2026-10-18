@@ -5,10 +5,11 @@
 
 [English](#lang-en) · [Türkçe](#lang-tr) · [Deutsch](#lang-de) · [Français](#lang-fr) · [Español](#lang-es) · [Italiano](#lang-it) · [Português](#lang-pt) · [العربية](#lang-ar) · [简体中文](#lang-zh-cn) · [繁體中文](#lang-zh-tw) · [한국어](#lang-ko) · [日本語](#lang-ja)
 
-[![Version: v.0.0.1](https://img.shields.io/badge/version-v.0.0.1-2563eb?style=flat-square)](https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.1)
-[![License: MIT](https://img.shields.io/badge/license-MIT-16a34a?style=flat-square)](LICENSE)
-[![Author: 𝓐.𝓒.𝓑](https://img.shields.io/badge/author-A.C.B.-64748b?style=flat-square)](https://github.com/IACBI)
-[![CI status](https://img.shields.io/github/actions/workflow/status/IACBI/academic-paper-forensic-auditor/validate.yml?branch=main&event=push&label=checks&style=flat-square)](https://github.com/IACBI/academic-paper-forensic-auditor/actions/workflows/validate.yml)
+<p align="center">
+  <a href="https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.2"><img alt="Version: v.0.0.2" src="https://img.shields.io/badge/version-v.0.0.2-2563eb?style=flat"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-16a34a?style=flat"></a>
+  <a href="https://github.com/IACBI/academic-paper-forensic-auditor/actions/workflows/validate.yml"><img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/IACBI/academic-paper-forensic-auditor/validate.yml?branch=main&amp;event=push&amp;label=checks&amp;style=flat"></a>
+</p>
 
 ---
 
@@ -95,11 +96,11 @@ These examples use synthetic material. Inventory accepts paths relative to `--ro
 
 ### Verification, support and license
 
-Recorded CI runs have passed all 70 tests on Windows and Ubuntu with Python 3.10 and 3.14. Windows/Python 3.14 exposed an inventory check that can reject an unchanged file; use Python 3.10 for Windows helpers while this limitation remains. Quick, master and skill routes each passed 16 synthetic cases and 48 model-judged checks, including legitimate controls, insufficient evidence and a resolved finding. These are acceptance results, not measured scientific accuracy. Native installation across AI hosts, macOS execution and expert performance across languages, modalities and disciplines remain unverified. The [validation guide](docs/VALIDATION.md) documents evidence, limits and reproduction steps.
+The project has 73 behavior tests and a Windows/Ubuntu CI matrix for Python 3.10 and 3.14. Version v.0.0.2 corrects the Windows inventory timestamp comparison while preserving file-identity and change-detection checks. Quick, master and skill routes each passed 16 synthetic cases and 48 model-judged checks, including legitimate controls, insufficient evidence and a resolved finding. These are acceptance results, not measured scientific accuracy. Native installation across AI hosts, macOS execution and expert performance across languages, modalities and disciplines remain unverified. The [validation guide](docs/VALIDATION.md) documents evidence, limits and reproduction steps.
 
 For a reproducible problem, use the [bug form][issues] with a minimal synthetic or authorized shareable example. [Contributing](CONTRIBUTING.md) covers development and releases; [CHANGELOG.md](CHANGELOG.md) records changes. The project is available under the [MIT license](LICENSE). This language section is a complete user guide; the additional technical documents are maintained in English.
 
-[↑ Language menu](#languages)
+[↑ Back to top](#top)
 
 ---
 
@@ -186,11 +187,11 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### Doğrulama, destek ve lisans
 
-Kaydedilmiş CI çalışmalarında 70 testin tamamı Windows ve Ubuntu üzerinde Python 3.10 ve 3.14 ile geçmiştir. Windows/Python 3.14’te envanter kontrolünün değişmemiş bir dosyayı reddedebildiği görüldü; bu sınırlılık sürerken Windows yardımcıları için Python 3.10 kullanın. Kısa istek, tam prompt ve skill yollarının her biri 16 sentetik vaka ve 48 model-yargıç ölçütünü geçmiştir; sorunsuz kontroller, yetersiz kanıt ve çözülen bulgu da sınanmıştır. Bunlar bilimsel doğruluk oranı değildir. Farklı ajanlarda native kurulum, macOS ve tüm dil, materyal ve disiplinlerde uzman performansı doğrulanmış değildir. [Doğrulama rehberi](docs/VALIDATION.md) kanıtları, sınırları ve tekrar adımlarını içerir.
+Projede 73 davranış testi ve Windows/Ubuntu üzerinde Python 3.10 ve 3.14 ile çalışan bir CI matrisi bulunur. v.0.0.2, Windows envanterindeki zaman alanı karşılaştırmasını düzeltir; dosya kimliği ve gerçek değişiklik kontrollerini korur. Kısa istek, tam prompt ve skill yollarının her biri 16 sentetik vaka ve 48 model-yargıç ölçütünü geçmiştir; sorunsuz kontroller, yetersiz kanıt ve çözülen bulgu da sınanmıştır. Bunlar bilimsel doğruluk oranı değildir. Farklı ajanlarda native kurulum, macOS ve tüm dil, materyal ve disiplinlerde uzman performansı doğrulanmış değildir. [Doğrulama rehberi](docs/VALIDATION.md) kanıtları, sınırları ve tekrar adımlarını içerir.
 
 Tekrarlanabilir bir sorun için [hata formuna][issues] küçük bir sentetik veya paylaşılabilir örnek ekleyin. Geliştirme ve yayın süreci [katkı rehberinde](CONTRIBUTING.md), sürüm değişiklikleri [CHANGELOG.md](CHANGELOG.md) içinde açıklanır. Proje [MIT lisanslıdır](LICENSE). Bu bölüm tam kullanıcı rehberidir; ek teknik belgeler İngilizce tutulur.
 
-[↑ Dil menüsü](#languages)
+[↑ Başa dön](#top)
 
 ---
 
@@ -277,11 +278,11 @@ Die Beispiele sind synthetisch. Das Inventar erwartet Pfade relativ zu `--root` 
 
 ### Prüfung, Hilfe und Lizenz
 
-Dokumentierte CI-Läufe haben alle 70 Tests unter Windows und Ubuntu mit Python 3.10 und 3.14 bestanden. Unter Windows/Python 3.14 kann die Inventarprüfung eine unveränderte Datei zurückweisen; verwenden Sie für Windows-Hilfsprogramme vorerst Python 3.10. Kurzanfrage, Hauptprotokoll und Skill bestanden jeweils 16 synthetische Fälle und 48 modellbewertete Kriterien, darunter unauffällige Kontrollen, unzureichende Evidenz und ein gelöster Befund. Das sind Abnahmeresultate, keine wissenschaftlichen Genauigkeitsmessungen. Native Hostinstallation, macOS sowie fachliche Leistung über alle Sprachen, Medien und Disziplinen sind nicht nachgewiesen. Der [Validierungsleitfaden](docs/VALIDATION.md) enthält Belege, Grenzen und Wiederholungsschritte.
+Das Projekt enthält 73 Verhaltenstests und eine CI-Matrix für Windows/Ubuntu mit Python 3.10 und 3.14. Version v.0.0.2 korrigiert den Zeitstempelvergleich im Windows-Inventar und bewahrt die Prüfung von Dateiidentität und tatsächlichen Änderungen. Kurzanfrage, Hauptprotokoll und Skill bestanden jeweils 16 synthetische Fälle und 48 modellbewertete Kriterien, darunter unauffällige Kontrollen, unzureichende Evidenz und ein gelöster Befund. Das sind Abnahmeresultate, keine wissenschaftlichen Genauigkeitsmessungen. Native Hostinstallation, macOS sowie fachliche Leistung über alle Sprachen, Medien und Disziplinen sind nicht nachgewiesen. Der [Validierungsleitfaden](docs/VALIDATION.md) enthält Belege, Grenzen und Wiederholungsschritte.
 
 Melden Sie reproduzierbare Probleme im [Fehlerformular][issues] mit einem kleinen synthetischen oder freigegebenen Beispiel. [Contributing](CONTRIBUTING.md) beschreibt Entwicklung und Releases, [CHANGELOG.md](CHANGELOG.md) die Änderungen. Es gilt die [MIT-Lizenz](LICENSE). Dieser Abschnitt ist ein vollständiger Benutzerleitfaden; ergänzende technische Dokumente werden auf Englisch gepflegt.
 
-[↑ Sprachauswahl](#languages)
+[↑ Nach oben](#top)
 
 ---
 
@@ -368,11 +369,11 @@ Les exemples sont synthétiques. L’inventaire accepte des chemins relatifs à 
 
 ### Vérification, aide et licence
 
-Des exécutions CI documentées ont passé les 70 tests sur Windows et Ubuntu avec Python 3.10 et 3.14. Sous Windows/Python 3.14, le contrôle d’inventaire peut rejeter un fichier inchangé ; utilisez Python 3.10 pour les outils Windows tant que cette limite subsiste. Demande courte, protocole complet et skill ont chacun passé 16 cas synthétiques et 48 critères évalués par un modèle, dont des contrôles sans anomalie, des preuves insuffisantes et une observation résolue. Ces résultats ne mesurent pas la précision scientifique. Installation native, exécution macOS et expertise dans toutes les langues, modalités et disciplines restent non établies. Le [guide de validation](docs/VALIDATION.md) fournit preuves, limites et procédure de reproduction.
+Le projet comprend 73 tests de comportement et une matrice CI Windows/Ubuntu avec Python 3.10 et 3.14. La version v.0.0.2 corrige la comparaison temporelle de l’inventaire Windows tout en conservant les contrôles d’identité et de modification des fichiers. Demande courte, protocole complet et skill ont chacun passé 16 cas synthétiques et 48 critères évalués par un modèle, dont des contrôles sans anomalie, des preuves insuffisantes et une observation résolue. Ces résultats ne mesurent pas la précision scientifique. Installation native, exécution macOS et expertise dans toutes les langues, modalités et disciplines restent non établies. Le [guide de validation](docs/VALIDATION.md) fournit preuves, limites et procédure de reproduction.
 
 Signalez un problème reproductible dans le [formulaire][issues] avec un petit exemple synthétique ou partageable. [Contributing](CONTRIBUTING.md) décrit développement et versions, [CHANGELOG.md](CHANGELOG.md) les changements. Le projet est sous [licence MIT](LICENSE). Cette section constitue un guide utilisateur complet ; les documents techniques complémentaires sont maintenus en anglais.
 
-[↑ Choix de la langue](#languages)
+[↑ Retour en haut](#top)
 
 ---
 
@@ -459,11 +460,11 @@ Los ejemplos son sintéticos. El inventario acepta rutas relativas a `--root` y 
 
 ### Verificación, ayuda y licencia
 
-Las ejecuciones de CI documentadas han superado los 70 tests en Windows y Ubuntu con Python 3.10 y 3.14. En Windows/Python 3.14, el inventario puede rechazar un archivo sin cambios; utilice Python 3.10 para las herramientas de Windows mientras persista esta limitación. Solicitud breve, protocolo completo y skill superaron cada uno 16 casos sintéticos y 48 criterios juzgados por un modelo, incluidos controles legítimos, pruebas insuficientes y un hallazgo resuelto. No son medidas de precisión científica. Instalación nativa, ejecución en macOS y rendimiento experto en todos los idiomas, modalidades y disciplinas siguen sin verificarse. La [guía de validación](docs/VALIDATION.md) documenta pruebas, límites y reproducción.
+El proyecto incluye 73 tests de comportamiento y una matriz CI para Windows/Ubuntu con Python 3.10 y 3.14. La versión v.0.0.2 corrige la comparación temporal del inventario en Windows y conserva los controles de identidad y cambios reales de los archivos. Solicitud breve, protocolo completo y skill superaron cada uno 16 casos sintéticos y 48 criterios juzgados por un modelo, incluidos controles legítimos, pruebas insuficientes y un hallazgo resuelto. No son medidas de precisión científica. Instalación nativa, ejecución en macOS y rendimiento experto en todos los idiomas, modalidades y disciplinas siguen sin verificarse. La [guía de validación](docs/VALIDATION.md) documenta pruebas, límites y reproducción.
 
 Para problemas reproducibles, utilice el [formulario][issues] con un ejemplo mínimo sintético o compartible. [Contributing](CONTRIBUTING.md) explica desarrollo y publicaciones; [CHANGELOG.md](CHANGELOG.md), los cambios. El proyecto tiene [licencia MIT](LICENSE). Esta sección es una guía de uso completa; la documentación técnica adicional se mantiene en inglés.
 
-[↑ Menú de idiomas](#languages)
+[↑ Volver al principio](#top)
 
 ---
 
@@ -550,11 +551,11 @@ Gli esempi sono sintetici. L’inventario accetta percorsi relativi a `--root` e
 
 ### Verifica, assistenza e licenza
 
-Le esecuzioni CI documentate hanno superato tutti i 70 test su Windows e Ubuntu con Python 3.10 e 3.14. Su Windows/Python 3.14 l’inventario può rifiutare un file invariato; usa Python 3.10 per gli strumenti Windows finché permane questo limite. Richiesta breve, protocollo completo e skill hanno superato ciascuno 16 casi sintetici e 48 criteri valutati da un modello, inclusi controlli senza problemi, prove insufficienti e un rilievo risolto. Non sono misure di accuratezza scientifica. Installazione nativa, esecuzione macOS e prestazioni esperte in ogni lingua, modalità e disciplina restano non verificate. La [guida di validazione](docs/VALIDATION.md) documenta prove, limiti e riproduzione.
+Il progetto comprende 73 test comportamentali e una matrice CI Windows/Ubuntu con Python 3.10 e 3.14. La versione v.0.0.2 corregge il confronto temporale dell’inventario Windows, mantenendo i controlli sull’identità e sulle modifiche effettive dei file. Richiesta breve, protocollo completo e skill hanno superato ciascuno 16 casi sintetici e 48 criteri valutati da un modello, inclusi controlli senza problemi, prove insufficienti e un rilievo risolto. Non sono misure di accuratezza scientifica. Installazione nativa, esecuzione macOS e prestazioni esperte in ogni lingua, modalità e disciplina restano non verificate. La [guida di validazione](docs/VALIDATION.md) documenta prove, limiti e riproduzione.
 
 Per problemi riproducibili usa il [modulo][issues] con un esempio minimo sintetico o condivisibile. [Contributing](CONTRIBUTING.md) descrive sviluppo e pubblicazioni, [CHANGELOG.md](CHANGELOG.md) le modifiche. Il progetto è sotto [licenza MIT](LICENSE). Questa sezione è una guida utente completa; i documenti tecnici aggiuntivi sono mantenuti in inglese.
 
-[↑ Menu delle lingue](#languages)
+[↑ Torna in cima](#top)
 
 ---
 
@@ -641,11 +642,11 @@ Os exemplos são sintéticos. O inventário aceita caminhos relativos a `--root`
 
 ### Validação, ajuda e licença
 
-Execuções de CI documentadas passaram nos 70 testes em Windows e Ubuntu com Python 3.10 e 3.14. Em Windows/Python 3.14, o inventário pode rejeitar um arquivo sem alterações; use Python 3.10 nas ferramentas Windows enquanto essa limitação persistir. Solicitação curta, protocolo completo e skill passaram, cada um, por 16 casos sintéticos e 48 critérios julgados por um modelo, incluindo controles legítimos, evidência insuficiente e um achado resolvido. Esses resultados não medem precisão científica. Instalação nativa, execução em macOS e desempenho especializado em todos os idiomas, modalidades e disciplinas continuam sem comprovação. O [guia de validação](docs/VALIDATION.md) apresenta evidências, limites e reprodução.
+O projeto inclui 73 testes de comportamento e uma matriz CI Windows/Ubuntu com Python 3.10 e 3.14. A versão v.0.0.2 corrige a comparação temporal do inventário Windows e mantém as verificações de identidade e alterações reais dos arquivos. Solicitação curta, protocolo completo e skill passaram, cada um, por 16 casos sintéticos e 48 critérios julgados por um modelo, incluindo controles legítimos, evidência insuficiente e um achado resolvido. Esses resultados não medem precisão científica. Instalação nativa, execução em macOS e desempenho especializado em todos os idiomas, modalidades e disciplinas continuam sem comprovação. O [guia de validação](docs/VALIDATION.md) apresenta evidências, limites e reprodução.
 
 Relate problemas reproduzíveis no [formulário][issues] com um exemplo mínimo sintético ou compartilhável. [Contributing](CONTRIBUTING.md) explica desenvolvimento e publicações; [CHANGELOG.md](CHANGELOG.md), as mudanças. O projeto usa a [licença MIT](LICENSE). Esta seção é um guia completo de uso; os documentos técnicos adicionais são mantidos em inglês.
 
-[↑ Menu de idiomas](#languages)
+[↑ Voltar ao início](#top)
 
 ---
 
@@ -732,11 +733,11 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### التحقق والمساعدة والترخيص
 
-اجتازت تشغيلات CI الموثقة الاختبارات السبعين على Windows وUbuntu مع Python 3.10 و3.14. أما Windows/Python 3.14 فقد أظهر أن فحص الجرد قد يرفض ملفاً لم يتغير؛ استخدم Python 3.10 للأدوات المحلية على Windows ما دام هذا القيد قائماً. اجتاز كل من الطلب المختصر والموجّه الكامل والـskill ست عشرة حالة اصطناعية و48 معياراً بتقييم نموذج، تشمل حالات سليمة وأدلة غير كافية وملاحظة حُلّت بتصحيح. هذه نتائج قبول وليست قياسات للدقة العلمية. لم يُثبت التثبيت الأصلي في مختلف البيئات أو تشغيل macOS أو الخبرة في جميع اللغات والوسائط والتخصصات. يوثّق [دليل التحقق](docs/VALIDATION.md) الأدلة والقيود وإعادة التنفيذ.
+يتضمن المشروع 73 اختباراً سلوكياً ومصفوفة CI على Windows وUbuntu مع Python 3.10 و3.14. يصحح الإصدار v.0.0.2 مقارنة الحقول الزمنية في جرد Windows مع الحفاظ على فحوص هوية الملف والتغييرات الفعلية. اجتاز كل من الطلب المختصر والموجّه الكامل والـskill ست عشرة حالة اصطناعية و48 معياراً بتقييم نموذج، تشمل حالات سليمة وأدلة غير كافية وملاحظة حُلّت بتصحيح. هذه نتائج قبول وليست قياسات للدقة العلمية. لم يُثبت التثبيت الأصلي في مختلف البيئات أو تشغيل macOS أو الخبرة في جميع اللغات والوسائط والتخصصات. يوثّق [دليل التحقق](docs/VALIDATION.md) الأدلة والقيود وإعادة التنفيذ.
 
 للأخطاء القابلة للتكرار، استخدم [النموذج][issues] مع مثال اصطناعي صغير أو مأذون بمشاركته. يشرح [دليل المساهمة](CONTRIBUTING.md) التطوير والإصدارات، ويسجل [CHANGELOG.md](CHANGELOG.md) التغييرات. يتاح المشروع وفق [ترخيص MIT](LICENSE). هذا القسم دليل استخدام كامل؛ تُصان الوثائق التقنية الإضافية بالإنجليزية.
 
-[↑ قائمة اللغات](#languages)
+[↑ العودة إلى الأعلى](#top)
 
 ---
 
@@ -823,11 +824,11 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 验证、反馈与许可
 
-记录中的 CI 运行已在 Windows、Ubuntu 与 Python 3.10、3.14 的组合中通过全部 70 项测试。Windows/Python 3.14 下的清单检查可能拒绝未发生变化的文件；该限制解决前，请在 Windows 辅助工具中使用 Python 3.10。简短请求、完整提示词和 skill 各通过 16 个合成案例与 48 项模型评判标准，包括正常对照、证据不足和已解决发现。这些是验收结果，不是科学准确率。不同 AI 宿主的原生安装、macOS 运行以及跨语言、媒介和学科的专家表现仍未验证。[验证指南](docs/VALIDATION.md) 提供证据、边界及复现步骤。
+项目包含 73 项行为测试，以及覆盖 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩阵。v.0.0.2 修正了 Windows 清单工具的时间字段比较，同时保留文件身份和实际变更检查。简短请求、完整提示词和 skill 各通过 16 个合成案例与 48 项模型评判标准，包括正常对照、证据不足和已解决发现。这些是验收结果，不是科学准确率。不同 AI 宿主的原生安装、macOS 运行以及跨语言、媒介和学科的专家表现仍未验证。[验证指南](docs/VALIDATION.md) 提供证据、边界及复现步骤。
 
 如遇可复现问题，请通过[问题表单][issues] 提供最小合成示例或获准公开的材料。[贡献指南](CONTRIBUTING.md) 介绍开发与发布，[CHANGELOG.md](CHANGELOG.md) 记录变更，项目采用 [MIT 许可](LICENSE)。本节是完整用户指南；补充技术文档以英语维护。
 
-[↑ 语言菜单](#languages)
+[↑ 返回顶部](#top)
 
 ---
 
@@ -914,11 +915,11 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 驗證、回饋與授權
 
-已記錄的 CI 執行在 Windows、Ubuntu 與 Python 3.10、3.14 的組合中通過全部 70 項測試。Windows/Python 3.14 的清單檢查可能拒絕未變更的檔案；此限制解決前，請在 Windows 輔助工具中使用 Python 3.10。簡短請求、完整提示詞與 skill 各通過 16 個合成案例及 48 項模型評判標準，包括正常對照、證據不足及已解決發現。這些是驗收結果，不是科學準確率。不同 AI 宿主的原生安裝、macOS 執行，以及跨語言、媒介與學科的專家表現仍未驗證。[驗證指南](docs/VALIDATION.md) 提供證據、界線及重現步驟。
+專案包含 73 項行為測試，以及涵蓋 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩陣。v.0.0.2 修正了 Windows 清單工具的時間欄位比較，同時保留檔案識別及實際變更檢查。簡短請求、完整提示詞與 skill 各通過 16 個合成案例及 48 項模型評判標準，包括正常對照、證據不足及已解決發現。這些是驗收結果，不是科學準確率。不同 AI 宿主的原生安裝、macOS 執行，以及跨語言、媒介與學科的專家表現仍未驗證。[驗證指南](docs/VALIDATION.md) 提供證據、界線及重現步驟。
 
 遇到可重現問題，請透過[問題表單][issues] 提供最小合成示例或獲准公開的資料。[貢獻指南](CONTRIBUTING.md) 說明開發與發布，[CHANGELOG.md](CHANGELOG.md) 記錄變更，專案採用 [MIT 授權](LICENSE)。本節為完整使用指南；補充技術文件以英文維護。
 
-[↑ 語言選單](#languages)
+[↑ 回到頂端](#top)
 
 ---
 
@@ -1005,11 +1006,11 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 검증, 문의와 라이선스
 
-기록된 CI 실행에서는 Windows·Ubuntu와 Python 3.10·3.14 조합에서 70개 테스트가 모두 통과했습니다. Windows/Python 3.14에서는 목록 검사가 변경되지 않은 파일을 거부할 수 있으므로, 이 제한이 해결될 때까지 Windows 보조 도구에는 Python 3.10을 사용하세요. 짧은 요청문, 전체 프롬프트, skill은 각각 합성 사례 16개와 별도 모델이 평가한 기준 48개를 통과했으며, 정상 대조, 근거 부족, 해결된 발견도 포함합니다. 이는 수용 검사 결과이지 과학적 정확도 측정이 아닙니다. 여러 AI 호스트의 기본 설치, macOS 실행, 모든 언어·매체·분야에서의 전문가 성능은 검증되지 않았습니다. [검증 안내](docs/VALIDATION.md)에 근거, 한계, 재현 절차가 있습니다.
+프로젝트에는 행동 테스트 73개와 Windows·Ubuntu 및 Python 3.10·3.14를 대상으로 하는 CI 조합이 있습니다. v.0.0.2는 Windows 목록 도구의 시간 필드 비교를 수정하면서 파일 식별과 실제 변경 감지를 유지합니다. 짧은 요청문, 전체 프롬프트, skill은 각각 합성 사례 16개와 별도 모델이 평가한 기준 48개를 통과했으며, 정상 대조, 근거 부족, 해결된 발견도 포함합니다. 이는 수용 검사 결과이지 과학적 정확도 측정이 아닙니다. 여러 AI 호스트의 기본 설치, macOS 실행, 모든 언어·매체·분야에서의 전문가 성능은 검증되지 않았습니다. [검증 안내](docs/VALIDATION.md)에 근거, 한계, 재현 절차가 있습니다.
 
 재현 가능한 문제는 [버그 양식][issues]에 작은 합성 예시나 공유 허가를 받은 자료와 함께 제출하세요. [기여 안내](CONTRIBUTING.md)는 개발·배포를, [CHANGELOG.md](CHANGELOG.md)는 변경 사항을 설명합니다. [MIT 라이선스](LICENSE)를 사용합니다. 이 절은 완전한 사용자 안내이며 추가 기술 문서는 영어로 유지됩니다.
 
-[↑ 언어 메뉴](#languages)
+[↑ 맨 위로](#top)
 
 ---
 
@@ -1096,18 +1097,18 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 検証、問い合わせ、ライセンス
 
-記録された CI 実行では、Windows・Ubuntu と Python 3.10・3.14 の組合せで 70 件すべてのテストに合格しています。Windows/Python 3.14 では一覧ツールが変更のないファイルを拒否する場合があるため、この制限が解消するまでは Windows の補助ツールに Python 3.10 を使ってください。短い依頼文、完全版、skill はそれぞれ、正常例、証拠不足、解消した指摘を含む合成 16 ケースと、別モデルが評価した 48 基準に合格しました。これは受け入れ確認であり科学的正確率ではありません。各 AI ホストへのネイティブ導入、macOS 実行、すべての言語・媒体・分野での専門家水準の性能は未検証です。[検証ガイド](docs/VALIDATION.md)に根拠、限界、再現手順があります。
+プロジェクトには 73 件の動作テストと、Windows・Ubuntu、Python 3.10・3.14 を対象とする CI 構成があります。v.0.0.2 は Windows 一覧ツールの時刻項目の比較を修正し、ファイルの同一性と実際の変更の検査は維持します。短い依頼文、完全版、skill はそれぞれ、正常例、証拠不足、解消した指摘を含む合成 16 ケースと、別モデルが評価した 48 基準に合格しました。これは受け入れ確認であり科学的正確率ではありません。各 AI ホストへのネイティブ導入、macOS 実行、すべての言語・媒体・分野での専門家水準の性能は未検証です。[検証ガイド](docs/VALIDATION.md)に根拠、限界、再現手順があります。
 
 再現できる問題は[不具合フォーム][issues]に、小さな合成例か公開許可のある資料を添えて報告してください。[貢献ガイド](CONTRIBUTING.md)は開発と公開、[CHANGELOG.md](CHANGELOG.md)は変更履歴を説明します。[MIT ライセンス](LICENSE)で利用できます。この節だけで利用に必要な説明を読めます。補足の技術文書は英語で管理しています。
 
-[↑ 言語メニュー](#languages)
+[↑ 先頭に戻る](#top)
 
 ---
 
-[release]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.1
-[download-prompt]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-prompt-0.0.1.zip
-[download-skill]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-skill-0.0.1.zip
-[download-plugin]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/academic-paper-auditor-plugin-0.0.1.zip
-[checksums]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.1/SHA256SUMS.txt
+[release]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.2
+[download-prompt]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/academic-paper-auditor-prompt-0.0.2.zip
+[download-skill]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/academic-paper-auditor-skill-0.0.2.zip
+[download-plugin]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/academic-paper-auditor-plugin-0.0.2.zip
+[checksums]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/SHA256SUMS.txt
 [download-source]: https://github.com/IACBI/academic-paper-forensic-auditor/archive/refs/heads/main.zip
 [issues]: https://github.com/IACBI/academic-paper-forensic-auditor/issues/new?template=bug_report.yml

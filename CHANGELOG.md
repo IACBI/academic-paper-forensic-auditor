@@ -1,14 +1,20 @@
 # Changelog
 
-## Unreleased
+## v.0.0.2 — 2026-10-19
+
+### Windows inventory correction
+
+Correct a false file-change error on Windows/Python 3.14, where path-based and descriptor-based stat calls can assign different meanings to the change-time field. Compare identity, size and modification time across APIs, and retain full before/after stability checks within each API. Add three regression tests for unchanged files with different timestamp meanings and actual path/descriptor changes, bringing the suite to 73 tests. The original failure was reproduced on the official Windows Python 3.14.8 build before the fix and passed afterward.
 
 ### Documentation
 
-Restore complete, equivalent user guides in all 12 README languages, with the language menu directly below the title. Each guide covers setup, request settings, delivery formats, research methods, report interpretation, privacy, continuation and optional local tools. Consolidate user instructions into the README and evaluation procedures into the validation guide; remove the superseded usage manual, internal project review and obsolete standalone regression output. The runtime protocol and published v.0.0.1 archives are unchanged.
+Restore complete, equivalent user guides in all 12 README languages, with inline language navigation directly below the title. Each guide covers setup, request settings, delivery formats, research methods, report interpretation, privacy, continuation and optional local tools. Consolidate user instructions into the README and evaluation procedures into the validation guide; remove the superseded usage manual, internal project review and obsolete standalone regression output.
 
-Record the Windows/Python 3.14 inventory failure exposed by the documentation CI run and recommend Python 3.10 for Windows helpers while that compatibility limitation remains. Preserve the failed-run evidence separately from the earlier passing release checks.
+Present version, license and live CI status as centered badges with rounded corners. Remove the author badge and localize each end-of-language link as “Back to top.” Clarify analysis-depth and descriptive settings in every language.
 
-Replace the README language table with inline navigation and present version, license, author and live CI status as linked badges. Explain analysis-depth and free-text settings in every language, and link recorded validation results without describing an older run as the latest check.
+### Distribution and evaluation
+
+Publish new v.0.0.2 prompt, skill and plugin packages with matching checksums. Preserve the original v.0.0.1 tag and assets. Refresh blind evaluations against the actual v.0.0.2 protocol snapshots rather than changing hashes in old response records. Structured examples and contracts identify v.0.0.2; retain historical v.0.0.1 records with their matching version rather than relabeling old observations as newly verified evidence.
 
 ## v.0.0.1 — 2026-10-19
 

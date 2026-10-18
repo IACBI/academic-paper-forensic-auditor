@@ -35,7 +35,7 @@ def check():
         errors.append("Skill metadata version differs from VERSION")
     for name in ("README.md", "master_prompt.md"):
         text = (ROOT / name).read_text(encoding="utf-8")
-        display_labels = (f"**Version:** v.{version}", f"![Version: v.{version}](")
+        display_labels = (f"**Version:** v.{version}", f"![Version: v.{version}](", f'alt="Version: v.{version}"')
         if not any(label in text for label in display_labels):
             errors.append(f"Display version differs in {name}")
     references = load_module("build_references", ROOT / "scripts/build_references.py")
