@@ -9,6 +9,24 @@
 
 An evidence-first master prompt for AI-assisted screening of academic papers, figures, statistics, references, metadata, provenance, and research-integrity signals.
 
+## Formats and operational documentation / Paketler ve kullanım
+
+**English:** Available as a standalone prompt, a modular skill, and a local skills-only plugin package. The original 12-language prompt guide continues below. Start with [usage and installation](docs/USAGE.md); review [validation limits](docs/VALIDATION.md), [privacy](docs/PRIVACY.md), and [future publication](docs/PUBLICATION.md). A [synthetic report](examples/synthetic-report.json) demonstrates the structured output. These formats share one review policy; skill references are generated from `master_prompt.md`.
+
+**Türkçe:** Proje; kopyalanabilir prompt, modüler skill ve yerel plugin paketi olarak kullanılabilir. Aşağıdaki 12 dilli rehber prompt kullanımını anlatır. Kurulum ve araçlar için [kullanım rehberini](docs/USAGE.md), kapsam ve test sınırları için [doğrulama rehberini](docs/VALIDATION.md) inceleyin. Ayrıntılı operasyon belgeleri İngilizcedir. Bu paket bir ön inceleme aracıdır; uzmanlık sertifikası veya kesin bilimsel doğrulama iddiası taşımaz.
+
+The display version is **v.0.0.1**; machine-readable manifests use **0.0.1**. There is no hosted service, automatic upload or public listing. Local helper checks do not establish scientific accuracy or native-host installation compatibility.
+
+```text
+python -m venv .venv
+# Windows; use .venv/bin/python on macOS/Linux:
+.venv/Scripts/python.exe -m pip install -r requirements-validation.txt
+.venv/Scripts/python.exe scripts/check_project.py
+.venv/Scripts/python.exe scripts/build_release.py
+```
+
+For standalone prompt use, no Python setup is required. See [contributing](CONTRIBUTING.md), [validation results](docs/VALIDATION_RESULTS.md), and [changelog](CHANGELOG.md) for maintenance and release details.
+
 > **Important:** This project is an investigative screening aid, not a forensic verdict. AI can be wrong, miss problems, or flag benign material. Findings should be independently verified before they are used for public allegations, editorial sanctions, disciplinary action, or formal misconduct determinations.
 
 ---
@@ -62,6 +80,22 @@ An anomaly is not proof of intent. Photoshop metadata is not proof of falsificat
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -162,6 +196,22 @@ Bir anomali kasıt kanıtı değildir. Photoshop metadata'sı falsifikasyon kan�
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -262,6 +312,22 @@ Eine Anomalie beweist keine Absicht. Photoshop-Metadaten beweisen keine Fälschu
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -362,6 +428,22 @@ Une anomalie ne prouve pas l'intention. La présence de métadonnées Photoshop 
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -462,6 +544,22 @@ Una anomalía no demuestra intención. Los metadatos de Photoshop no demuestran 
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -562,6 +660,22 @@ Un'anomalia non dimostra l'intenzione. La presenza di metadati Photoshop non dim
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -662,6 +776,22 @@ Uma anomalia não prova intenção. Metadados do Photoshop não provam falsifica
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -762,6 +892,22 @@ Use este projeto para triagem, preparação de revisão por pares, análise de i
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -862,6 +1008,22 @@ MATERIALS = [Analyze the uploaded paper and all accompanying files. Use DOI/URL 
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -962,6 +1124,22 @@ Level 2 或 Level 3 **不等于**已经发生科研不端。置信度标签表�
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -1062,6 +1240,22 @@ AI 시스템이 사용할 수 있는 파일과 도구에 따라 다음 항목을
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
@@ -1162,6 +1356,22 @@ Level 2 또는 Level 3은 연구부정이 실제로 발생했다는 뜻이 **아
 academic-paper-forensic-auditor/
 ├── README.md
 ├── master_prompt.md
+├── plugin.json
+├── VERSION
+├── skills/academic-paper-audit/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   ├── assets/
+│   ├── scripts/
+│   └── requirements.txt
+├── scripts/
+├── tests/
+├── examples/
+├── docs/
+├── requirements-validation.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
