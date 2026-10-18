@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic Research Audit Evaluation Run v.0.0.1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "suite_id", "suite_sha256", "variant", "recorded_at", "host", "model", "judge", "protocol_hashes", "input_hashes", "responses", "judgements"],
+  "properties": {
+    "schema_version": {"const": "0.0.1"},
+    "suite_id": {"$ref": "#/$defs/text"},
+    "suite_sha256": {"$ref": "#/$defs/hash"},
+    "variant": {"enum": ["quick", "master", "skill"]},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "host": {"$ref": "#/$defs/text"},
+    "model": {"type": ["string", "null"], "minLength": 1},
+    "judge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["identity", "kind", "notes"],
+      "properties": {
+        "identity": {"$ref": "#/$defs/text"},
+        "kind": {"enum": ["human", "model"]},
+        "notes": {"$ref": "#/$defs/text"}
+      }
+    },
+    "protocol_hashes": {"$ref": "#/$defs/hashes"},
+    "input_hashes": {"$ref": "#/$defs/hashes"},
+    "responses": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["case_id", "text", "sha256"],
+        "properties": {"case_id": {"$ref": "#/$defs/text"}, "text": {"$ref": "#/$defs/text"}, "sha256": {"$ref": "#/$defs/hash"}}
+      }
+    },
+    "judgements": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["case_id", "observed_outcome", "checks"],
+        "properties": {
+          "case_id": {"$ref": "#/$defs/text"},
+          "observed_outcome": {"enum": ["concern", "clean", "insufficient_evidence", "resolved", "unassessed"]},
+          "checks": {
+            "type": "array", "minItems": 1,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["id", "status", "quote", "rationale"],
+              "properties": {
+                "id": {"$ref": "#/$defs/text"}, "status": {"enum": ["pass", "fail", "not_assessed"]},
+                "quote": {"type": ["string", "null"], "minLength": 1},
+                "rationale": {"$ref": "#/$defs/text"}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "hashes": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/hash"}}
+  }
+}

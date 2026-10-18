@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic Audit Acceptance Suite v.0.0.1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "id", "description", "common_checks", "cases"],
+  "properties": {
+    "schema_version": {"const": "0.0.1"},
+    "id": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"},
+    "common_checks": {"$ref": "#/$defs/checks"},
+    "cases": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "method", "expected_outcome", "inputs", "checks"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^R[0-9]{2}$"},
+          "method": {"$ref": "#/$defs/text"},
+          "expected_outcome": {"enum": ["concern", "clean", "insufficient_evidence", "resolved"]},
+          "inputs": {
+            "type": "array", "minItems": 1,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["path", "section"],
+              "properties": {"path": {"$ref": "#/$defs/text"}, "section": {"type": ["string", "null"], "minLength": 1}}
+            }
+          },
+          "checks": {"$ref": "#/$defs/checks"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "checks": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "requirement"],
+        "properties": {"id": {"$ref": "#/$defs/text"}, "requirement": {"$ref": "#/$defs/text"}}
+      }
+    }
+  }
+}

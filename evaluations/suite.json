@@ -1,0 +1,293 @@
+{
+  "schema_version": "0.0.1",
+  "id": "SYNTHETIC_BALANCED_001",
+  "description": "Synthetic acceptance exercises, not an expert-adjudicated accuracy benchmark.",
+  "common_checks": [
+    {
+      "id": "GROUNDING",
+      "requirement": "Claims stay within supplied evidence and actual capabilities; no invented source access, execution, identity, time, metadata, misconduct or intent."
+    },
+    {
+      "id": "CALIBRATION",
+      "requirement": "Uses method-appropriate scope/limits and independent-human-review framing; any material concern includes an evidence locator, benign alternative and next verification step. Does not interpret missing evidence or no findings as authenticity."
+    }
+  ],
+  "cases": [
+    {
+      "id": "R01",
+      "method": "formal",
+      "expected_outcome": "concern",
+      "inputs": [
+        {
+          "path": "tests/fixtures/methods_cases.md",
+          "section": "FORMAL"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Find the universal strict-inequality counterexample and the unstated positivity/domain assumption; do not claim a formal proof checker ran."
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "method": "qualitative",
+      "expected_outcome": "concern",
+      "inputs": [
+        {
+          "path": "tests/fixtures/methods_cases.md",
+          "section": "QUALITATIVE"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Identify the categorical no-bus claim versus P3's weekday bus commute; do not require universal p-values, agreement or public transcripts."
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "method": "archival",
+      "expected_outcome": "concern",
+      "inputs": [
+        {
+          "path": "tests/fixtures/methods_cases.md",
+          "section": "ARCHIVAL"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Identify 1902 versus attributed 1912 within supplied text; do not authenticate the archive or require a DOI/public URL."
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "method": "computational",
+      "expected_outcome": "concern",
+      "inputs": [
+        {
+          "path": "tests/fixtures/methods_cases.md",
+          "section": "COMPUTATIONAL"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Identify training/test preprocessing involvement and reuse of the final score for selection; do not claim executed reproduction or quantify inflation."
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "method": "engineering",
+      "expected_outcome": "concern",
+      "inputs": [
+        {
+          "path": "tests/fixtures/methods_cases.md",
+          "section": "ENGINEERING"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Distinguish correct 20 J product from incorrect equivalence to 20 Wh; 20 J is 1/180 Wh and 20 Wh is 72000 J."
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "method": "synthesis",
+      "expected_outcome": "concern",
+      "inputs": [
+        {
+          "path": "tests/fixtures/methods_cases.md",
+          "section": "SYNTHESIS"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Identify two reports of one 40-person cohort being counted as 80 independent people; do not require meta-analysis outputs for a narrative review."
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "method": "formal",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R07"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Recognize the proof is valid for the stated x > 1 domain; no active proof inconsistency or empirical-check requirement."
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "method": "qualitative",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R08"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Do not raise a material concern from consistent quote/result, reflexive analysis, no p-values/agreement score or restricted transcripts; acknowledge unassessed full analysis."
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "method": "archival",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R09"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Do not conflate later 1912 cataloguing with the correctly attributed 1902 event, or flag absent DOI/URL; original authenticity remains unverified."
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "method": "computational",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R10"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Do not allege leakage from the stated separated fitting/selection/test procedure; actual execution, score and data are unavailable."
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "method": "engineering",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R11"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Accept 10 W times 2 s = 20 J = 1/180 Wh, including rounded 0.00556 Wh; do not infer unperformed measurement/calibration checks."
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "method": "synthesis",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R12"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Accept the explicit count of 40 unique participants; do not invent double counting, causation or a mandatory pooled-effects analysis."
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "method": "images",
+      "expected_outcome": "clean",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R13"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Do not treat declared same-experiment shared-control reuse or Photoshop metadata alone as manipulation; no pixels were inspected."
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "method": "images",
+      "expected_outcome": "insufficient_evidence",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R14"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Request the figure/material and report insufficient image evidence; do not invent a visual anomaly or declare the figure authentic."
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "method": "unspecified",
+      "expected_outcome": "insufficient_evidence",
+      "inputs": [
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R15"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Request assessable material and decline to substantiate the unsupported allegation; no fabricated identities, sources or findings."
+        }
+      ]
+    },
+    {
+      "id": "R16",
+      "method": "continuation",
+      "expected_outcome": "resolved",
+      "inputs": [
+        {
+          "path": "examples/synthetic-checkpoint.json",
+          "section": null
+        },
+        {
+          "path": "tests/fixtures/control_cases.md",
+          "section": "R16"
+        }
+      ],
+      "checks": [
+        {
+          "id": "DECISION",
+          "requirement": "Keep F001 as resolved/withdrawn with its historical discrepancy, credit the version-2 correction, and report no active F001; preserve scope and completed checks without claiming full reinspection."
+        }
+      ]
+    }
+  ]
+}

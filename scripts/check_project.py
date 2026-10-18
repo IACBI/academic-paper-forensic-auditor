@@ -51,6 +51,29 @@ def check():
     inventory = tool.inventory(ROOT / "tests/fixtures", ["synthetic_manuscript.md"])
     if inventory["artifacts"] != example["artifacts"]:
         errors.append("Synthetic example artifact identity differs from its fixture")
+    checkpoint_schema = json.loads((SKILL / "assets/checkpoint.schema.json").read_text(encoding="utf-8"))
+    if checkpoint_schema["properties"]["schema_version"].get("const") != version or checkpoint_schema["properties"]["protocol_version"].get("const") != version:
+        errors.append("Continuation schema version differs from VERSION")
+    checkpoint = tool.load_json(ROOT / "examples/synthetic-checkpoint.json")
+    errors.extend(tool.validate_checkpoint(checkpoint))
+    if checkpoint != tool.checkpoint_from_report(example):
+        errors.append("Continuation example differs from its source report")
+    evaluation = load_module("project_evaluation", ROOT / "scripts/evaluate.py")
+    evaluation.load_suite()
+    for variant in ("quick", "master", "skill"):
+        baseline = ROOT / "evaluations" / f"baseline-{variant}.json"
+        if not baseline.is_file():
+            errors.append(f"Missing independent evaluation baseline: {variant}")
+            continue
+        run = tool.load_json(baseline)
+        try:
+            result = evaluation.score(run)
+            if result["variant"] != variant:
+                errors.append(f"Evaluation baseline has incorrect variant: {variant}")
+            if not result["all_passed"]:
+                errors.append(f"Synthetic acceptance failed for {variant}: {result['cases_passed']}/{result['cases_total']}")
+        except ValueError as exc:
+            errors.append(f"Evaluation baseline invalid for {variant}: {exc}")
     # Check linked local file paths. Fragment targets and external URLs are not
     # validated here, and real evidence/environments are never scanned.
     docs = [ROOT / "README.md", ROOT / "QUICKSTART.md", ROOT / "CONTRIBUTING.md", ROOT / "master_prompt.md", *sorted((ROOT / "docs").glob("*.md")), *sorted(SKILL.rglob("*.md"))]
@@ -79,7 +102,7 @@ def main():
     result = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], cwd=ROOT)
     if result.returncode:
         return result.returncode
-    print("Project checks passed: versions, generated references, report schema, example evidence, links, release inputs and tests.")
+    print("Project checks passed: versions, references, report/continuation contracts, example evidence, blind evaluation baselines, links, release inputs and tests.")
     return 0
 
 

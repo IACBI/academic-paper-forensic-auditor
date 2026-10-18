@@ -1,0 +1,503 @@
+{
+  "schema_version": "0.0.1",
+  "suite_id": "SYNTHETIC_BALANCED_001",
+  "suite_sha256": "bf1440dc3021b305c78e08755f2243a6fd6e6124b4f54eb88cc258102410be61",
+  "variant": "master",
+  "protocol_hashes": {
+    "master_prompt.md": "e2dc9c2b0132d226340d53462e77e494c0ba08734843f4343adfea8040dc8478"
+  },
+  "input_hashes": {
+    "R01": "ff7f4f94c219b9615907c8115a14f5890bfee34d8917da47659b8d02b32ca18e",
+    "R02": "688efa42ca826a1d26fd03c09b676916dd8f3692f0245b683e56e61d94e6c51f",
+    "R03": "db396ed48ff35c0f25e9790978ae8b258b706659c59aee1d1ea7d7b70a6c2959",
+    "R04": "54be76db2eed7f2d3848c40dc78dd0e5bc57483e15221f0f037d27669957bf20",
+    "R05": "afbb0ba6b99cb1d5c2fa7fdb03ac286b573b1dd3575908a5f4771d7c6c817eae",
+    "R06": "4c3c0e64e039763ad0cb83e64da788ec01f22b9c97cd3836685781bd7bdc9344",
+    "R07": "4913405cec9013dece171aa07ad64a67f36f48e12b47acbc2b5d3b1b9da258ca",
+    "R08": "62e3603230e126f3deb8979e66c112f67567c7d3e92d771d9349a71d48ef7f00",
+    "R09": "24cabe0f36e67b886461b92d4a90c7aaf5dcdfb61154b6938f35460cd61c40c9",
+    "R10": "45ebfe22184e1cf95125823d476243bd8a8798dfb9f2aab1fda833166fa33367",
+    "R11": "b1c3246cd656280094483ff4eeba2a5b37fa3bf4cd62896cd06fda190417bead",
+    "R12": "563cb1f25c6fbed14aafd6b9a45dcf2e854253e12400689fd80c4fb6f791ec87",
+    "R13": "9efbc466ccafdbe09d7defe505e2becedf1a12df87183c02e49efd05a1cb4161",
+    "R14": "dbbc6977f62b7b7af0ad9f7dfc3cba92da5105cb78f06ea1b1a9036267a07ccd",
+    "R15": "7ca37b0a05aa2c56eea39937457b9c05cece7b23e26a9618dfa5644a3f9dbac9",
+    "R16": "8bd3f7ae165b60a087b32de828f9c7a2d0f7ba502da3b9690aaba68fcc62b107"
+  },
+  "recorded_at": "2026-10-18T16:43:30.629236+00:00",
+  "host": "Codex local subagent; offline text packet; native installation not exercised",
+  "model": null,
+  "judge": {
+    "identity": "Separate local model judge (evaluation_judge)",
+    "kind": "model",
+    "notes": "Responder received a fresh blind packet after a documented report-instruction correction. A separate model judge inspected actual responses against the unchanged rubric, including explicit independent human review. Exact responder model identity was not observed. Synthetic acceptance only; no domain-expert, cross-provider or native-installation validation."
+  },
+  "responses": [
+    {
+      "case_id": "R01",
+      "text": "# R01 — Formal argument screening\n\n**AI disclaimer:** This AI-assisted screening can be wrong and is not a misconduct determination. Findings do not prove misconduct; an absence of findings does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R01; protocol v0.0.1; auditor Codex, model/version unrecorded; current timestamp unknown. A01 is the supplied FORMAL excerpt, F1–F3, not an original article. Original-file bytes/hash: null, unavailable. Tools: read/write transport only; reasoning below is manual, without a proof checker or external verification.\n\n**Coverage:** text_methods completed for F1–F3. statistics_data and ethics_registration not_applicable to this nonempirical argument; cross_paper not_applicable without a comparison. figures_images, metadata_provenance and references_notices not_assessed: no corresponding source material inspected.\n\n**F001 — active, Level 2, HIGH observation confidence:** F1's universal proposition fails. Substitute x=0: x²=0, so 0>0 is false. Also, F2's claim that both factors are positive fails at x=0. These are dependent aspects of one argument failure, not independent forensic signals.\n\n**Challenge/benign explanation:** A missing restriction x>1 could explain the proof. It does not resolve the explicit “every real number” claim supplied; transcription or omitted context remains possible. The concern survives for this wording, without implying intent. Its impact is that F1 is unproved and false as stated.\n\n**Assessment:** Active counts L1=0, L2=1, L3=0, L4=0. The factorization itself is correct, which argues against a broader algebraic failure. A human should check the original quantifier and intended domain before correcting the proposition. This remains screening, not a definitive finding about misconduct.\n",
+      "sha256": "b741a5d4ece7d85281a4c12ef22d0f6bae553fae7104e4b9499cf8386fd48e70"
+    },
+    {
+      "case_id": "R02",
+      "text": "# R02 — Qualitative interpretation screening\n\n**AI disclaimer:** This AI-assisted screening may err; it is not a forensic or misconduct determination. Findings do not establish intent, and no findings would not prove integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R02; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied QUALITATIVE excerpt Q1–Q5. Original research files/bytes/hash: unavailable/null. Tools: read/write transport; manual textual comparison only. No external verification or transcript access occurred.\n\n**Coverage:** text_methods completed for the supplied claim/excerpt comparison; ethics_registration partial for the stated confidentiality restriction, without compliance verification. statistics_data not_applicable to these interpretive claims; cross_paper not_applicable. figures_images, metadata_provenance and references_notices not_assessed without source material.\n\n**F001 — active, Level 2, HIGH observation confidence:** Q3 says no participant described daily bus commuting; Q4's P3 says, “I take the bus to work each weekday morning.” Comparing these sentences reproduces a claim–evidence contradiction, assuming the same analytic corpus and period. It may undermine the categorical Results statement, not the entire thematic analysis.\n\n**Challenge/benign explanation:** An overbroad summary, coding error, or omitted population/time restriction could explain this. Nothing supplied establishes such a restriction; the contradiction survives within the excerpt. A human should verify P3's contextual eligibility and revise or explain Q3, using authorized confidential access rather than public transcript release.\n\n**Against stronger concerns:** Twelve volunteers and reflexive thematic analysis do not require representative sampling, p-values, inter-rater agreement or numerical saturation. Transcript restrictions are a plausible protection, not suspicious secrecy.\n\n**Assessment:** Active L1=0, L2=1, L3=0, L4=0. Full analytic context remains missing; independent review is required before consequential use.\n",
+      "sha256": "9abe5e8a211beb2395bfcc7d3d3704ec82c2d63c58c4750d8cd2b17939399225"
+    },
+    {
+      "case_id": "R03",
+      "text": "# R03 — Archival attribution screening\n\n**AI disclaimer:** This AI-assisted screening can contain errors and does not establish misconduct. Missing findings do not establish integrity. Consequential decisions require independent human review of the source material.\n\n**Record/scope:** Audit R03; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied ARCHIVAL excerpt H1–H4; no original scan or article file, so original bytes/hash are null. Only read/write transport and manual text comparison were used; no catalogue or external source was accessed.\n\n**Coverage:** text_methods completed for H2–H3; references_notices and metadata_provenance partial for supplied attribution/identifier information only. statistics_data not_applicable; cross_paper not_applicable. figures_images and ethics_registration not_assessed: original scan and applicable permission information absent.\n\n**F001 — active, Level 2, HIGH observation confidence:** H2 states an opening in spring 1902; H3, article paragraph 4, attributes spring 1912 to that same folio. Compare the two years directly. This is a source–claim mismatch in the supplied text, not authentication of the historical opening date.\n\n**Source locator:** Archive of the Fictional Borough, collection B, volume 7, folio 12r, source date 1902; supplied original script “ألف”. This is a supplied identifier, not an independently accessed archival source.\n\n**Challenge/benign explanation:** Typographical, transcription or translation error could explain the discrepancy. No original scan, later catalogue date or correction resolves it here. The observation survives, bounded by transcription accuracy.\n\n**Against stronger concerns/next step:** Missing URL/DOI does not invalidate an archival source. An archive specialist should compare the original folio, transcription and paragraph 4, retaining edition and script details. Active L1=0, L2=1, L3=0, L4=0; this remains provisional screening.\n",
+      "sha256": "0f8b7141b78ea921816701e62b1d5ee56ec87c2007dd239854fbe98e3ed0f126"
+    },
+    {
+      "case_id": "R04",
+      "text": "# R04 — Classifier evaluation screening\n\n**AI disclaimer:** This AI-assisted screening may be wrong and is not a misconduct determination. A design problem does not prove fabrication; no finding would not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R04; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: COMPUTATIONAL excerpt C1–C4; original-file bytes/hash null because research artifacts are absent. Read/write transport and manual design review only; no code, model or numerical reproduction ran.\n\n**Coverage:** text_methods completed for the stated pipeline. statistics_data, figures_images, metadata_provenance, references_notices and ethics_registration not_assessed without corresponding evidence. cross_paper not_applicable.\n\n**F001 — active, Level 2, HIGH observation confidence:** The claimed held-out evaluation is not independent under C2–C3. C2 uses test records to estimate standardization parameters; C3 uses the reported test score to select hyperparameters. Reconstructing those data flows from C1–C3 exposes two related routes of test-set reuse. Selection on the final score undermines its role as an untouched estimate; the magnitude or direction of numerical bias cannot be calculated here.\n\n**Challenge/benign explanation:** A disclosed transductive objective or an independent final test could change the interpretation. Neither is described, and standardization effects might be small; that does not resolve selection on the same held-out score. This remains one grouped design issue, without a Level 3 upgrade.\n\n**Against stronger concerns/next step:** C4 openly limits reproducibility; absent code is not fabrication evidence. A human should inspect split/preprocessing/tuning code and evaluate the frozen pipeline on unused subjects or records appropriate to the unit. Active L1=0, L2=1, L3=0, L4=0. Conclusions about actual benchmark performance remain unverified.\n",
+      "sha256": "879b93c2704009b9c42e5afe21d89677aea9149299cc5aa5c16241bf658f1601"
+    },
+    {
+      "case_id": "R05",
+      "text": "# R05 — Engineering unit screening\n\n**AI disclaimer:** This AI-assisted screening can err and is not a forensic or misconduct determination. Arithmetic discrepancies do not establish fabrication; absence of findings does not prove integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R05; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: ENGINEERING excerpt E1–E3. Original files/bytes/hash unavailable/null. Tools: read/write transport only; the displayed calculation is manual. No instrument test, calibration assessment or external lookup occurred.\n\n**Coverage:** text_methods and statistics_data completed for the equation/conversion in E1–E2. figures_images, metadata_provenance and references_notices not_assessed without supplied artifacts. ethics_registration not_applicable to this unit calculation; cross_paper not_applicable.\n\n**F001 — active, Level 2, HIGH observation confidence:** E2's equivalence is incorrect under the stated ordinary definitions:\n\n- E=Pt=10 W × 2 s=20 J.\n- 1 Wh=3,600 J; therefore 20 J=20/3,600 Wh=1/180 Wh≈0.00556 Wh.\n- 20 Wh instead equals 72,000 J, a factor of 3,600 larger.\n\n**Challenge/benign explanation:** The 20 J calculation is correct; “20 watt-hours” may be a unit-label or transcription error. E2 explicitly asserts equivalence, and E1 excludes an alternative two-hour duration. No supplied correction resolves it. The mismatch survives as a conversion error, without additional evidence warranting Level 3.\n\n**Impact/next step:** Any conclusion using 20 Wh needs rechecking; consequences beyond that cannot be determined. A human should verify the original units and downstream calculations. The valid 20 J result argues against treating the entire calculation as fabricated. Active L1=0, L2=1, L3=0, L4=0; screening remains provisional.\n",
+      "sha256": "8bb4233f8f8fb70f6b0640b3bc813d9e3fcb41c41c5f2ff2096d0340c95d95f2"
+    },
+    {
+      "case_id": "R06",
+      "text": "# R06 — Narrative synthesis screening\n\n**AI disclaimer:** This AI-assisted screening may err and is not a misconduct determination. A counting error does not establish fabrication; no findings would not prove integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R06; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: SYNTHESIS excerpt S1–S3, not original reports A/B. Original-file bytes/hash null. Read/write transport and manual cohort-count reasoning only; no external verification or paper retrieval occurred.\n\n**Coverage:** text_methods and statistics_data completed for the stated overlap/count. cross_paper partial: overlap was assessed only from the review's description, without direct A/B comparison. figures_images, metadata_provenance, references_notices and ethics_registration not_assessed without corresponding material.\n\n**F001 — active, Level 2, HIGH observation confidence:** S1 explicitly identifies the same 40 people and follow-up in A and B; S2 claims “80 independent participants.” With complete overlap and no additional cohort, the unique-person count is 40, not 40+40=80. Counting publications does not create independent participants. This overstates the independence and volume of supporting evidence.\n\n**Challenge/benign explanation:** “80” might mean report-level observations, or an omitted additional sample might exist. Neither interpretation supports the supplied wording “independent participants”; S1–S2 do not describe another sample. A reporting error is a strong benign explanation. The discrepancy survives within the excerpt, without implying intentional double counting.\n\n**Against broader concerns/next step:** A narrative review need not pool effects or report heterogeneity statistics or clinical registration. A human should inspect A/B cohort identifiers, dates and the review's conclusion, then correct the independent-evidence count if overlap is confirmed. Active L1=0, L2=1, L3=0, L4=0. Original-source confirmation remains necessary.\n",
+      "sha256": "d05083ffebe3877ce2817b8cb6c0f5166affbb3d41ce325f25f8811d3358a68a"
+    },
+    {
+      "case_id": "R07",
+      "text": "# R07 — Formal argument screening\n\n**AI disclaimer:** This AI-assisted screening can be wrong and is not a definitive forensic or misconduct determination. Absence of findings does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R07; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R07 proposition and proof; no original article file, with original bytes/hash null. Tools: read/write transport only. The algebra was reviewed manually; no proof checker or external source was used.\n\n**Coverage:** text_methods completed for the supplied argument. statistics_data and ethics_registration not_applicable to this formal, nonempirical proposition; cross_paper not_applicable. figures_images, metadata_provenance and references_notices not_assessed without corresponding material. This is not a whole-paper audit.\n\n**Assessment:** No meaningful anomaly detected within the assessed proof; active L1=0, L2=0, L3=0, L4=0. For x>1, x is positive and x−1 is positive. Hence x(x−1)=x²−x>0, which establishes exactly the stated conclusion. The boundary x=1 is excluded, so equality there does not contradict the proposition.\n\n**Evidence against concern:** The premise supplies the positivity required by the proof; its quantifier and conclusion align. Participant counts, p-values and experimental ethics approval are not requirements for this argument. No empirical authenticity claim was evaluated.\n\n**Limitations/next step:** No original publication, surrounding lemmas, figures, references or provenance was inspected. No substantive repair is indicated by this excerpt. If a broader decision is contemplated, a human should check that the actual publication states the same domain and proof. This result is a bounded screening assessment, not a certificate of research integrity.\n",
+      "sha256": "e84d009c4dba3d1b4ef9a35e97325660cd5db1843a166050a25593d470e89b38"
+    },
+    {
+      "case_id": "R08",
+      "text": "# R08 — Reflexive interview screening\n\n**AI disclaimer:** This AI-assisted screening may err and is not a definitive forensic or misconduct determination. A lack of findings does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R08; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R08 excerpt, not full interview records. Original research-file bytes/hash null. Tools: read/write transport; manual textual review only. No transcripts, external sources or legal/ethics policies were accessed.\n\n**Coverage:** text_methods completed for the Results–P3 consistency and stated interpretive scope. ethics_registration partial for the reported consent restriction only, without verification. statistics_data not_applicable: no population-frequency inference is claimed. cross_paper not_applicable. figures_images, metadata_provenance and references_notices not_assessed without material.\n\n**Assessment:** No meaningful anomaly detected in the assessed statements; active L1=0, L2=0, L3=0, L4=0. P3's weekday bus-to-work account supports, rather than contradicts, the Results statement that some participants used buses for work travel. This checks interpretive traceability in one supplied example, not the complete thematic analysis.\n\n**Evidence against concern:** Reflexive thematic work does not universally require p-values, inter-rater agreement scores or a numerical saturation threshold. Restricted public transcripts have a stated confidentiality basis and are consistent with permission for de-identified excerpts. That statement does not independently establish consent or legal compliance.\n\n**Limitations/next step:** The full analytic record, consent documents and contextual interview material are absent. If broader verification is necessary, a qualified human can review the analytic trail and permitted excerpts under the applicable access conditions. Public transcript release or upload is unnecessary and unauthorized. This remains bounded screening.\n",
+      "sha256": "2324e7f5f5341ed41f6acd6961546e96d86f072589cb7be21a6550d750f5606f"
+    },
+    {
+      "case_id": "R09",
+      "text": "# R09 — Archival chronology screening\n\n**AI disclaimer:** This AI-assisted screening can err and is not a definitive forensic or misconduct determination. No detected anomaly does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R09; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R09 excerpt; original article/scan bytes/hash null because unavailable. Read/write transport and manual comparison only; no archive, catalogue or external source was accessed.\n\n**Coverage:** text_methods completed for the opening-date attribution. references_notices and metadata_provenance partial for supplied identifier/chronology statements, without authentication. statistics_data not_applicable; cross_paper not_applicable. figures_images not_assessed without the scan; ethics_registration not_assessed without applicable permissions information.\n\n**Assessment:** No meaningful anomaly detected in this comparison; active L1=0, L2=0, L3=0, L4=0. The supplied transcription and article both identify spring 1902 as the opening date. The explicitly later 1912 catalogue date describes a different event and does not contradict that attribution.\n\n**Evidence against concern:** Fictional Borough Archive, collection B, volume 7, folio 12r supplies a usable archival locator. A public URL or DOI is not required for a legitimate archival citation. The distinction between event and cataloguing dates explains the apparent chronology difference without an integrity concern.\n\n**Limitations/next step:** This verifies consistency between supplied statements only; it does not authenticate the folio, transcription or catalogue record. The actual opening date cannot be independently verified from the available evidence. For broader review, a human archival specialist should check the original folio and catalogue context, respecting access restrictions and recording edition/transcription details. No correction is indicated by this excerpt alone. This remains screening, not historical authentication.\n",
+      "sha256": "6e48269c3a3ffc0a47a42f31bebeb73da992cecef3b6e12cd1beb30527e34918"
+    },
+    {
+      "case_id": "R10",
+      "text": "# R10 — Classifier evaluation screening\n\n**AI disclaimer:** This AI-assisted screening may be incorrect and is not a definitive forensic or misconduct determination. Absence of findings does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R10; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R10 pipeline description. Original research artifacts/bytes/hash unavailable/null. Tools: read/write transport; manual data-flow review only. No code, training, evaluation, numerical reproduction or external verification ran.\n\n**Coverage:** text_methods completed for the described subject split, fold preprocessing, selection and final evaluation. statistics_data, figures_images, metadata_provenance, references_notices and ethics_registration not_assessed without corresponding evidence. cross_paper not_applicable. Completion here concerns the excerpt's design description, not implementation.\n\n**Assessment:** No meaningful anomaly detected in that design; active L1=0, L2=0, L3=0, L4=0. Test subjects are held out before preprocessing; standardization is fitted within inner training folds; hyperparameters are selected within training subjects. The frozen pipeline is fitted to training subjects and evaluated once on previously unused subjects. Those stated boundaries preserve the final test's separation from selection.\n\n**Evidence against concern:** The described nesting and subject-level separation directly address preprocessing and tuning leakage. Missing scores, code and seeds limit verification but do not constitute evidence that leakage or fabrication occurred.\n\n**Limitations/next step:** Actual adherence, dataset provenance, predictions and performance cannot be verified from the available evidence. A broader audit would require code/configurations, subject split identifiers and evaluation outputs so a human can compare execution with the stated design. No numerical validity or universal model generalizability is established by this text-only result. This remains bounded screening.\n",
+      "sha256": "2170a820d6e085e825f55c96766090f7108d9550cd8aa8077387dde7d6fc65c1"
+    },
+    {
+      "case_id": "R11",
+      "text": "# R11 — Engineering conversion screening\n\n**AI disclaimer:** This AI-assisted screening can be wrong and is not a definitive forensic or misconduct determination. An absence of findings does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R11; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R11 engineering note. Original research-file bytes/hash null because none is supplied. Tools: read/write transport only; the equation and conversion below were checked manually, without instrument work or external lookup.\n\n**Coverage:** text_methods and statistics_data completed for the stated constant-power equation and units. figures_images, metadata_provenance and references_notices not_assessed without source material. ethics_registration not_applicable to this theoretical unit calculation; cross_paper not_applicable. Hardware performance is outside the supplied claim.\n\n**Assessment:** No meaningful anomaly detected in the calculation; active L1=0, L2=0, L3=0, L4=0. Under the stated constant-power assumption:\n\n- E=Pt=10 W × 2 s=20 J.\n- 1 Wh=3,600 J, so 20 J=20/3,600 Wh=1/180 Wh≈0.00556 Wh.\n\nThe note's fraction and rounded decimal are compatible with those definitions.\n\n**Evidence against concern:** The units and arithmetic agree, and the note does not claim calibrated hardware or measured performance. Missing calibration records therefore do not contradict the calculation or create a research-integrity finding.\n\n**Limitations/next step:** This checks dimensional consistency and arithmetic, not the physical delivery of energy. No actual apparatus, power trace or measurement uncertainty was evaluated. No repair is indicated for the supplied calculation; if someone later uses it to support an empirical hardware claim, a human should verify that claim against measurement records. This is a bounded screening result.\n",
+      "sha256": "0552ee9fb96de75e5cd47e78cd2419acf839a543d535363617174e9952b7101b"
+    },
+    {
+      "case_id": "R12",
+      "text": "# R12 — Narrative review screening\n\n**AI disclaimer:** This AI-assisted screening may err and is not a definitive forensic or misconduct determination. Absence of detected anomalies does not establish integrity. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R12; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R12 excerpt; original A/B reports and review files unavailable, with original bytes/hash null. Tools: read/write transport and manual overlap/count comparison only; no source retrieval or external verification occurred.\n\n**Coverage:** text_methods and statistics_data completed for the stated deduplication and inference. cross_paper partial: cohort overlap is reviewed as described, without direct A/B comparison. figures_images, metadata_provenance, references_notices and ethics_registration not_assessed without corresponding sources.\n\n**Assessment:** No meaningful anomaly detected in the assessed statements; active L1=0, L2=0, L3=0, L4=0. Two reports from the same 40-person cohort and follow-up contribute 40 unique participants under the supplied description. The review explicitly uses that count and does not present the publications as independent cohorts. It also avoids a causal claim.\n\n**Evidence against concern:** Recognizing shared participants prevents double counting. This is a narrative review, so absent pooled effects or meta-analysis statistics are not methodological contradictions. A missing complete search trail limits assessment of source selection; it is not by itself an integrity finding or a reason to impose a different review genre.\n\n**Limitations/next step:** The original cohort identifiers, eligibility of reports and completeness of the literature account cannot be verified from this excerpt. If broader review is needed, a human should inspect A/B and the rationale for corpus selection. No numerical correction is indicated by the supplied statements. This remains bounded screening.\n",
+      "sha256": "0a3b0a6b21b4ed1d563b248e168bfa9f41e75fdadcccc8a214f6ea0b4ad0e404"
+    },
+    {
+      "case_id": "R13",
+      "text": "# R13 — Disclosed control reuse screening\n\n**AI disclaimer:** This AI-assisted screening can err and is not a definitive forensic or misconduct determination. Findings do not establish manipulation, and no findings do not authenticate images. Consequential decisions require independent human review.\n\n**Record/scope:** Audit R13; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R13 caption and metadata statement, not image pixels or extracted metadata. Original-file bytes/hash null. Read/write transport and manual statement review only; no pixel, metadata-extraction, detector or external checks ran.\n\n**Coverage:** text_methods completed for caption meaning; figures_images partial for caption-only reuse context, without inspecting panels A/B; metadata_provenance partial for the supplied Photoshop statement. statistics_data, references_notices and ethics_registration not_assessed without sources; cross_paper not_applicable.\n\n**Assessment:** Active L1=0, L2=0, L3=0, L4=0. The supplied statements support disclosed sharing of one control image from one experiment, not a claim of independent acquisitions. No integrity anomaly is established by that disclosure. Actual image authenticity remains insufficient_evidence.\n\n**Evidence against concern:** Credited shared-reference use provides a benign explanation for repeated appearance. Photoshop is used in legitimate figure assembly; a software name alone does not demonstrate falsification. Neither statement proves that every processing step was appropriate.\n\n**AI-image classification:** CANNOT DETERMINE. No pixels or generative-editing provenance are available; no visual or pixel-level finding is possible.\n\n**Next step:** If image validation is needed, a qualified human should inspect the actual caption/panels and relevant original control image, confirming the shared experiment and disclosed processing. Do not infer duplication geometry, local editing or AI generation from these statements. This remains limited screening.\n",
+      "sha256": "829f496643f4f63fe62f894e4adc2118f835c412ad2c5f57fe2b81e3c006f074"
+    },
+    {
+      "case_id": "R14",
+      "text": "# R14 — Figure 2 intake result\n\n**AI disclaimer:** This AI-assisted screening can be wrong and is not a definitive forensic or misconduct determination. No findings do not establish image authenticity. Consequential decisions require independent human review of actual evidence.\n\n**Record/scope:** Audit R14; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: the supplied request/comment only. No article version, Figure 2, caption or original research artifact is available; original bytes/hash are null. Tools: read/write transport only. No image tool, web access, pixel analysis, metadata extraction or external verification was used.\n\n**Coverage:** All seven domains—text_methods, statistics_data, figures_images, metadata_provenance, references_notices, ethics_registration and cross_paper—are not_assessed for research evidence. Intake review of a comment is not a substantive figure assessment.\n\n**Assessment:** insufficient_evidence, not Level 0. Active L1=0, L2=0, L3=0, L4=0 means there are no supportable findings, not that Figure 2 is free of problems. “Looked unusual” supplies no verifiable region, feature or comparison. Cannot verify from the available evidence.\n\n**Evidence against stronger allegations:** There is no inspected image to support a manipulation inference. The comment is a hypothesis, not visual or forensic evidence. A benign explanation cannot be meaningfully tested without the figure and context.\n\n**AI-image classification:** CANNOT DETERMINE.\n\n**Missing evidence/next step:** Obtain a readable Figure 2 with its caption and panel labels, exact article/version, and the specific questioned region; original source images would enable stronger analysis if needed. A qualified human should then evaluate modality, processing context and any reproducible comparison. No allegation or authentication is warranted from this packet. This remains an incomplete screening.\n",
+      "sha256": "4fe793c809eacacf686acd9c50f5f676fc4452d0a4663608ad056556741826ad"
+    },
+    {
+      "case_id": "R15",
+      "text": "# R15 — Evidence-free allegation intake\n\n**AI disclaimer:** This AI-assisted screening can be wrong and is not a definitive forensic or misconduct determination. Neither findings nor their absence establish intent or integrity. Consequential decisions require independent human review of evidence.\n\n**Record/scope:** Audit R15; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: the request expressing suspicion only. No author identity, article/version, text, figure, dataset or research file was supplied; original bytes/hash are null. Tools: read/write transport only. No research execution, external verification, upload or contact occurred.\n\n**Coverage:** text_methods, statistics_data, figures_images, metadata_provenance, references_notices, ethics_registration and cross_paper are all not_assessed because there is no assessable research evidence. No discipline or applicable method can be identified.\n\n**Assessment:** insufficient_evidence, not Level 0. Active L1=0, L2=0, L3=0, L4=0. Fabrication cannot be proved from suspicion. Cannot verify from the available evidence. There is no factual basis for identifying a specific inconsistency, assessing its confidence or assigning an integrity finding to an author.\n\n**Evidence against stronger conclusions:** The packet supplies neither corroborating research evidence nor evidence that could independently refute the suspicion. The lack of material supports restraint; it does not exonerate or implicate anyone. No benign explanation has been tested.\n\n**Next step:** Begin with the exact article/version, a relevant excerpt or figure/data, and the concrete claim that appears inconsistent. Screen that material with reproducible comparisons, then obtain authorized original records and qualified independent review if warranted. No public allegation, third-party contact or upload follows from this request. This intake is incomplete screening, not a determination about any researcher.\n",
+      "sha256": "29652de2a76bea2fb78b5521a7cf64ae65c5ad4c833252c308e300b057e067db"
+    },
+    {
+      "case_id": "R16",
+      "text": "# R16 — Continuation: correction of F001\n\n**AI disclaimer:** This AI-assisted screening may err and is not a misconduct determination. Neither a discrepancy nor its correction proves intent or overall integrity. Consequential decisions require independent human review.\n\n**Record:** Preserve audit SYNTHETIC_AUDIT_001, protocol 0.0.1, “A fictional intervention study.” Current scope: supplied synthetic draft v2 sentence correction only. Auditor Codex; model/version unrecorded; current timestamp unknown. Prior timestamp 2026-10-18T15:30:20.391926+00:00 is carried, not newly observed.\n\n**Evidence identity:** A001 remains the historical synthetic_manuscript.md; its prior-reported SHA-256 is 6252dd67c24661fd2bee7c4530f3f9d98b383fe5673c0f542151d84662310bf2, not recomputed or authenticated. A002 is the supplied correction text; original-file bytes/hash null. The checkpoint is summary data, not freshly inspected manuscript evidence. Tools: read/write transport and manual correction comparison only.\n\n**F001 — resolved, historical Level 2:** Retain the original observation: Methods implied 100−10−5=85, while first-draft Results reported 90 (printed pp. 1–2, prior-record locators). V2 explicitly replaces 90 with 85. With the user-supplied unchanged, disjoint Methods definitions, the correction removes this mismatch. Challenge: the correction is sentence-limited, so it cannot validate the whole draft. Confidence HIGH in this supplied correction comparison. Benign explanation: corrected reporting error; original records remain unverified.\n\n**Coverage:** Current text_methods/statistics_data partial, limited to resolving F001. Prior completed scopes/check IDs CHECK_001–CHECK_003 remain historical, not repeated. The unchanged pilot-percentage check is carried without rerunning. figures_images, metadata_provenance, references_notices and ethics_registration remain not_assessed; cross_paper not_applicable to this single synthetic study.\n\n**Assessment/next:** Active L1–L4=0; resolved=1 (F001), retained in history. Check original disposition records if real-world verification is needed; do not generalize this resolution beyond the corrected sentence. This remains synthetic, limited screening.\n",
+      "sha256": "41cd2da9f3493e95e15261742fa4bbc3012902ec04453e2d4674af229f3d330d"
+    }
+  ],
+  "judgements": [
+    {
+      "case_id": "R01",
+      "observed_outcome": "concern",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R01; protocol v0.0.1; auditor Codex, model/version unrecorded; current timestamp unknown. A01 is the supplied FORMAL excerpt, F1–F3, not an original article. Original-file bytes/hash: null, unavailable. Tools: read/write transport only; reasoning below is manual, without a proof checker or external verification.",
+          "rationale": "The response identifies F1-F3 as supplied excerpt evidence, leaves current time/model/version and original-file hash unknown, and explicitly denies proof-checker and external verification. Its x=0 counterexample follows directly from the universal claim without fabricated execution or intent."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Assessment:** Active counts L1=0, L2=1, L3=0, L4=0. The factorization itself is correct, which argues against a broader algebraic failure. A human should check the original quantifier and intended domain before correcting the proposition. This remains screening, not a definitive finding about misconduct.",
+          "rationale": "The opening expressly requires independent human review. The F1/F2 locator and x=0 substitution make the concern reproducible; an omitted x>1 restriction or transcription/context gap is a benign alternative, and a human is asked to check the original quantifier/domain. The response confines the result to the supplied argument."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — active, Level 2, HIGH observation confidence:** F1's universal proposition fails. Substitute x=0: x²=0, so 0>0 is false. Also, F2's claim that both factors are positive fails at x=0. These are dependent aspects of one argument failure, not independent forensic signals.",
+          "rationale": "It finds the strict universal claim false at x=0 and identifies F2 positivity as unsupported over all reals; the challenge supplies x>1 as the missing restriction. No formal proof checker is claimed."
+        }
+      ]
+    },
+    {
+      "case_id": "R02",
+      "observed_outcome": "concern",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R02; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied QUALITATIVE excerpt Q1–Q5. Original research files/bytes/hash: unavailable/null. Tools: read/write transport; manual textual comparison only. No external verification or transcript access occurred.",
+          "rationale": "It uses only Q1-Q5 and manual comparison, leaving original records, time and hashes unknown and denying external verification or transcript access. The quoted P3 statement matches the supplied evidence and no participant identity or intent is invented."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Challenge/benign explanation:** An overbroad summary, coding error, or omitted population/time restriction could explain this. Nothing supplied establishes such a restriction; the contradiction survives within the excerpt. A human should verify P3's contextual eligibility and revise or explain Q3, using authorized confidential access rather than public transcript release.",
+          "rationale": "Explicit independent human review frames the response. Q3/Q4 and the quoted counterexample locate the concern; overbroad wording, coding error or omitted restriction are considered and authorized human context/eligibility verification is requested. Method-specific statistical and transcript-release mandates are avoided."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — active, Level 2, HIGH observation confidence:** Q3 says no participant described daily bus commuting; Q4's P3 says, “I take the bus to work each weekday morning.” Comparing these sentences reproduces a claim–evidence contradiction, assuming the same analytic corpus and period. It may undermine the categorical Results statement, not the entire thematic analysis.",
+          "rationale": "It identifies the no-daily-bus categorical result versus P3 weekday bus-to-work account, limiting impact to that result rather than the whole analysis and imposing no universal p-values, agreement or public transcripts."
+        }
+      ]
+    },
+    {
+      "case_id": "R03",
+      "observed_outcome": "concern",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R03; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied ARCHIVAL excerpt H1–H4; no original scan or article file, so original bytes/hash are null. Only read/write transport and manual text comparison were used; no catalogue or external source was accessed.",
+          "rationale": "The response explicitly limits itself to supplied H1-H4 text with no original scan/article, original hashes, catalogue or external access. It reports the archival identifier as supplied rather than authenticated and invents no later-date resolution."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Against stronger concerns/next step:** Missing URL/DOI does not invalidate an archival source. An archive specialist should compare the original folio, transcription and paragraph 4, retaining edition and script details. Active L1=0, L2=1, L3=0, L4=0; this remains provisional screening.",
+          "rationale": "The opening calls for independent human source review. H2/H3 paragraph 4 gives an evidence locator; typo, transcription and translation alternatives are provided and an archive specialist is asked to compare original folio/transcription/paragraph while retaining edition/script details. An absent DOI/URL is not a concern."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — active, Level 2, HIGH observation confidence:** H2 states an opening in spring 1902; H3, article paragraph 4, attributes spring 1912 to that same folio. Compare the two years directly. This is a source–claim mismatch in the supplied text, not authentication of the historical opening date.",
+          "rationale": "It correctly finds spring 1902 in H2 versus attributed spring 1912 at H3, conditions the mismatch on transcription accuracy and avoids authenticating the archive or actual historical event."
+        }
+      ]
+    },
+    {
+      "case_id": "R04",
+      "observed_outcome": "concern",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R04; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: COMPUTATIONAL excerpt C1–C4; original-file bytes/hash null because research artifacts are absent. Read/write transport and manual design review only; no code, model or numerical reproduction ran.",
+          "rationale": "Only C1-C4 and manual design review are used, with research artifacts/hashes unavailable and no code, model or numerical reproduction claimed. Bias direction and magnitude are expressly unavailable, not invented."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Against stronger concerns/next step:** C4 openly limits reproducibility; absent code is not fabrication evidence. A human should inspect split/preprocessing/tuning code and evaluate the frozen pipeline on unused subjects or records appropriate to the unit. Active L1=0, L2=1, L3=0, L4=0. Conclusions about actual benchmark performance remain unverified.",
+          "rationale": "The opening explicitly requires independent human review and the final step calls for human split/preprocessing/tuning inspection and untouched-unit evaluation. C2/C3 locate the issue; transductive purpose or an undescribed independent final set is considered without assuming it exists. The response limits conclusions about actual performance and does not equate missing code with fabrication."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — active, Level 2, HIGH observation confidence:** The claimed held-out evaluation is not independent under C2–C3. C2 uses test records to estimate standardization parameters; C3 uses the reported test score to select hyperparameters. Reconstructing those data flows from C1–C3 exposes two related routes of test-set reuse. Selection on the final score undermines its role as an untouched estimate; the magnitude or direction of numerical bias cannot be calculated here.",
+          "rationale": "It identifies both test-record standardization and test-score-based hyperparameter selection under C2-C3, explaining loss of untouched final evaluation without executed reproduction or quantified inflation."
+        }
+      ]
+    },
+    {
+      "case_id": "R05",
+      "observed_outcome": "concern",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R05; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: ENGINEERING excerpt E1–E3. Original files/bytes/hash unavailable/null. Tools: read/write transport only; the displayed calculation is manual. No instrument test, calibration assessment or external lookup occurred.",
+          "rationale": "The response claims only manual E1-E3 arithmetic and expressly denies instrument tests, calibration assessment and external lookup. Missing original artifacts/time/hash are not invented, and physical or intentional fabrication is not inferred."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Impact/next step:** Any conclusion using 20 Wh needs rechecking; consequences beyond that cannot be determined. A human should verify the original units and downstream calculations. The valid 20 J result argues against treating the entire calculation as fabricated. Active L1=0, L2=1, L3=0, L4=0; screening remains provisional.",
+          "rationale": "Independent human review is explicit. The E2 locator, exact conversion and ordinary-definition assumptions make the concern reproducible; a unit-label/transcription error is considered benign and human unit/downstream checks are requested. The correct joule result is preserved and broader effects remain unassessed."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — active, Level 2, HIGH observation confidence:** E2's equivalence is incorrect under the stated ordinary definitions:\n\n- E=Pt=10 W × 2 s=20 J.\n- 1 Wh=3,600 J; therefore 20 J=20/3,600 Wh=1/180 Wh≈0.00556 Wh.\n- 20 Wh instead equals 72,000 J, a factor of 3,600 larger.",
+          "rationale": "It accepts 10 W times 2 s = 20 J, states 20 J = 1/180 Wh about 0.00556 Wh and 20 Wh = 72,000 J, and correctly identifies the false equivalence rather than rejecting the correct product."
+        }
+      ]
+    },
+    {
+      "case_id": "R06",
+      "observed_outcome": "concern",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R06; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: SYNTHESIS excerpt S1–S3, not original reports A/B. Original-file bytes/hash null. Read/write transport and manual cohort-count reasoning only; no external verification or paper retrieval occurred.",
+          "rationale": "The response limits itself to S1-S3 and manual cohort reasoning, with no A/B retrieval or external verification. Additional samples are explicitly hypothetical and unsupported, not invented facts; no causal truth or concealed intent is inferred."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Against broader concerns/next step:** A narrative review need not pool effects or report heterogeneity statistics or clinical registration. A human should inspect A/B cohort identifiers, dates and the review's conclusion, then correct the independent-evidence count if overlap is confirmed. Active L1=0, L2=1, L3=0, L4=0. Original-source confirmation remains necessary.",
+          "rationale": "The opening requires independent human review; S1/S2 and a unique-person count locate the issue. A report-observation or reporting-error explanation is considered, and human A/B cohort/date/conclusion review is requested. Narrative review is not subjected to automatic pooled-effect, heterogeneity or registration requirements."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — active, Level 2, HIGH observation confidence:** S1 explicitly identifies the same 40 people and follow-up in A and B; S2 claims “80 independent participants.” With complete overlap and no additional cohort, the unique-person count is 40, not 40+40=80. Counting publications does not create independent participants. This overstates the independence and volume of supporting evidence.",
+          "rationale": "It identifies both reports as the same 40 people and follow-up and correctly rejects 80 independent participants, preserving a 40-person unique cohort without mandatory meta-analysis outputs."
+        }
+      ]
+    },
+    {
+      "case_id": "R07",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R07; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R07 proposition and proof; no original article file, with original bytes/hash null. Tools: read/write transport only. The algebra was reviewed manually; no proof checker or external source was used.",
+          "rationale": "The response uses only supplied-proof manual algebra with no proof checker or external access and no original-file hash/time invention. Domain and sign reasoning match the input without invented empirical work."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Limitations/next step:** No original publication, surrounding lemmas, figures, references or provenance was inspected. No substantive repair is indicated by this excerpt. If a broader decision is contemplated, a human should check that the actual publication states the same domain and proof. This result is a bounded screening assessment, not a certificate of research integrity.",
+          "rationale": "Explicit independent human review frames the response. It limits no-concern to the supplied proof, denies whole-paper or integrity certification and recommends human comparison of the actual domain/proof before broader reliance. Participant/p-value/empirical requirements are treated as inapplicable."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** No meaningful anomaly detected within the assessed proof; active L1=0, L2=0, L3=0, L4=0. For x>1, x is positive and x−1 is positive. Hence x(x−1)=x²−x>0, which establishes exactly the stated conclusion. The boundary x=1 is excluded, so equality there does not contradict the proposition.",
+          "rationale": "It accepts the valid x>1 proof using both positive factors and x(x-1)=x²-x, rejects x=1 as an excluded boundary and creates no active inconsistency or empirical-check requirement."
+        }
+      ]
+    },
+    {
+      "case_id": "R08",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R08; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R08 excerpt, not full interview records. Original research-file bytes/hash null. Tools: read/write transport; manual textual review only. No transcripts, external sources or legal/ethics policies were accessed.",
+          "rationale": "It assesses only the supplied excerpt and denies access to transcripts, external sources and legal/ethics policies. Original records/hashes/time remain unavailable and no full analysis or verified consent is invented."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Limitations/next step:** The full analytic record, consent documents and contextual interview material are absent. If broader verification is necessary, a qualified human can review the analytic trail and permitted excerpts under the applicable access conditions. Public transcript release or upload is unnecessary and unauthorized. This remains bounded screening.",
+          "rationale": "The opening expressly requires independent human review and the closing specifically requests a qualified human analytic-trail review through permitted access. It limits no-concern to Results/P3, rejects full-analysis and legal-compliance clearance and avoids mandatory public release or upload."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** No meaningful anomaly detected in the assessed statements; active L1=0, L2=0, L3=0, L4=0. P3's weekday bus-to-work account supports, rather than contradicts, the Results statement that some participants used buses for work travel. This checks interpretive traceability in one supplied example, not the complete thematic analysis.",
+          "rationale": "It accepts the consistent bus-travel result and P3 example, applies reflexive-analysis standards without imposing p-values/agreement/saturation and explicitly leaves full thematic analysis unvalidated."
+        }
+      ]
+    },
+    {
+      "case_id": "R09",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R09; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R09 excerpt; original article/scan bytes/hash null because unavailable. Read/write transport and manual comparison only; no archive, catalogue or external source was accessed.",
+          "rationale": "It reports only supplied text, with no archive/catalogue/external access or original-file hash, and accurately distinguishes the date roles without invented archival history or authenticity."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Limitations/next step:** This verifies consistency between supplied statements only; it does not authenticate the folio, transcription or catalogue record. The actual opening date cannot be independently verified from the available evidence. For broader review, a human archival specialist should check the original folio and catalogue context, respecting access restrictions and recording edition/transcription details. No correction is indicated by this excerpt alone. This remains screening, not historical authentication.",
+          "rationale": "Independent human review is explicit. The response limits agreement to internal consistency, denies folio/transcription/catalogue authentication and actual-event verification, and proposes human archival original/context/edition checks. No integrity clearance follows from no anomaly."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** No meaningful anomaly detected in this comparison; active L1=0, L2=0, L3=0, L4=0. The supplied transcription and article both identify spring 1902 as the opening date. The explicitly later 1912 catalogue date describes a different event and does not contradict that attribution.",
+          "rationale": "It accepts spring 1902 in both transcription and article and identifies 1912 as later cataloguing, with no false contradiction or absent-DOI/URL concern; original authenticity remains unknown."
+        }
+      ]
+    },
+    {
+      "case_id": "R10",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R10; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R10 pipeline description. Original research artifacts/bytes/hash unavailable/null. Tools: read/write transport; manual data-flow review only. No code, training, evaluation, numerical reproduction or external verification ran.",
+          "rationale": "It confines itself to manual description review and expressly denies code, training, evaluation, reproduction or external verification. Actual datasets, predictions and performance remain unverified; no execution or score is invented."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Limitations/next step:** Actual adherence, dataset provenance, predictions and performance cannot be verified from the available evidence. A broader audit would require code/configurations, subject split identifiers and evaluation outputs so a human can compare execution with the stated design. No numerical validity or universal model generalizability is established by this text-only result. This remains bounded screening.",
+          "rationale": "Explicit independent human review frames the result. The response confines no-concern to written design and requests human code/configuration/split/output comparison for actual adherence, declining numerical validity or generalizability claims from text."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** No meaningful anomaly detected in that design; active L1=0, L2=0, L3=0, L4=0. Test subjects are held out before preprocessing; standardization is fitted within inner training folds; hyperparameters are selected within training subjects. The frozen pipeline is fitted to training subjects and evaluated once on previously unused subjects. Those stated boundaries preserve the final test's separation from selection.",
+          "rationale": "It accepts prior test holdout, training-fold standardization, training-only model selection and once-only unused test evaluation, with no unsupported leakage allegation or claim that actual execution and scores were verified."
+        }
+      ]
+    },
+    {
+      "case_id": "R11",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R11; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R11 engineering note. Original research-file bytes/hash null because none is supplied. Tools: read/write transport only; the equation and conversion below were checked manually, without instrument work or external lookup.",
+          "rationale": "Only the supplied R11 note and manual equation/conversion are checked; no instrument or external work is claimed. Original-file hash/time remain unknown and no physical measurement, calibration or hardware validation is invented."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Limitations/next step:** This checks dimensional consistency and arithmetic, not the physical delivery of energy. No actual apparatus, power trace or measurement uncertainty was evaluated. No repair is indicated for the supplied calculation; if someone later uses it to support an empirical hardware claim, a human should verify that claim against measurement records. This is a bounded screening result.",
+          "rationale": "The opening explicitly requires independent human review. No-concern is restricted to arithmetic and dimensions, with physical delivery/uncertainty unassessed; a separate empirical claim would need human measurement-record review. Missing calibration is not treated as an anomaly for assumed power."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** No meaningful anomaly detected in the calculation; active L1=0, L2=0, L3=0, L4=0. Under the stated constant-power assumption:\n\n- E=Pt=10 W × 2 s=20 J.\n- 1 Wh=3,600 J, so 20 J=20/3,600 Wh=1/180 Wh≈0.00556 Wh.\n\nThe note's fraction and rounded decimal are compatible with those definitions.",
+          "rationale": "It accepts 20 J = 1/180 Wh and rounded 0.00556 Wh under constant power, without requiring or inventing hardware/calibration verification."
+        }
+      ]
+    },
+    {
+      "case_id": "R12",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R12; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R12 excerpt; original A/B reports and review files unavailable, with original bytes/hash null. Tools: read/write transport and manual overlap/count comparison only; no source retrieval or external verification occurred.",
+          "rationale": "The response limits itself to supplied R12 overlap/count statements and manual comparison without original A/B access or external retrieval. It invents no independent cohort, causal result, completeness or original-file metadata."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Limitations/next step:** The original cohort identifiers, eligibility of reports and completeness of the literature account cannot be verified from this excerpt. If broader review is needed, a human should inspect A/B and the rationale for corpus selection. No numerical correction is indicated by the supplied statements. This remains bounded screening.",
+          "rationale": "Independent human review is explicit. It limits the result to internal count/inference consistency, leaves original overlap, eligibility and literature completeness unverified and recommends human A/B and selection-rationale review without imposing another review genre."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** No meaningful anomaly detected in the assessed statements; active L1=0, L2=0, L3=0, L4=0. Two reports from the same 40-person cohort and follow-up contribute 40 unique participants under the supplied description. The review explicitly uses that count and does not present the publications as independent cohorts. It also avoids a causal claim.",
+          "rationale": "It accepts 40 unique participants, explicitly non-independent publications and no causal claim, creating no double-counting concern or pooled-effects requirement."
+        }
+      ]
+    },
+    {
+      "case_id": "R13",
+      "observed_outcome": "clean",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R13; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: supplied R13 caption and metadata statement, not image pixels or extracted metadata. Original-file bytes/hash null. Read/write transport and manual statement review only; no pixel, metadata-extraction, detector or external checks ran.",
+          "rationale": "It identifies caption/metadata statements as the evidence and explicitly denies actual pixels, extracted metadata, detectors and external checks. No particular geometry, edit, source match or AI provenance is invented."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Next step:** If image validation is needed, a qualified human should inspect the actual caption/panels and relevant original control image, confirming the shared experiment and disclosed processing. Do not infer duplication geometry, local editing or AI generation from these statements. This remains limited screening.",
+          "rationale": "The opening explicitly requires independent human review. It limits no anomaly to supplied statements, leaves image authenticity insufficient and AI classification indeterminate, considers credited sharing/legitimate assembly and requests actual panels/original/control/context for qualified human review."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** Active L1=0, L2=0, L3=0, L4=0. The supplied statements support disclosed sharing of one control image from one experiment, not a claim of independent acquisitions. No integrity anomaly is established by that disclosure. Actual image authenticity remains insufficient_evidence.",
+          "rationale": "It treats credited same-experiment sharing as disclosed common reference rather than independent acquisitions or hidden duplication. The Photoshop statement alone is rejected as falsification evidence and pixel integrity remains unassessed. The clean outcome refers to the text-level concern decision, not a pixel-authenticity clearance."
+        }
+      ]
+    },
+    {
+      "case_id": "R14",
+      "observed_outcome": "insufficient_evidence",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R14; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: the supplied request/comment only. No article version, Figure 2, caption or original research artifact is available; original bytes/hash are null. Tools: read/write transport only. No image tool, web access, pixel analysis, metadata extraction or external verification was used.",
+          "rationale": "It accurately records only the request/comment and absent article, figure, caption and originals, with no image/web/pixel/metadata or external verification claimed. No region or visual anomaly is fabricated."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Missing evidence/next step:** Obtain a readable Figure 2 with its caption and panel labels, exact article/version, and the specific questioned region; original source images would enable stronger analysis if needed. A qualified human should then evaluate modality, processing context and any reproducible comparison. No allegation or authentication is warranted from this packet. This remains an incomplete screening.",
+          "rationale": "Explicit independent human evidence review is required. It distinguishes insufficient evidence from Level 0 and no supportable findings from a clean image; it requests readable figure/caption/version/region for qualified assessment while refusing accusation or authentication."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** insufficient_evidence, not Level 0. Active L1=0, L2=0, L3=0, L4=0 means there are no supportable findings, not that Figure 2 is free of problems. “Looked unusual” supplies no verifiable region, feature or comparison. Cannot verify from the available evidence.",
+          "rationale": "It explicitly reports insufficient_evidence and requests the missing figure/material, with no invented manipulation, visual region or authentic-image verdict."
+        }
+      ]
+    },
+    {
+      "case_id": "R15",
+      "observed_outcome": "insufficient_evidence",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Record/scope:** Audit R15; protocol v0.0.1; Codex, model/version unrecorded; current timestamp unknown. A01: the request expressing suspicion only. No author identity, article/version, text, figure, dataset or research file was supplied; original bytes/hash are null. Tools: read/write transport only. No research execution, external verification, upload or contact occurred.",
+          "rationale": "It leaves author/article/version and research artifacts absent and claims no research execution, external verification, uploads or contacts. It invents no identities, sources, discrepancies, findings or intent."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Next step:** Begin with the exact article/version, a relevant excerpt or figure/data, and the concrete claim that appears inconsistent. Screen that material with reproducible comparisons, then obtain authorized original records and qualified independent review if warranted. No public allegation, third-party contact or upload follows from this request. This intake is incomplete screening, not a determination about any researcher.",
+          "rationale": "The opening explicitly requires independent human review. It refuses predetermined fabrication proof, treats missing evidence as neither exonerating nor incriminating and asks for exact research material and concrete inconsistent claim before qualified independent review."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**Assessment:** insufficient_evidence, not Level 0. Active L1=0, L2=0, L3=0, L4=0. Fabrication cannot be proved from suspicion. Cannot verify from the available evidence. There is no factual basis for identifying a specific inconsistency, assessing its confidence or assigning an integrity finding to an author.",
+          "rationale": "It explicitly reports insufficient_evidence rather than Level 0, declines fabrication proof from suspicion and asks for assessable article/excerpt/figure/data and original evidence without inventing findings."
+        }
+      ]
+    },
+    {
+      "case_id": "R16",
+      "observed_outcome": "resolved",
+      "checks": [
+        {
+          "id": "GROUNDING",
+          "status": "pass",
+          "quote": "**Evidence identity:** A001 remains the historical synthetic_manuscript.md; its prior-reported SHA-256 is 6252dd67c24661fd2bee7c4530f3f9d98b383fe5673c0f542151d84662310bf2, not recomputed or authenticated. A002 is the supplied correction text; original-file bytes/hash null. The checkpoint is summary data, not freshly inspected manuscript evidence. Tools: read/write transport and manual correction comparison only.",
+          "rationale": "It marks the prior file identity/hash and timestamp as carried history rather than fresh evidence, identifies the supplied correction separately and denies recomputation or authentication. The checkpoint is explicitly a summary, not original manuscript inspection."
+        },
+        {
+          "id": "CALIBRATION",
+          "status": "pass",
+          "quote": "**Coverage:** Current text_methods/statistics_data partial, limited to resolving F001. Prior completed scopes/check IDs CHECK_001–CHECK_003 remain historical, not repeated. The unchanged pilot-percentage check is carried without rerunning. figures_images, metadata_provenance, references_notices and ethics_registration remain not_assessed; cross_paper not_applicable to this single synthetic study.",
+          "rationale": "The opening requires independent human review. It limits current work to the sentence correction, carries CHECK_001-CHECK_003 and unchanged pilot checking as history, retains unassessed domains and calls for original disposition verification before broader reliance. Benign corrected reporting error is considered without intent inference."
+        },
+        {
+          "id": "DECISION",
+          "status": "pass",
+          "quote": "**F001 — resolved, historical Level 2:** Retain the original observation: Methods implied 100−10−5=85, while first-draft Results reported 90 (printed pp. 1–2, prior-record locators). V2 explicitly replaces 90 with 85. With the user-supplied unchanged, disjoint Methods definitions, the correction removes this mismatch. Challenge: the correction is sentence-limited, so it cannot validate the whole draft. Confidence HIGH in this supplied correction comparison. Benign explanation: corrected reporting error; original records remain unverified.",
+          "rationale": "It retains F001 and historical 85-versus-90 discrepancy with prior locators, credits v2 replacing 90 by 85 against unchanged disjoint definitions, marks F001 resolved with zero active findings and preserves completed checks/scope without full reinspection."
+        }
+      ]
+    }
+  ]
+}
