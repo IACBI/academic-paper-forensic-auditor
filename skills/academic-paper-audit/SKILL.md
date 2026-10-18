@@ -46,7 +46,7 @@ For JSON, use [report.schema.json](assets/report.schema.json). Unknown values ar
 python scripts/audit_tools.py validate-report report.json
 ```
 
-Paths here are relative to this skill directory. The validator requires `jsonschema` 4.26.0 (install through the host's normal dependency workflow); other commands use only Python 3.10+ standard library. If it cannot run, say validation was not performed. Validation does not verify the scientific truth of a report.
+Paths here are relative to this skill directory. The validator requires `jsonschema` 4.26.0 (listed in this skill's `requirements.txt`; install through the host's normal dependency workflow); other commands use only Python 3.10+ standard library. If it cannot run, say validation was not performed. Validation does not verify the scientific truth of a report.
 
 Arithmetic examples:
 

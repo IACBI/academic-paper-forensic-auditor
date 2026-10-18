@@ -1,0 +1,2 @@
+# Only needed for JSON report validation and the full test suite.
+-r skills/academic-paper-audit/requirements.txt

@@ -1,0 +1,2 @@
+# Optional: needed only for the validate-report command.
+jsonschema==4.26.0
