@@ -10,7 +10,7 @@ From the repository root, in an environment with `skills/academic-paper-audit/re
 python scripts/check_project.py
 ```
 
-The command checks versions, all 35 numbered protocol sections, generated-reference synchronization, report and continuation contracts, example identity, current evaluation baselines, local documentation links and release inputs. It then runs the 70 behavior tests. Those tests cover arithmetic assumptions, input errors, path containment, linked/reparse files, evidence references, coverage, source eligibility, resolved findings, checkpoint conversion, evaluation integrity and deterministic packaging. An invalid report cannot masquerade as a report with zero findings.
+The command checks versions, all 35 numbered protocol sections, generated-reference synchronization, report and continuation contracts, example identity, current evaluation baselines, local documentation links and release inputs. It then runs the 73 behavior tests. Those tests cover arithmetic assumptions, input errors, path containment, linked/reparse files, evidence references, coverage, source eligibility, resolved findings, checkpoint conversion, evaluation integrity and deterministic packaging. An invalid report cannot masquerade as a report with zero findings.
 
 The local execution record is Windows, Python 3.10.11 and jsonschema 4.26.0 on 18 October 2026. All 70 tests passed. The published v.0.0.1 commit, `97f2010`, also passed the [four-job GitHub run](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39166102414): Windows and Ubuntu, each with Python 3.10 and 3.14. Every job checked the project and built all three distribution formats. The archive hashes matched the local builds across all four environments.
 
@@ -20,15 +20,13 @@ Local packages were also extracted and compared byte-for-byte with their explici
 
 The link check resolves local file paths; it does not validate remote URLs or fragment targets. JSON Schema validation checks structure and additional local invariants, not source truth, authority, actual access or honest tool use. A matching file hash identifies bytes, not authenticity or legal chain of custody.
 
-### Current Windows/Python 3.14 limitation
+### Windows timestamp compatibility in v.0.0.2
 
-The [documentation-update run](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39168134821) at `57c5f2e` passed all 70 tests and packaging on Ubuntu/Python 3.10 and 3.14 and Windows/Python 3.10. Windows/Python 3.14.8 failed `test_hashes_bytes_without_modification`: inventory rejected the newly written fixture with `Evidence changed before hashing`. This is a helper compatibility limitation, even though the runtime code did not change in that documentation update. The earlier passing release run does not establish that this behavior is reliable.
+The Windows/Python 3.14 failure in [run 39168957314](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39168957314) was reproduced locally with the official Python 3.14.8 Windows build. A stable rewritten file had the same identity, size and modification time through both APIs, but path-based `stat()` and descriptor-based `fstat()` returned different `st_ctime_ns` values. The old comparison rejected that file before hashing. [CPython issue 157671](https://github.com/python/cpython/issues/157671) documents the underlying difference in timestamp meaning.
 
-The subsequent [run at 43480ff](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39168397885) passed all four environments without a runtime change. Both results are retained: a green status badge reports a run outcome, while the earlier intermittent failure remains an unresolved compatibility limitation.
+Version v.0.0.2 compares identity, size and modification time across the two APIs, while comparing change-time fields only within the same API before and after reading. It retains both descriptor and path stability checks. The same Python 3.14.8 reproduction passed after the fix. Three added regression tests cover differing API timestamp meanings, a descriptor-side timestamp change and a path-side timestamp change; all 73 tests passed locally on Windows/Python 3.10.11. The four-environment CI workflow separately exercises the full suite and all package formats.
 
-The symptom is consistent with [CPython issue 157671](https://github.com/python/cpython/issues/157671): Windows path-based `stat()` and descriptor-based `fstat()` can report different meanings for `st_ctime_ns`, while inventory compares those fields as part of its stability signature. The failed run did not capture each signature field, so this is a likely explanation rather than a confirmed diagnosis of that individual failure. A local Windows/Python 3.10.11 stress check completed 1,000 new-file inventory trials without this error; that is not a Python 3.14 fix or a general filesystem guarantee.
-
-Use Python 3.10 for Windows helpers while this limitation remains. Plain-text protocol use does not invoke inventory. A future repair should reproduce the timestamp difference, preserve file-identity and actual-change detection, and rerun the Windows/Python 3.14 checks; skipping the test or retrying until green would not establish a repair.
+The fix does not turn inventory into a transaction or guarantee safety against a hostile concurrently changing filesystem. Use a stable evidence directory under your control. Historical v.0.0.1 packages retain the old behavior; install the v.0.0.2 helper rather than relying on a previously green run of the old release.
 
 ## Behavioral suite and current results
 
@@ -50,6 +48,8 @@ Each case has grounding, calibration and decision criteria. Grounding requires c
 | [Skill](../evaluations/baseline-skill.json) | 16/16 | 48/48 | 0 / 0 |
 
 These records contain 48 actual responses and 144 model-judged criteria across the three routes. Fresh responders did not receive expected answers. A separate local model judge inspected their responses; this was not domain-expert adjudication. Each route used one fresh conversation whose cases shared that conversation, so the cases are not independent statistical trials. Exact model identities were not observed and remain null. The records disclose host, mode, judge and review limitations in their metadata.
+
+The current master run's packet hashes and byte lengths were independently matched by the judge. Its observed session time and tool version were supported by a responder-reported historical tool trace, not an independent session recording; this distinction and the trace are retained in the record's judge notes.
 
 An earlier strict review found missing explicit human-review framing in two otherwise correctly classified responses. The reporting instruction was clarified and fresh blind evaluations were run. The correction and historical evidence remain available in [commit 3590ec8](https://github.com/IACBI/academic-paper-forensic-auditor/commit/3590ec8).
 
