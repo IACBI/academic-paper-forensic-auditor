@@ -51,9 +51,9 @@ def check():
     inventory = tool.inventory(ROOT / "tests/fixtures", ["synthetic_manuscript.md"])
     if inventory["artifacts"] != example["artifacts"]:
         errors.append("Synthetic example artifact identity differs from its fixture")
-    # Resolve local Markdown links, including fragment anchors, without following
-    # arbitrary external URLs or scanning environments and real evidence.
-    docs = [ROOT / "README.md", ROOT / "master_prompt.md", *sorted((ROOT / "docs").glob("*.md")), *sorted(SKILL.rglob("*.md"))]
+    # Check linked local file paths. Fragment targets and external URLs are not
+    # validated here, and real evidence/environments are never scanned.
+    docs = [ROOT / "README.md", ROOT / "QUICKSTART.md", ROOT / "CONTRIBUTING.md", ROOT / "master_prompt.md", *sorted((ROOT / "docs").glob("*.md")), *sorted(SKILL.rglob("*.md"))]
     for doc in docs:
         for target in re.findall(r"\]\(([^)]+)\)", doc.read_text(encoding="utf-8")):
             if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", target) or target.startswith("#"):
@@ -62,7 +62,7 @@ def check():
             if local and not (doc.parent / local).is_file():
                 errors.append(f"Broken local link in {doc.relative_to(ROOT)}: {target}")
     release = load_module("build_release", ROOT / "scripts/build_release.py")
-    for kind in ("plugin", "skill"):
+    for kind in ("prompt", "skill", "plugin"):
         release.release_members(kind)
     return errors
 
