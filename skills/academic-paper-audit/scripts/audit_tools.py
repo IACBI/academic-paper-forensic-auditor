@@ -156,12 +156,12 @@ def _unique_ids(items, name, errors):
     return set(ids)
 
 
-def validate_report(report):
+def schema_errors(instance, schema_path):
     try:
         from jsonschema import Draft202012Validator, FormatChecker
     except ImportError as exc:
-        raise ValueError("Report validation requires jsonschema 4.26.0; install the skill's requirements.txt") from exc
-    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+        raise ValueError("Validation requires jsonschema 4.26.0; install the skill's requirements.txt") from exc
+    schema = json.loads(Path(schema_path).read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
     checker = FormatChecker()
 
@@ -179,9 +179,14 @@ def validate_report(report):
 
     validator = Draft202012Validator(schema, format_checker=checker)
     errors = []
-    for error in sorted(validator.iter_errors(report), key=lambda item: str(list(item.absolute_path))):
+    for error in sorted(validator.iter_errors(instance), key=lambda item: str(list(item.absolute_path))):
         location = "/".join(map(str, error.absolute_path)) or "$"
         errors.append(f"{location}: {error.message}")
+    return errors
+
+
+def validate_report(report):
+    errors = schema_errors(report, SCHEMA)
     if errors:
         return errors
     artifacts = _unique_ids(report["artifacts"], "artifact", errors)
@@ -290,6 +295,77 @@ def validate_report(report):
     return errors
 
 
+def validate_checkpoint(checkpoint):
+    errors = schema_errors(checkpoint, SCHEMA.with_name("checkpoint.schema.json"))
+    if errors:
+        return errors
+    artifacts = _unique_ids(checkpoint["artifacts"], "artifact", errors)
+    sources = _unique_ids(checkpoint["sources"], "source", errors)
+    _unique_ids(checkpoint["findings"], "finding", errors)
+    _unique_ids(checkpoint["completed_checks"], "completed check", errors)
+    all_ids = [item["id"] for group in ("artifacts", "sources", "findings", "completed_checks") for item in checkpoint[group]]
+    if len(all_ids) != len(set(all_ids)):
+        errors.append("Checkpoint IDs must be unique across registries")
+    coverage = {item["domain"]: item for item in checkpoint["coverage"]}
+    if len(coverage) != len(DOMAINS) or set(coverage) != set(DOMAINS):
+        errors.append("Checkpoint coverage must contain each of the seven domains exactly once")
+    for group in ("completed_checks", "findings"):
+        for item in checkpoint[group]:
+            for key, targets in (("artifact_ids", artifacts), ("source_ids", sources)):
+                if set(item[key]) - targets:
+                    errors.append(f"{item['id']}: unknown {key}")
+            if not item["artifact_ids"] and not item["source_ids"]:
+                errors.append(f"{item['id']}: checkpoint entry requires evidence references")
+    for item in checkpoint["findings"]:
+        if item["status"] == "active" and coverage.get(item["category"], {}).get("status") not in ("completed", "partial"):
+            errors.append(f"{item['id']}: active finding requires assessed coverage")
+    if checkpoint["last_observed_at"] is None or any(item["sha256"] is None for item in checkpoint["artifacts"]):
+        if not checkpoint["limitations"]:
+            errors.append("Unknown checkpoint time/hash requires explicit limitations")
+    return errors
+
+
+def checkpoint_from_report(report):
+    errors = validate_report(report)
+    if errors:
+        raise ValueError("Cannot checkpoint invalid report: " + "; ".join(errors))
+    checks = []
+    for domain in report["coverage"]:
+        for description in domain["checks"]:
+            checks.append({
+                "id": f"CHECK_{len(checks) + 1:03d}", "description": description,
+                "artifact_ids": list(domain["artifact_ids"]), "source_ids": list(domain["source_ids"]),
+            })
+    # Generated check IDs must not collide with user-assigned evidence/finding IDs.
+    used_ids = {item["id"] for group in ("artifacts", "sources", "findings") for item in report[group]}
+    for item in checks:
+        base = item["id"]
+        suffix = 1
+        while item["id"] in used_ids:
+            item["id"] = f"{base}_{suffix}"
+            suffix += 1
+        used_ids.add(item["id"])
+    checkpoint = {
+        "schema_version": VERSION, "audit_id": report["audit"]["id"], "protocol_version": VERSION,
+        "article": dict(report["audit"]["article"]), "scope": report["audit"]["scope"],
+        "last_observed_at": report["audit"]["created_at"],
+        "artifacts": [{key: item[key] for key in ("id", "label", "sha256")} for item in report["artifacts"]],
+        "sources": [{"id": item["id"], "identifier": item["url"] or item["identifier"],
+                     "verification_notes": f"Prior source record: {item['access_status']}; {item['statement']} Limitations: {item['limitations']}"} for item in report["sources"]],
+        "coverage": [{key: item[key] for key in ("domain", "status", "scope")} for item in report["coverage"]],
+        "completed_checks": checks,
+        "findings": [{**{key: item[key] for key in ("id", "category", "status", "level", "observation", "locator")},
+                      "artifact_ids": list(item["artifact_ids"]), "source_ids": list(item["source_ids"]),
+                      "verification_notes": f"{item['self_challenge']['outcome']}: {item['self_challenge']['details']} Next: {item['verification_needed']}"} for item in report["findings"]],
+        "pending_steps": list(report["next_steps"]),
+        "limitations": list(report["limitations"]) + ["Summary of a prior report; no new source inspection, clock observation or authentication was performed. Recheck identity and changed evidence before resuming."],
+    }
+    errors = validate_checkpoint(checkpoint)
+    if errors:
+        raise ValueError("Checkpoint conversion failed: " + "; ".join(errors))
+    return checkpoint
+
+
 def load_json(path):
     def unique_object(pairs):
         result = {}
@@ -328,6 +404,10 @@ def main(argv=None):
     flow.add_argument("--disjoint", action="store_true")
     validate = subparsers.add_parser("validate-report", help="Validate schema and evidence cross-references")
     validate.add_argument("report", type=Path)
+    checkpoint = subparsers.add_parser("checkpoint", help="Convert a valid report into a continuation record")
+    checkpoint.add_argument("report", type=Path)
+    resume = subparsers.add_parser("validate-checkpoint", help="Validate a continuation record without executing it")
+    resume.add_argument("checkpoint", type=Path)
     args = parser.parse_args(argv)
     try:
         if args.command == "inventory":
@@ -336,6 +416,15 @@ def main(argv=None):
             result = percentage_check(args.count, args.total, args.reported, args.places)
         elif args.command == "flow":
             result = flow_check(args.initial, args.excluded, args.dropouts, args.analyzed, disjoint=args.disjoint)
+        elif args.command == "checkpoint":
+            result = checkpoint_from_report(load_json(args.report))
+        elif args.command == "validate-checkpoint":
+            checkpoint = load_json(args.checkpoint)
+            errors = validate_checkpoint(checkpoint)
+            result = {"valid": not errors, "errors": errors,
+                      "pending_steps": checkpoint["pending_steps"] if not errors else None}
+            print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
+            return 1 if errors else 0
         else:
             report = load_json(args.report)
             errors = validate_report(report)

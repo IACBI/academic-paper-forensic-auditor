@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.0.1",
+  "audit_id": "SYNTHETIC_AUDIT_001",
+  "protocol_version": "0.0.1",
+  "article": {
+    "title": "A fictional intervention study",
+    "doi": null,
+    "version": "Synthetic draft, 2026-10-18"
+  },
+  "scope": "Worked example using synthetic text; local arithmetic and file inventory only. No real publication, online verification or pixel analysis.",
+  "last_observed_at": "2026-10-18T15:30:20.391926+00:00",
+  "artifacts": [
+    {
+      "id": "A001",
+      "label": "synthetic_manuscript.md",
+      "sha256": "6252dd67c24661fd2bee7c4530f3f9d98b383fe5673c0f542151d84662310bf2"
+    }
+  ],
+  "sources": [],
+  "coverage": [
+    {
+      "domain": "text_methods",
+      "status": "completed",
+      "scope": "Printed pages 1-3 of synthetic text"
+    },
+    {
+      "domain": "statistics_data",
+      "status": "completed",
+      "scope": "Participant flow and pilot percentage only"
+    },
+    {
+      "domain": "figures_images",
+      "status": "not_assessed",
+      "scope": "Synthetic fixture only"
+    },
+    {
+      "domain": "metadata_provenance",
+      "status": "not_assessed",
+      "scope": "Synthetic fixture only"
+    },
+    {
+      "domain": "references_notices",
+      "status": "not_assessed",
+      "scope": "Synthetic fixture only"
+    },
+    {
+      "domain": "ethics_registration",
+      "status": "not_assessed",
+      "scope": "Synthetic fixture only"
+    },
+    {
+      "domain": "cross_paper",
+      "status": "not_applicable",
+      "scope": "Synthetic fixture only"
+    }
+  ],
+  "completed_checks": [
+    {
+      "id": "CHECK_001",
+      "description": "Read population definitions, results, limitations and untrusted embedded text",
+      "artifact_ids": [
+        "A001"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "CHECK_002",
+      "description": "Reconciled disjoint flow: 100 - 10 - 5 = 85 versus reported 90",
+      "artifact_ids": [
+        "A001"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "CHECK_003",
+      "description": "Checked 1/3 at one decimal place: 33.3% is compatible",
+      "artifact_ids": [
+        "A001"
+      ],
+      "source_ids": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "F001",
+      "category": "statistics_data",
+      "status": "active",
+      "level": 2,
+      "observation": "The stated disjoint participant flow implies 85 analyzed participants, but Results reports 90.",
+      "locator": "Methods, printed page 1; Results, printed page 2",
+      "artifact_ids": [
+        "A001"
+      ],
+      "source_ids": [],
+      "verification_notes": "survived: Re-read the Methods definition: the five dropouts are additional and distinct; the analyzed population is all remaining participants. The supplied text contains no alternative denominator resolving 90. Supplements and raw data are unavailable. Next: Check participant disposition and the intended analysis population against original records; correct either Methods or Results if appropriate."
+    }
+  ],
+  "pending_steps": [
+    "For a real study, verify population definitions and disposition with original source records."
+  ],
+  "limitations": [
+    "Synthetic training material; not a real study",
+    "No images, raw data, supplements, ethics records or external notices",
+    "Auditor/model identity not recorded; analyst is null",
+    "No estimates of sensitivity, specificity or professional certification",
+    "Summary of a prior report; no new source inspection, clock observation or authentication was performed. Recheck identity and changed evidence before resuming."
+  ]
+}

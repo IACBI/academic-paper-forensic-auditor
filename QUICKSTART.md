@@ -31,6 +31,11 @@ evidence, reproducible check, assumptions, strongest benign explanation, effect
 on conclusions and next verification step. Try to disprove major findings.
 Do not infer intent or misconduct from anomalies or from missing evidence.
 
+When resuming, preserve audit/finding IDs and completed checks. Recheck source
+identity and changed versions; keep old observations as history and resolve or
+withdraw concerns when a supplied correction removes them. A prior summary is
+not new evidence. Disclose missing context rather than inventing prior work.
+
 Return: a concise AI-screening disclaimer; research/method context; actual scope
 and coverage (completed / partial / not_assessed / not_applicable, with reasons);
 priority findings; evidence against concerns; limitations; next human checks.

@@ -13,6 +13,7 @@ SKILL = ROOT / "skills" / "academic-paper-audit"
 SKILL_FILES = (
     "SKILL.md", "requirements.txt",
     "assets/report-template.md", "assets/report.schema.json",
+    "assets/checkpoint.schema.json", "assets/continuation-template.md",
     "references/core.md", "references/manuscript.md", "references/statistics.md",
     "references/images.md", "references/report.md", "scripts/audit_tools.py",
     "references/methods.md", "references/portability.md",
@@ -24,6 +25,8 @@ PROMPT_FILES = {
     "LICENSE": ROOT / "LICENSE",
     "report.schema.json": SKILL / "assets/report.schema.json",
     "report-template.md": SKILL / "assets/report-template.md",
+    "checkpoint.schema.json": SKILL / "assets/checkpoint.schema.json",
+    "continuation-template.md": SKILL / "assets/continuation-template.md",
 }
 
 

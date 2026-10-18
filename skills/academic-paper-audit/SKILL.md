@@ -50,7 +50,7 @@ For optional JSON, use [report.schema.json](assets/report.schema.json). Record r
 python scripts/audit_tools.py validate-report report.json
 ```
 
-Paths here are relative to this skill directory. The validator requires `jsonschema` 4.26.0 (listed in this skill's `requirements.txt`; install through the host's normal dependency workflow); other commands use only Python 3.10+ standard library. If it cannot run, say validation was not performed. Validation does not verify the scientific truth of a report.
+Paths here are relative to this skill directory. Report/checkpoint validation and checkpoint conversion require `jsonschema` 4.26.0 (listed in this skill's `requirements.txt`; install through the host's normal dependency workflow). Inventory and arithmetic commands use only Python 3.10+ standard library. If validation cannot run, say it was not performed. Validation does not verify the scientific truth of a report.
 
 Arithmetic examples:
 
@@ -62,3 +62,9 @@ python scripts/audit_tools.py flow --initial 100 --excluded 10 --dropouts 5 --an
 The percentage command assumes ordinary unweighted counts and nearest rounding, with conservative boundary ties; it cannot infer the intended denominator or rounding convention. Flow requires disjoint losses in the same population. Neither command assigns evidence levels or misconduct probabilities.
 
 Before delivery reconcile active findings, sources, evidence links, coverage and tool limitations. Keep raw participant data out of shareable reports. Human verification remains necessary for consequential decisions.
+
+## Continue across sessions
+
+Use [continuation-template.md](assets/continuation-template.md) to carry a bounded audit between sessions or agents. Preserve evidence identity, article version, inspected locations, completed checks, finding IDs/status and pending steps. Reinspect changed evidence and preserve resolved findings as history; do not rerun unrelated completed checks or treat the summary as original evidence.
+
+Optional JSON uses [checkpoint.schema.json](assets/checkpoint.schema.json). `python scripts/audit_tools.py checkpoint report.json` prints a continuation record from a valid report; `python scripts/audit_tools.py validate-checkpoint checkpoint.json` checks structure and links. Neither reruns the analysis or supplies new authorization, provenance or current-time observations. Unknown time/hashes stay explicitly unknown with limitations.

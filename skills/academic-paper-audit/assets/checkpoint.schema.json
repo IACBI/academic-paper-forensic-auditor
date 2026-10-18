@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Academic Paper Audit Continuation v.0.0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "audit_id", "protocol_version", "article", "scope", "last_observed_at", "artifacts", "sources", "coverage", "completed_checks", "findings", "pending_steps", "limitations"],
+  "properties": {
+    "schema_version": {"const": "0.0.1"},
+    "audit_id": {"$ref": "#/$defs/id"},
+    "protocol_version": {"const": "0.0.1"},
+    "article": {
+      "type": "object", "additionalProperties": false,
+      "required": ["title", "doi", "version"],
+      "properties": {
+        "title": {"type": ["string", "null"], "minLength": 1},
+        "doi": {"type": ["string", "null"], "minLength": 1},
+        "version": {"type": ["string", "null"], "minLength": 1}
+      }
+    },
+    "scope": {"$ref": "#/$defs/text"},
+    "last_observed_at": {"type": ["string", "null"], "format": "date-time"},
+    "artifacts": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "label", "sha256"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/text"},
+          "sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "sources": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "identifier", "verification_notes"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"}, "identifier": {"$ref": "#/$defs/text"},
+          "verification_notes": {"$ref": "#/$defs/text"}
+        }
+      }
+    },
+    "coverage": {
+      "type": "array", "minItems": 7, "maxItems": 7,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["domain", "status", "scope"],
+        "properties": {
+          "domain": {"$ref": "#/$defs/domain"},
+          "status": {"enum": ["completed", "partial", "not_assessed", "not_applicable"]},
+          "scope": {"$ref": "#/$defs/text"}
+        }
+      }
+    },
+    "completed_checks": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "description", "artifact_ids", "source_ids"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"}, "description": {"$ref": "#/$defs/text"},
+          "artifact_ids": {"$ref": "#/$defs/ids"}, "source_ids": {"$ref": "#/$defs/ids"}
+        }
+      }
+    },
+    "findings": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "category", "status", "level", "observation", "locator", "artifact_ids", "source_ids", "verification_notes"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"}, "category": {"$ref": "#/$defs/domain"},
+          "status": {"enum": ["active", "resolved", "withdrawn"]},
+          "level": {"type": "integer", "minimum": 1, "maximum": 4},
+          "observation": {"$ref": "#/$defs/text"}, "locator": {"$ref": "#/$defs/text"},
+          "artifact_ids": {"$ref": "#/$defs/ids"}, "source_ids": {"$ref": "#/$defs/ids"},
+          "verification_notes": {"$ref": "#/$defs/text"}
+        }
+      }
+    },
+    "pending_steps": {"$ref": "#/$defs/strings"},
+    "limitations": {"$ref": "#/$defs/strings"}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]{0,63}$"},
+    "ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "strings": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "domain": {"enum": ["text_methods", "statistics_data", "figures_images", "metadata_provenance", "references_notices", "ethics_registration", "cross_paper"]}
+  }
+}
