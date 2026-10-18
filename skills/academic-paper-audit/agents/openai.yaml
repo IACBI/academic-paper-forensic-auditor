@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Paper Audit"
+  short_description: "Screen papers with traceable evidence and review limits"
+  default_prompt: "Use $academic-paper-audit to screen the supplied paper and report reproducible findings, coverage limits and next verification steps."
