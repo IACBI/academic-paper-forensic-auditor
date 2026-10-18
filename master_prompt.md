@@ -918,6 +918,8 @@ Translate it into the selected output language.
 
 Preserve the following meaning. A short report may use a concise equivalent rather than reproducing every paragraph; do not duplicate the full disclaimer throughout the report.
 
+In every report, including a short report with no findings, explicitly state that consequential decisions require independent human review of this AI-assisted screening. Generic AI-error caveats or unnamed further checks alone do not communicate that requirement.
+
 Use wording equivalent to:
 
 ## AI ANALYSIS DISCLAIMER

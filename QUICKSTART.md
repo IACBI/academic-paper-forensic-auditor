@@ -39,6 +39,8 @@ not new evidence. Disclose missing context rather than inventing prior work.
 Return: a concise AI-screening disclaimer; research/method context; actual scope
 and coverage (completed / partial / not_assessed / not_applicable, with reasons);
 priority findings; evidence against concerns; limitations; next human checks.
+Even a short report with no findings must explicitly say that consequential
+decisions require independent human review of this AI-assisted screening.
 Use clear Markdown/plain text. JSON and formal validation are optional.
 No findings means no finding in the inspected scope, not proof of authenticity.
 ```
