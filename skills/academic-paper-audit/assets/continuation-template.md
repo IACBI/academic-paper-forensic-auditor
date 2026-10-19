@@ -5,10 +5,11 @@ Use plain text when structured output is unavailable. This record summarizes wor
 - Audit ID and protocol version:
 - Article title/identifier/version (unknown where necessary):
 - Original requested scope and output language:
+- Recorded research context: disciplines, methods and applicability notes (unknown if absent):
 - Last actually observed time (unknown if unavailable):
 - Evidence registry: stable ID, relative label/source identifier, actually computed hash or unknown, original/derived status and provenance limitations:
 - Inspected locations and completed checks, with evidence IDs:
-- Coverage: completed / partial / not_assessed / not_applicable for the seven domains, with reasons:
+- Coverage: completed / partial / not_assessed / not_applicable for the seven domains, with limitations/reasons and completed-check IDs:
 - Findings: stable ID, category, active/resolved/withdrawn status, level, observation, exact locator, evidence IDs and challenge/verification notes:
 - Unresolved questions and pending steps:
 - Missing evidence/tools, confidentiality and specialist-review limits:
@@ -22,3 +23,5 @@ Use plain text when structured output is unavailable. This record summarizes wor
 5. Continue the pending scope and update the record. Distinguish prior work from checks performed in this session. Do not silently expand coverage or infer missing results from context loss.
 
 For optional JSON use `checkpoint.schema.json`. The helper's `checkpoint REPORT.json` converts a valid report without inventing new inspection or current time; `validate-checkpoint` checks structure and links only. Neither operation reruns or authenticates the scientific analysis.
+
+Consistent older v.0.0.2 JSON records can omit research context, domain reasons or check links. The validator reports these gaps as warnings; preserve the uncertainty instead of inventing prior work. Newly exported records carry the reasons and links, and copy research context when the report records it.

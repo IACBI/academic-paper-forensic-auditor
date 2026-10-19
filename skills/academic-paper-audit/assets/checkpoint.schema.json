@@ -18,6 +18,15 @@
       }
     },
     "scope": {"$ref": "#/$defs/text"},
+    "research_context": {
+      "type": "object", "additionalProperties": false,
+      "required": ["disciplines", "method_families", "applicability_notes"],
+      "properties": {
+        "disciplines": {"$ref": "#/$defs/strings"},
+        "method_families": {"$ref": "#/$defs/strings"},
+        "applicability_notes": {"$ref": "#/$defs/text"}
+      }
+    },
     "last_observed_at": {"type": ["string", "null"], "format": "date-time"},
     "artifacts": {
       "type": "array", "items": {
@@ -47,8 +56,15 @@
         "properties": {
           "domain": {"$ref": "#/$defs/domain"},
           "status": {"enum": ["completed", "partial", "not_assessed", "not_applicable"]},
-          "scope": {"$ref": "#/$defs/text"}
-        }
+          "scope": {"$ref": "#/$defs/text"},
+          "limitations": {"type": "string"},
+          "check_ids": {"$ref": "#/$defs/ids"}
+        },
+        "allOf": [
+          {"if": {"properties": {"status": {"enum": ["completed", "partial"]}}}, "then": {"properties": {"check_ids": {"minItems": 1}}}},
+          {"if": {"properties": {"status": {"enum": ["not_assessed", "not_applicable"]}}}, "then": {"properties": {"check_ids": {"maxItems": 0}}}},
+          {"if": {"properties": {"status": {"enum": ["partial", "not_assessed", "not_applicable"]}}}, "then": {"properties": {"limitations": {"minLength": 1, "pattern": "\\S"}}}}
+        ]
       }
     },
     "completed_checks": {

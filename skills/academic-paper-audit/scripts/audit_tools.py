@@ -5,6 +5,7 @@ evidence. JSON results go to stdout; callers choose where to save them.
 """
 
 import argparse
+import copy
 from collections import Counter
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
@@ -305,7 +306,7 @@ def validate_checkpoint(checkpoint):
     artifacts = _unique_ids(checkpoint["artifacts"], "artifact", errors)
     sources = _unique_ids(checkpoint["sources"], "source", errors)
     _unique_ids(checkpoint["findings"], "finding", errors)
-    _unique_ids(checkpoint["completed_checks"], "completed check", errors)
+    checks = _unique_ids(checkpoint["completed_checks"], "completed check", errors)
     all_ids = [item["id"] for group in ("artifacts", "sources", "findings", "completed_checks") for item in checkpoint[group]]
     if len(all_ids) != len(set(all_ids)):
         errors.append("Checkpoint IDs must be unique across registries")
@@ -319,6 +320,20 @@ def validate_checkpoint(checkpoint):
                     errors.append(f"{item['id']}: unknown {key}")
             if not item["artifact_ids"] and not item["source_ids"]:
                 errors.append(f"{item['id']}: checkpoint entry requires evidence references")
+    linked_checks = set()
+    for item in checkpoint["coverage"]:
+        check_ids = set(item.get("check_ids", []))
+        if check_ids - checks:
+            errors.append(f"{item['domain']}: unknown check_ids")
+        if item["status"] in ("completed", "partial"):
+            if not checks:
+                errors.append(f"{item['domain']}: assessed coverage requires completed checks with evidence")
+            linked_checks.update(check_ids)
+    # Older v.0.0.2 records lack per-domain links. Keep them readable with
+    # explicit warnings, without pretending to reconstruct the missing links.
+    if all("check_ids" in item for item in checkpoint["coverage"]):
+        if checks - linked_checks:
+            errors.append("Completed checks must be linked to assessed coverage")
     for item in checkpoint["findings"]:
         if item["status"] == "active" and coverage.get(item["category"], {}).get("status") not in ("completed", "partial"):
             errors.append(f"{item['id']}: active finding requires assessed coverage")
@@ -328,26 +343,45 @@ def validate_checkpoint(checkpoint):
     return errors
 
 
+def checkpoint_warnings(checkpoint):
+    """Describe missing legacy context after successful checkpoint validation."""
+    warnings = []
+    if "research_context" not in checkpoint:
+        warnings.append("Research context was not recorded; establish methods from source evidence before resuming.")
+    for field, message in (
+        ("limitations", "Coverage reasons/limitations were not recorded"),
+        ("check_ids", "Per-domain completed-check links were not recorded; domain coverage cannot be confirmed"),
+    ):
+        missing = [item["domain"] for item in checkpoint["coverage"] if field not in item]
+        if missing:
+            warnings.append(f"{message}: {', '.join(missing)}. Do not infer missing history.")
+    return warnings
+
+
 def checkpoint_from_report(report):
     errors = validate_report(report)
     if errors:
         raise ValueError("Cannot checkpoint invalid report: " + "; ".join(errors))
     checks = []
+    coverage = []
+    used_ids = {item["id"] for group in ("artifacts", "sources", "findings") for item in report[group]}
     for domain in report["coverage"]:
+        check_ids = []
         for description in domain["checks"]:
+            base = f"CHECK_{len(checks) + 1:03d}"
+            check_id = base
+            suffix = 1
+            while check_id in used_ids:
+                check_id = f"{base}_{suffix}"
+                suffix += 1
+            used_ids.add(check_id)
+            check_ids.append(check_id)
             checks.append({
-                "id": f"CHECK_{len(checks) + 1:03d}", "description": description,
+                "id": check_id, "description": description,
                 "artifact_ids": list(domain["artifact_ids"]), "source_ids": list(domain["source_ids"]),
             })
-    # Generated check IDs must not collide with user-assigned evidence/finding IDs.
-    used_ids = {item["id"] for group in ("artifacts", "sources", "findings") for item in report[group]}
-    for item in checks:
-        base = item["id"]
-        suffix = 1
-        while item["id"] in used_ids:
-            item["id"] = f"{base}_{suffix}"
-            suffix += 1
-        used_ids.add(item["id"])
+        coverage.append({**{key: domain[key] for key in ("domain", "status", "scope", "limitations")},
+                         "check_ids": check_ids})
     checkpoint = {
         "schema_version": VERSION, "audit_id": report["audit"]["id"], "protocol_version": VERSION,
         "article": dict(report["audit"]["article"]), "scope": report["audit"]["scope"],
@@ -355,7 +389,7 @@ def checkpoint_from_report(report):
         "artifacts": [{key: item[key] for key in ("id", "label", "sha256")} for item in report["artifacts"]],
         "sources": [{"id": item["id"], "identifier": item["url"] or item["identifier"],
                      "verification_notes": f"Prior source record: {item['access_status']}; {item['statement']} Limitations: {item['limitations']}"} for item in report["sources"]],
-        "coverage": [{key: item[key] for key in ("domain", "status", "scope")} for item in report["coverage"]],
+        "coverage": coverage,
         "completed_checks": checks,
         "findings": [{**{key: item[key] for key in ("id", "category", "status", "level", "observation", "locator")},
                       "artifact_ids": list(item["artifact_ids"]), "source_ids": list(item["source_ids"]),
@@ -363,6 +397,8 @@ def checkpoint_from_report(report):
         "pending_steps": list(report["next_steps"]),
         "limitations": list(report["limitations"]) + ["Summary of a prior report; no new source inspection, clock observation or authentication was performed. Recheck identity and changed evidence before resuming."],
     }
+    if "research_context" in report["audit"]:
+        checkpoint["research_context"] = copy.deepcopy(report["audit"]["research_context"])
     errors = validate_checkpoint(checkpoint)
     if errors:
         raise ValueError("Checkpoint conversion failed: " + "; ".join(errors))
@@ -425,6 +461,7 @@ def main(argv=None):
             checkpoint = load_json(args.checkpoint)
             errors = validate_checkpoint(checkpoint)
             result = {"valid": not errors, "errors": errors,
+                      "warnings": checkpoint_warnings(checkpoint) if not errors else None,
                       "pending_steps": checkpoint["pending_steps"] if not errors else None}
             print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
             return 1 if errors else 0

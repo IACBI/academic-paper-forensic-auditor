@@ -21,37 +21,56 @@
     {
       "domain": "text_methods",
       "status": "completed",
-      "scope": "Printed pages 1-3 of synthetic text"
+      "scope": "Printed pages 1-3 of synthetic text",
+      "limitations": "Text fixture only; no real publication assessed.",
+      "check_ids": [
+        "CHECK_001"
+      ]
     },
     {
       "domain": "statistics_data",
       "status": "completed",
-      "scope": "Participant flow and pilot percentage only"
+      "scope": "Participant flow and pilot percentage only",
+      "limitations": "No raw data, inference tests or real study.",
+      "check_ids": [
+        "CHECK_002",
+        "CHECK_003"
+      ]
     },
     {
       "domain": "figures_images",
       "status": "not_assessed",
-      "scope": "Synthetic fixture only"
+      "scope": "Synthetic fixture only",
+      "limitations": "No relevant source evidence supplied; no external verification performed.",
+      "check_ids": []
     },
     {
       "domain": "metadata_provenance",
       "status": "not_assessed",
-      "scope": "Synthetic fixture only"
+      "scope": "Synthetic fixture only",
+      "limitations": "No relevant source evidence supplied; no external verification performed.",
+      "check_ids": []
     },
     {
       "domain": "references_notices",
       "status": "not_assessed",
-      "scope": "Synthetic fixture only"
+      "scope": "Synthetic fixture only",
+      "limitations": "No relevant source evidence supplied; no external verification performed.",
+      "check_ids": []
     },
     {
       "domain": "ethics_registration",
       "status": "not_assessed",
-      "scope": "Synthetic fixture only"
+      "scope": "Synthetic fixture only",
+      "limitations": "No relevant source evidence supplied; no external verification performed.",
+      "check_ids": []
     },
     {
       "domain": "cross_paper",
       "status": "not_applicable",
-      "scope": "Synthetic fixture only"
+      "scope": "Synthetic fixture only",
+      "limitations": "One synthetic text supplied; comparison was not requested.",
+      "check_ids": []
     }
   ],
   "completed_checks": [
