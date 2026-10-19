@@ -29,6 +29,8 @@ reporting gaps, methodological limitations, scholarly disagreement and specific
 integrity concerns. For a material issue give an exact locator, observation,
 evidence, reproducible check, assumptions, strongest benign explanation, effect
 on conclusions and next verification step. Try to disprove major findings.
+For numerical comparisons, put quantities on the same basis and show relevant
+unit conversions in both directions so the correction can be independently checked.
 Do not infer intent or misconduct from anomalies or from missing evidence.
 
 When resuming, preserve audit/finding IDs and completed checks. Recheck source
