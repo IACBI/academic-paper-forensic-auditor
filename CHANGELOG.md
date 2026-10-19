@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Reliable continuation records
+
+Preserve recorded research context, domain limitations and completed-check links when exporting a JSON continuation record. Reject completed or partial coverage without completed evidence-linked work and reject inconsistent declared links. Keep consistent older v.0.0.2 records readable, with explicit validation warnings for missing history. Add six regression tests, bringing the software suite to 79 tests, and update the continuation example and all 12 user guides. These changes are in source only; published release archives are unchanged.
+
+### Observed agent behavior
+
+Run isolated real Codex CLI checks for native skill discovery, explicit and implicit use, ordinary-summary non-activation, text-only operation and the three synthetic review routes. Retain failures rather than presenting format compatibility as complete behavioral acceptance. Clarify the quick request's numerical-comparison instructions after an observed omission of a required reverse unit conversion.
+
 ## v.0.0.2 — 2026-10-19
 
 ### Windows inventory correction

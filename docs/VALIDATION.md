@@ -10,7 +10,7 @@ From the repository root, in an environment with `skills/academic-paper-audit/re
 python scripts/check_project.py
 ```
 
-The command checks versions, all 35 numbered protocol sections, generated-reference synchronization, report and continuation contracts, example identity, current evaluation baselines, local documentation links and release inputs. It then runs the 73 behavior tests. Those tests cover arithmetic assumptions, input errors, path containment, linked/reparse files, evidence references, coverage, source eligibility, resolved findings, checkpoint conversion, evaluation integrity and deterministic packaging. An invalid report cannot masquerade as a report with zero findings.
+The command checks versions, all 35 numbered protocol sections, generated-reference synchronization, report and continuation contracts, example identity, current evaluation baselines, local documentation links and release inputs. It then runs the 79 behavior tests. Those tests cover arithmetic assumptions, input errors, path containment, linked/reparse files, evidence references, coverage, source eligibility, resolved findings, checkpoint conversion, evaluation integrity and deterministic packaging. An invalid report cannot masquerade as a report with zero findings.
 
 The local execution record is Windows, Python 3.10.11 and jsonschema 4.26.0 on 18 October 2026. All 70 tests passed. The published v.0.0.1 commit, `97f2010`, also passed the [four-job GitHub run](https://github.com/IACBI/academic-paper-forensic-auditor/actions/runs/39166102414): Windows and Ubuntu, each with Python 3.10 and 3.14. Every job checked the project and built all three distribution formats. The archive hashes matched the local builds across all four environments.
 
@@ -27,6 +27,14 @@ The Windows/Python 3.14 failure in [run 39168957314](https://github.com/IACBI/ac
 Version v.0.0.2 compares identity, size and modification time across the two APIs, while comparing change-time fields only within the same API before and after reading. It retains both descriptor and path stability checks. The same Python 3.14.8 reproduction passed after the fix. Three added regression tests cover differing API timestamp meanings, a descriptor-side timestamp change and a path-side timestamp change; all 73 tests passed locally on Windows/Python 3.10.11. The four-environment CI workflow separately exercises the full suite and all package formats.
 
 The fix does not turn inventory into a transaction or guarantee safety against a hostile concurrently changing filesystem. Use a stable evidence directory under your control. Historical v.0.0.1 packages retain the old behavior; install the v.0.0.2 helper rather than relying on a previously green run of the old release.
+
+### Continuation preservation in the current source
+
+The updated exporter copies recorded `research_context` without sharing mutable lists with the report. Each coverage entry retains its `limitations` and `check_ids`, linking its actual completed work to the checkpoint check registry. Unknown research context remains absent rather than being inferred. The example checkpoint is regenerated from its source report.
+
+Validation rejects assessed coverage without completed evidence-linked work, unknown or missing declared check links, checks assigned to unassessed domains, and orphaned checks in fully linked records. Six new regression tests also cover partial-scope reasons, preservation without mutation, empty-evidence claims, legitimate unassessed records and legacy handling. All 79 software tests passed locally on Windows/Python 3.10.11 with jsonschema 4.26.0 on 19 October 2026.
+
+The fields are additive to the v.0.0.2 reader contract. Consistent older records remain readable; `validate-checkpoint` returns a separate `warnings` list identifying absent context, domain reasons or per-domain links. Valid structure with warnings is not confirmation of the missing history. The Python API preserves `validate_checkpoint()`'s error-list contract; callers can obtain the same warnings with `checkpoint_warnings()` after successful validation. New exports always include domain reasons and links, and include research context only when it was recorded. Older released validators do not understand the added fields: use the updated helper for new exports. These source changes are unreleased; the published v.0.0.2 tag and archives remain unchanged.
 
 ## Behavioral suite and current results
 
@@ -49,7 +57,7 @@ Each case has grounding, calibration and decision criteria. Grounding requires c
 
 These records contain 48 actual responses and 144 model-judged criteria across the three routes. Fresh responders did not receive expected answers. A separate local model judge inspected their responses; this was not domain-expert adjudication. Each route used one fresh conversation whose cases shared that conversation, so the cases are not independent statistical trials. Exact model identities were not observed and remain null. The records disclose host, mode, judge and review limitations in their metadata.
 
-The current master run's packet hashes and byte lengths were independently matched by the judge. Its observed session time and tool version were supported by a responder-reported historical tool trace, not an independent session recording; this distinction and the trace are retained in the record's judge notes.
+The current quick baseline comes from a fresh real Codex CLI session after the numerical-comparison clarification. The master and skill baselines come from fresh local subagents using the existing regression route. Their metadata observations are supported by responder-reported historical tool traces, not independently captured session recordings. The judge independently matched packet hashes/byte lengths; the tool evidence and its limitations are retained in the records. Master timestamps were computed by original successful writing commands and inserted into report files; they were not substituted from an earlier printed clock. None of these local-subagent passes certifies a native host. Native CLI failures are retained separately below.
 
 An earlier strict review found missing explicit human-review framing in two otherwise correctly classified responses. The reporting instruction was clarified and fresh blind evaluations were run. The correction and historical evidence remain available in [commit 3590ec8](https://github.com/IACBI/academic-paper-forensic-auditor/commit/3590ec8).
 
@@ -101,8 +109,34 @@ Exit codes are 0 for successful preparation/all acceptance checks passed, 1 for 
 
 Keep the three current reviewed baselines, their suite/contracts and synthetic fixtures. They are the evidence required by the project check and are excluded from runtime packages. Keep originals of any authorized real research outside public test data. Temporary packets, environments, extracted archives and duplicate outputs can be removed after the reviewed records are safely retained.
 
+## Observed native-host tests — 19 October 2026
+
+The [compatibility record](../evaluations/compatibility.json) retains original failed native runs, exact response excerpts and judgements, protocol hashes, the initial quick protocol snapshot, complete executed-command lists and relevant original metadata stdout. Other read stdout is represented by hashes; temporary full JSONL transport is not retained. Workspace paths are normalized. The record also links the current successful quick baseline by file hash. The observations below used Codex CLI **0.163.0 on Windows**, fresh ephemeral sessions, a read-only sandbox and `approval_policy=never`. The resolved server model identifier was not exposed and remains unknown.
+
+| Real CLI exercise | Observation | Acceptance result |
+| --- | --- | --- |
+| ZIP skill installed at `.agents/skills/academic-paper-audit`; explicit invocation and 16 cases | The CLI read the installed skill and linked resources. Clock, hashes, byte counts and arithmetic claims matched original executed tools. | 15/16 cases, 47/48 criteria. R16 resolved F001 but omitted part of the prior text-review history. |
+| Same installed skill; one relevant request without naming it | The CLI selected and read the skill and relevant resources. | Implicit selection observed once; no activation-rate claim. |
+| Ordinary meeting-summary request | One-sentence summary, no skill read and no tool calls. | Non-activation observed once. |
+| Pasted quick instructions; tool calls forbidden by the task | A bounded participant-flow review with no tool calls. | Text-only behavior observed; tools were not mechanically removed from the harness. |
+| Full master protocol; 16 cases | All case decisions and calibration requirements passed, but reports claimed a clock read unsupported by the complete original command trace. | 0/16 fully passing cases, 32/48 criteria. Grounding failed in all 16. |
+| Initial quick request; 16 cases | Correct case outcomes; R05 omitted the explicit reverse conversion required by the rubric. | 15/16 cases, 47/48 criteria. |
+| Clarified quick request; fresh 16-case session | Relevant unit conversions are requested in both directions; no oracle or failed answers were supplied to the responder. | 16/16 cases, 48/48 criteria. |
+
+The unchanged rubric was judged by a separate local model. The initial quick, native master and native skill failures remain in the compatibility record; they were not rewritten, hidden or retried until green. The separate local regression passes above use another harness. Installation/discovery worked in these Codex runs, while the native master/skill outputs did not meet full behavioral acceptance. Use the deterministic JSON exporter to retain continuation state rather than relying on a short narrative to reproduce every prior check. Independently verify claimed operations before consequential use.
+
+Claude Code **2.1.301** was available, but `claude auth status --json` reported `loggedIn=false` and `authMethod=none`; model execution and native installation remain untested pending user sign-in. No `dsh` or `deepseek` executable was found on PATH, so DeepSeek Harness execution remains untested. No provider secrets were inspected or credentials changed. These are test preconditions, not evidence that the project is incompatible with either host.
+
+To repeat the Codex test, build a fresh standalone-skill archive, extract its `academic-paper-audit` folder into an isolated workspace's `.agents/skills`, and prepare a fresh blind packet. The [official Codex skills guide](https://learn.chatgpt.com/docs/build-skills) describes local discovery. Invoke an explicit request with literal `$academic-paper-audit`, a relevant request without naming the skill, and an ordinary unrelated summary in separate sessions. A representative command, run from the test workspace, is:
+
+```text
+codex exec --skip-git-repo-check --ephemeral --sandbox read-only -c approval_policy=never --json -o response.txt 'Use $academic-paper-audit to review the supplied synthetic case.' > events.jsonl
+```
+
+Quote the prompt for the shell in use: PowerShell needs single quotes around the literal `$academic-paper-audit` prompt to prevent variable expansion. Store original JSONL output and inspect actual tool calls, not just the final self-report. For route evaluations, keep the prepared manifest/protocol/case bytes and use the unchanged judging/assembly procedure above. The test used the installed skill for native invocation rather than merely reading its alternative `protocol/` copy. No user-wide installation or configuration was changed. Claude project skills instead use `.claude/skills/academic-paper-audit`, as described in its [official skills guide](https://code.claude.com/docs/en/skills); installation there is not a tested result here.
+
 ## What still requires external validation
 
-Text portability, host integration and scientific adequacy are separate questions. The project offers a text path and capability-based fallbacks; that design does not certify every future agent. Windows/Ubuntu helper and packaging execution has been tested, while macOS and native skill/plugin installation have not. The included helpers do not implement OCR, image forensics or formal proof-checking engines.
+Text portability, host integration and scientific adequacy are separate questions. The project offers a text path and capability-based fallbacks; that design does not certify every future agent. Windows/Ubuntu helper and packaging execution and the bounded Codex native observations above have been tested. macOS, other native hosts, plugin loading, context-limit stress and native execution of the Python helper remain unverified. The included helpers do not implement OCR, image forensics or formal proof-checking engines.
 
 Before making host-specific claims, test actual installation, explicit invocation, relevant automatic activation, ordinary-summary non-activation, context limits and missing-tool behavior in that host. Record observed model/version, date, mode, capabilities, hashes, outcomes and failures. Before making scientific accuracy claims, obtain authorized literature, qualified independent reviewers, legitimate and ambiguous controls, and appropriate metrics by domain and evidence quality. Language and specialist terminology need their own expert assessment. No current record supports a blanket accuracy claim across research fields, languages or modalities.
