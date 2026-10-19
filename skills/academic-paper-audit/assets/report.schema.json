@@ -1,18 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Academic Paper Audit Report v.0.0.2",
+  "title": "Academic Paper Audit Report v.0.0.3",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "audit", "disclaimer", "artifacts", "coverage", "sources", "findings", "assessment", "evidence_against_concerns", "limitations", "next_steps"],
   "properties": {
-    "schema_version": {"const": "0.0.2"},
+    "schema_version": {"const": "0.0.3"},
     "audit": {
       "type": "object", "additionalProperties": false,
       "required": ["id", "created_at", "package_version", "analyst", "scope", "article", "tools"],
       "properties": {
         "id": {"$ref": "#/$defs/id"},
         "created_at": {"type": "string", "format": "date-time"},
-        "package_version": {"const": "0.0.2"},
+        "package_version": {"const": "0.0.3"},
         "analyst": {"type": ["string", "null"], "minLength": 1},
         "scope": {"$ref": "#/$defs/text"},
         "research_context": {

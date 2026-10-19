@@ -55,6 +55,7 @@ class CheckpointTests(unittest.TestCase):
         self.assertEqual(context["disciplines"], ["Mixed research"])
 
     def test_assessed_coverage_cannot_survive_without_checks_or_evidence(self):
+        self.checkpoint.update(schema_version="0.0.2", protocol_version="0.0.2")
         for key in ("artifacts", "sources", "completed_checks", "findings"):
             self.checkpoint[key] = []
         for item in self.checkpoint["coverage"]:
@@ -81,6 +82,7 @@ class CheckpointTests(unittest.TestCase):
         self.assertTrue(audit.validate_checkpoint(self.checkpoint))
 
     def test_legacy_checkpoint_is_readable_with_explicit_missing_history_warnings(self):
+        self.checkpoint.update(schema_version="0.0.2", protocol_version="0.0.2")
         for item in self.checkpoint["coverage"]:
             item.pop("limitations")
             item.pop("check_ids")
@@ -89,6 +91,22 @@ class CheckpointTests(unittest.TestCase):
         self.assertTrue(any("Research context was not recorded" in warning for warning in warnings))
         self.assertTrue(any("reasons/limitations were not recorded" in warning for warning in warnings))
         self.assertTrue(any("domain coverage cannot be confirmed" in warning for warning in warnings))
+
+    def test_current_version_requires_domain_history_and_consistent_version_pair(self):
+        for field in ("limitations", "check_ids"):
+            checkpoint = copy.deepcopy(self.checkpoint)
+            del checkpoint["coverage"][0][field]
+            self.assertTrue(audit.validate_checkpoint(checkpoint))
+        self.checkpoint["protocol_version"] = "0.0.2"
+        self.assertTrue(any("versions must match" in error for error in audit.validate_checkpoint(self.checkpoint)))
+
+    def test_reading_previous_version_does_not_relabel_or_mutate_history(self):
+        self.checkpoint.update(schema_version="0.0.2", protocol_version="0.0.2")
+        original = copy.deepcopy(self.checkpoint)
+        self.assertEqual(audit.validate_checkpoint(self.checkpoint), [])
+        self.assertEqual(self.checkpoint, original)
+        self.checkpoint.update(schema_version="0.0.1", protocol_version="0.0.1")
+        self.assertTrue(audit.validate_checkpoint(self.checkpoint))
 
     def test_no_assessable_material_can_be_carried_without_inventing_completed_work(self):
         for key in ("artifacts", "sources", "completed_checks", "findings"):
@@ -156,6 +174,7 @@ class CheckpointTests(unittest.TestCase):
             self.assertEqual(validated.returncode, 0, validated.stderr)
             self.assertTrue(json.loads(validated.stdout)["valid"])
             legacy = json.loads(result.stdout)
+            legacy.update(schema_version="0.0.2", protocol_version="0.0.2")
             for item in legacy["coverage"]:
                 item.pop("limitations")
                 item.pop("check_ids")

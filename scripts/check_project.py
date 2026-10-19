@@ -54,7 +54,8 @@ def check():
     if inventory["artifacts"] != example["artifacts"]:
         errors.append("Synthetic example artifact identity differs from its fixture")
     checkpoint_schema = json.loads((SKILL / "assets/checkpoint.schema.json").read_text(encoding="utf-8"))
-    if checkpoint_schema["properties"]["schema_version"].get("const") != version or checkpoint_schema["properties"]["protocol_version"].get("const") != version:
+    checkpoint_versions = ["0.0.2", version]
+    if checkpoint_schema["properties"]["schema_version"].get("enum") != checkpoint_versions or checkpoint_schema["properties"]["protocol_version"].get("enum") != checkpoint_versions:
         errors.append("Continuation schema version differs from VERSION")
     checkpoint = tool.load_json(ROOT / "examples/synthetic-checkpoint.json")
     errors.extend(tool.validate_checkpoint(checkpoint))

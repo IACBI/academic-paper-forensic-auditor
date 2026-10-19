@@ -6,7 +6,7 @@
 [English](#lang-en) · [Türkçe](#lang-tr) · [Deutsch](#lang-de) · [Français](#lang-fr) · [Español](#lang-es) · [Italiano](#lang-it) · [Português](#lang-pt) · [العربية](#lang-ar) · [简体中文](#lang-zh-cn) · [繁體中文](#lang-zh-tw) · [한국어](#lang-ko) · [日本語](#lang-ja)
 
 <p align="center">
-  <a href="https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.2"><img alt="Version: v.0.0.2" src="https://img.shields.io/badge/version-v.0.0.2-2563eb?style=flat"></a>
+  <a href="https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.3"><img alt="Version: v.0.0.3" src="https://img.shields.io/badge/version-v.0.0.3-2563eb?style=flat"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-16a34a?style=flat"></a>
   <a href="https://github.com/IACBI/academic-paper-forensic-auditor/actions/workflows/validate.yml"><img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/IACBI/academic-paper-forensic-auditor/validate.yml?branch=main&amp;event=push&amp;label=checks&amp;style=flat"></a>
 </p>
@@ -76,7 +76,7 @@ Keep originals unchanged and record derived copies separately. Share unpublished
 
 For another session or agent, use the [continuation record](skills/academic-paper-audit/assets/continuation-template.md). Carry the article/version, scope, evidence IDs, inspected locations, completed checks, finding IDs/status, missing material and next steps, together with the actual sources. Recheck changed evidence. Keep corrected findings as resolved history and exclude them from active counts. A summary does not replace an unseen original or grant permission to expand the task.
 
-In the current source, JSON continuation export preserves recorded research context, each domain’s limitations and links to completed checks. `validate-checkpoint` reports `warnings` when older records lack this history; keep those gaps explicit when resuming. These updates are not included in the published v.0.0.2 archives.
+In the current source, JSON continuation export preserves recorded research context, each domain’s limitations and links to completed checks. `validate-checkpoint` reports `warnings` when older records lack this history; keep those gaps explicit when resuming. These updates are included in v.0.0.3; consistent v.0.0.2 continuation records remain readable.
 
 ### Optional local helpers
 
@@ -98,7 +98,7 @@ These examples use synthetic material. Inventory accepts paths relative to `--ro
 
 ### Verification, support and license
 
-The project has 79 behavior tests and a Windows/Ubuntu CI matrix for Python 3.10 and 3.14. Version v.0.0.2 corrects the Windows inventory timestamp comparison while preserving file-identity and change-detection checks. Quick, master and skill routes each passed 16 synthetic cases and 48 model-judged checks, including legitimate controls, insufficient evidence and a resolved finding. These are acceptance results, not measured scientific accuracy. Observed native-host tests and their failures are recorded in the validation guide; results apply only to those runs. macOS execution and expert performance across languages, modalities and disciplines remain unverified. The [validation guide](docs/VALIDATION.md) documents evidence, limits and reproduction steps.
+The project has 81 behavior tests and a Windows/Ubuntu CI matrix for Python 3.10 and 3.14. Version v.0.0.2 corrects the Windows inventory timestamp comparison while preserving file-identity and change-detection checks. Quick, master and skill routes each passed 16 synthetic cases and 48 model-judged checks, including legitimate controls, insufficient evidence and a resolved finding. These are acceptance results, not measured scientific accuracy. Observed native-host tests and their failures are recorded in the validation guide; results apply only to those runs. macOS execution and expert performance across languages, modalities and disciplines remain unverified. The [validation guide](docs/VALIDATION.md) documents evidence, limits and reproduction steps.
 
 For a reproducible problem, use the [bug form][issues] with a minimal synthetic or authorized shareable example. [Contributing](CONTRIBUTING.md) covers development and releases; [CHANGELOG.md](CHANGELOG.md) records changes. The project is available under the [MIT license](LICENSE). This language section is a complete user guide; the additional technical documents are maintained in English.
 
@@ -169,7 +169,7 @@ Varsayılan çıktı Markdown veya düz metindir. [Rapor şablonu](skills/academ
 
 Başka oturuma veya ajana geçerken [devam kaydını](skills/academic-paper-audit/assets/continuation-template.md) kullanın. Makale/sürüm, kapsam, kanıt kimlikleri, incelenen konumlar, tamamlanan kontroller, bulgu kimliği/durumu, eksik materyal ve sonraki adımları gerçek kaynaklarla birlikte taşıyın. Değişen kanıtı yeniden inceleyin. Düzeltilen bulguyu geçmişte saklayıp aktif sayıma katmayın. Özet, görülmemiş kaynağın veya yeni işlem izninin yerini tutmaz.
 
-Güncel kaynak kodunda JSON devam kaydı, kaydedilmiş araştırma bağlamını, her alanın sınırlamalarını ve tamamlanan kontrollere bağlantılarını korur. Eski kayıtlarda bu bilgiler yoksa `validate-checkpoint`, `warnings` alanında uyarı verir; devam ederken eksikleri açıkça belirtin. Bu güncellemeler yayımlanmış v.0.0.2 arşivlerine dahil değildir.
+Güncel kaynak kodunda JSON devam kaydı, kaydedilmiş araştırma bağlamını, her alanın sınırlamalarını ve tamamlanan kontrollere bağlantılarını korur. Eski kayıtlarda bu bilgiler yoksa `validate-checkpoint`, `warnings` alanında uyarı verir; devam ederken eksikleri açıkça belirtin. Bu güncellemeler v.0.0.3 paketlerine dahildir; tutarlı v.0.0.2 devam kayıtları okunabilir.
 
 ### İsteğe bağlı yerel yardımcılar
 
@@ -191,7 +191,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### Doğrulama, destek ve lisans
 
-Projede 79 davranış testi ve Windows/Ubuntu üzerinde Python 3.10 ve 3.14 ile çalışan bir CI matrisi bulunur. v.0.0.2, Windows envanterindeki zaman alanı karşılaştırmasını düzeltir; dosya kimliği ve gerçek değişiklik kontrollerini korur. Kısa istek, tam prompt ve skill yollarının her biri 16 sentetik vaka ve 48 model-yargıç ölçütünü geçmiştir; sorunsuz kontroller, yetersiz kanıt ve çözülen bulgu da sınanmıştır. Bunlar bilimsel doğruluk oranı değildir. Gerçek ajan testleri ve başarısızlıkları doğrulama rehberinde kayıtlıdır; sonuçlar yalnız sınanan çalıştırmalar için geçerlidir. macOS ve tüm dil, materyal ve disiplinlerde uzman performansı doğrulanmış değildir. [Doğrulama rehberi](docs/VALIDATION.md) kanıtları, sınırları ve tekrar adımlarını içerir.
+Projede 81 davranış testi ve Windows/Ubuntu üzerinde Python 3.10 ve 3.14 ile çalışan bir CI matrisi bulunur. v.0.0.2, Windows envanterindeki zaman alanı karşılaştırmasını düzeltir; dosya kimliği ve gerçek değişiklik kontrollerini korur. Kısa istek, tam prompt ve skill yollarının her biri 16 sentetik vaka ve 48 model-yargıç ölçütünü geçmiştir; sorunsuz kontroller, yetersiz kanıt ve çözülen bulgu da sınanmıştır. Bunlar bilimsel doğruluk oranı değildir. Gerçek ajan testleri ve başarısızlıkları doğrulama rehberinde kayıtlıdır; sonuçlar yalnız sınanan çalıştırmalar için geçerlidir. macOS ve tüm dil, materyal ve disiplinlerde uzman performansı doğrulanmış değildir. [Doğrulama rehberi](docs/VALIDATION.md) kanıtları, sınırları ve tekrar adımlarını içerir.
 
 Tekrarlanabilir bir sorun için [hata formuna][issues] küçük bir sentetik veya paylaşılabilir örnek ekleyin. Geliştirme ve yayın süreci [katkı rehberinde](CONTRIBUTING.md), sürüm değişiklikleri [CHANGELOG.md](CHANGELOG.md) içinde açıklanır. Proje [MIT lisanslıdır](LICENSE). Bu bölüm tam kullanıcı rehberidir; ek teknik belgeler İngilizce tutulur.
 
@@ -262,7 +262,7 @@ Verändern Sie Originale nicht und kennzeichnen Sie abgeleitete Kopien. Unveröf
 
 Für einen neuen Chat oder Assistenten nutzen Sie den [Fortsetzungsnachweis](skills/academic-paper-audit/assets/continuation-template.md). Übergeben Sie Arbeit/Fassung, Umfang, Beleg-IDs, Fundstellen, erledigte Prüfungen, Befund-IDs/Status, fehlendes Material und nächste Schritte zusammen mit den tatsächlichen Quellen. Geänderte Belege werden neu geprüft. Erledigte Bedenken bleiben als gelöste Historie erhalten und zählen nicht als aktive Befunde. Eine Zusammenfassung ersetzt keine ungelesene Quelle und erweitert keine Berechtigung.
 
-Im aktuellen Quellstand bewahrt der JSON-Fortsetzungsexport den erfassten Forschungskontext, die Einschränkungen jedes Bereichs und Verweise auf abgeschlossene Prüfungen. Fehlen diese Angaben in älteren Datensätzen, meldet `validate-checkpoint` dies unter `warnings`; halten Sie die Lücken beim Fortsetzen ausdrücklich fest. Diese Änderungen sind nicht in den veröffentlichten v.0.0.2-Archiven enthalten.
+Im aktuellen Quellstand bewahrt der JSON-Fortsetzungsexport den erfassten Forschungskontext, die Einschränkungen jedes Bereichs und Verweise auf abgeschlossene Prüfungen. Fehlen diese Angaben in älteren Datensätzen, meldet `validate-checkpoint` dies unter `warnings`; halten Sie die Lücken beim Fortsetzen ausdrücklich fest. Diese Änderungen sind in v.0.0.3 enthalten; konsistente Fortsetzungsdatensätze aus v.0.0.2 bleiben lesbar.
 
 ### Optionale lokale Hilfsskripte
 
@@ -284,7 +284,7 @@ Die Beispiele sind synthetisch. Das Inventar erwartet Pfade relativ zu `--root` 
 
 ### Prüfung, Hilfe und Lizenz
 
-Das Projekt enthält 79 Verhaltenstests und eine CI-Matrix für Windows/Ubuntu mit Python 3.10 und 3.14. Version v.0.0.2 korrigiert den Zeitstempelvergleich im Windows-Inventar und bewahrt die Prüfung von Dateiidentität und tatsächlichen Änderungen. Kurzanfrage, Hauptprotokoll und Skill bestanden jeweils 16 synthetische Fälle und 48 modellbewertete Kriterien, darunter unauffällige Kontrollen, unzureichende Evidenz und ein gelöster Befund. Das sind Abnahmeresultate, keine wissenschaftlichen Genauigkeitsmessungen. Beobachtete native Hosttests und ihre Fehlschläge sind im Validierungsleitfaden dokumentiert; die Ergebnisse gelten nur für diese Durchläufe. macOS sowie fachliche Leistung über alle Sprachen, Medien und Disziplinen sind nicht nachgewiesen. Der [Validierungsleitfaden](docs/VALIDATION.md) enthält Belege, Grenzen und Wiederholungsschritte.
+Das Projekt enthält 81 Verhaltenstests und eine CI-Matrix für Windows/Ubuntu mit Python 3.10 und 3.14. Version v.0.0.2 korrigiert den Zeitstempelvergleich im Windows-Inventar und bewahrt die Prüfung von Dateiidentität und tatsächlichen Änderungen. Kurzanfrage, Hauptprotokoll und Skill bestanden jeweils 16 synthetische Fälle und 48 modellbewertete Kriterien, darunter unauffällige Kontrollen, unzureichende Evidenz und ein gelöster Befund. Das sind Abnahmeresultate, keine wissenschaftlichen Genauigkeitsmessungen. Beobachtete native Hosttests und ihre Fehlschläge sind im Validierungsleitfaden dokumentiert; die Ergebnisse gelten nur für diese Durchläufe. macOS sowie fachliche Leistung über alle Sprachen, Medien und Disziplinen sind nicht nachgewiesen. Der [Validierungsleitfaden](docs/VALIDATION.md) enthält Belege, Grenzen und Wiederholungsschritte.
 
 Melden Sie reproduzierbare Probleme im [Fehlerformular][issues] mit einem kleinen synthetischen oder freigegebenen Beispiel. [Contributing](CONTRIBUTING.md) beschreibt Entwicklung und Releases, [CHANGELOG.md](CHANGELOG.md) die Änderungen. Es gilt die [MIT-Lizenz](LICENSE). Dieser Abschnitt ist ein vollständiger Benutzerleitfaden; ergänzende technische Dokumente werden auf Englisch gepflegt.
 
@@ -355,7 +355,7 @@ Conservez les originaux et identifiez séparément les copies dérivées. Partag
 
 Pour changer de session ou d’agent, utilisez la [fiche de reprise](skills/academic-paper-audit/assets/continuation-template.md). Transmettez article/version, périmètre, identifiants de preuves, emplacements examinés, contrôles effectués, identifiants/statuts des observations, pièces manquantes et prochaines étapes avec les vraies sources. Réexaminez les éléments modifiés. Gardez les observations corrigées dans l’historique comme résolues, hors des comptes actifs. Un résumé ne remplace pas une source non consultée et n’élargit aucune autorisation.
 
-Dans le code source actuel, l’export JSON de reprise conserve le contexte de recherche enregistré, les limites de chaque domaine et les liens vers les contrôles terminés. Si ces informations manquent dans un ancien enregistrement, `validate-checkpoint` les signale dans `warnings` ; gardez ces lacunes explicites lors de la reprise. Ces mises à jour ne figurent pas dans les archives publiées de v.0.0.2.
+Dans le code source actuel, l’export JSON de reprise conserve le contexte de recherche enregistré, les limites de chaque domaine et les liens vers les contrôles terminés. Si ces informations manquent dans un ancien enregistrement, `validate-checkpoint` les signale dans `warnings` ; gardez ces lacunes explicites lors de la reprise. Ces mises à jour sont incluses dans v.0.0.3 ; les enregistrements de reprise cohérents de v.0.0.2 restent lisibles.
 
 ### Outils locaux facultatifs
 
@@ -377,7 +377,7 @@ Les exemples sont synthétiques. L’inventaire accepte des chemins relatifs à 
 
 ### Vérification, aide et licence
 
-Le projet comprend 79 tests de comportement et une matrice CI Windows/Ubuntu avec Python 3.10 et 3.14. La version v.0.0.2 corrige la comparaison temporelle de l’inventaire Windows tout en conservant les contrôles d’identité et de modification des fichiers. Demande courte, protocole complet et skill ont chacun passé 16 cas synthétiques et 48 critères évalués par un modèle, dont des contrôles sans anomalie, des preuves insuffisantes et une observation résolue. Ces résultats ne mesurent pas la précision scientifique. Les essais réels dans les environnements hôtes et leurs échecs sont consignés dans le guide de validation ; les résultats ne valent que pour ces exécutions. L’exécution macOS et l’expertise dans toutes les langues, modalités et disciplines restent non établies. Le [guide de validation](docs/VALIDATION.md) fournit preuves, limites et procédure de reproduction.
+Le projet comprend 81 tests de comportement et une matrice CI Windows/Ubuntu avec Python 3.10 et 3.14. La version v.0.0.2 corrige la comparaison temporelle de l’inventaire Windows tout en conservant les contrôles d’identité et de modification des fichiers. Demande courte, protocole complet et skill ont chacun passé 16 cas synthétiques et 48 critères évalués par un modèle, dont des contrôles sans anomalie, des preuves insuffisantes et une observation résolue. Ces résultats ne mesurent pas la précision scientifique. Les essais réels dans les environnements hôtes et leurs échecs sont consignés dans le guide de validation ; les résultats ne valent que pour ces exécutions. L’exécution macOS et l’expertise dans toutes les langues, modalités et disciplines restent non établies. Le [guide de validation](docs/VALIDATION.md) fournit preuves, limites et procédure de reproduction.
 
 Signalez un problème reproductible dans le [formulaire][issues] avec un petit exemple synthétique ou partageable. [Contributing](CONTRIBUTING.md) décrit développement et versions, [CHANGELOG.md](CHANGELOG.md) les changements. Le projet est sous [licence MIT](LICENSE). Cette section constitue un guide utilisateur complet ; les documents techniques complémentaires sont maintenus en anglais.
 
@@ -448,7 +448,7 @@ Conserve los originales y registre las copias derivadas por separado. Comparta m
 
 Para cambiar de sesión o agente, use el [registro de continuación](skills/academic-paper-audit/assets/continuation-template.md). Traslade artículo/versión, alcance, identificadores de pruebas, ubicaciones revisadas, controles terminados, identificadores/estados de hallazgos, material faltante y próximos pasos junto con las fuentes reales. Revise las pruebas modificadas. Mantenga los hallazgos corregidos como historial resuelto y exclúyalos del recuento activo. Un resumen no sustituye una fuente no vista ni amplía permisos.
 
-En el código fuente actual, la exportación JSON de continuación conserva el contexto de investigación registrado, las limitaciones de cada área y los enlaces a las comprobaciones terminadas. Si un registro antiguo carece de esos datos, `validate-checkpoint` lo indica en `warnings`; mantenga explícitas las lagunas al continuar. Estas actualizaciones no están incluidas en los archivos publicados de v.0.0.2.
+En el código fuente actual, la exportación JSON de continuación conserva el contexto de investigación registrado, las limitaciones de cada área y los enlaces a las comprobaciones terminadas. Si un registro antiguo carece de esos datos, `validate-checkpoint` lo indica en `warnings`; mantenga explícitas las lagunas al continuar. Estas actualizaciones están incluidas en v.0.0.3; los registros de continuación coherentes de v.0.0.2 siguen siendo legibles.
 
 ### Herramientas locales opcionales
 
@@ -470,7 +470,7 @@ Los ejemplos son sintéticos. El inventario acepta rutas relativas a `--root` y 
 
 ### Verificación, ayuda y licencia
 
-El proyecto incluye 79 tests de comportamiento y una matriz CI para Windows/Ubuntu con Python 3.10 y 3.14. La versión v.0.0.2 corrige la comparación temporal del inventario en Windows y conserva los controles de identidad y cambios reales de los archivos. Solicitud breve, protocolo completo y skill superaron cada uno 16 casos sintéticos y 48 criterios juzgados por un modelo, incluidos controles legítimos, pruebas insuficientes y un hallazgo resuelto. No son medidas de precisión científica. Las pruebas reales en los entornos anfitriones y sus fallos constan en la guía de validación; los resultados se limitan a esas ejecuciones. La ejecución en macOS y el rendimiento experto en todos los idiomas, modalidades y disciplinas siguen sin verificarse. La [guía de validación](docs/VALIDATION.md) documenta pruebas, límites y reproducción.
+El proyecto incluye 81 tests de comportamiento y una matriz CI para Windows/Ubuntu con Python 3.10 y 3.14. La versión v.0.0.2 corrige la comparación temporal del inventario en Windows y conserva los controles de identidad y cambios reales de los archivos. Solicitud breve, protocolo completo y skill superaron cada uno 16 casos sintéticos y 48 criterios juzgados por un modelo, incluidos controles legítimos, pruebas insuficientes y un hallazgo resuelto. No son medidas de precisión científica. Las pruebas reales en los entornos anfitriones y sus fallos constan en la guía de validación; los resultados se limitan a esas ejecuciones. La ejecución en macOS y el rendimiento experto en todos los idiomas, modalidades y disciplinas siguen sin verificarse. La [guía de validación](docs/VALIDATION.md) documenta pruebas, límites y reproducción.
 
 Para problemas reproducibles, utilice el [formulario][issues] con un ejemplo mínimo sintético o compartible. [Contributing](CONTRIBUTING.md) explica desarrollo y publicaciones; [CHANGELOG.md](CHANGELOG.md), los cambios. El proyecto tiene [licencia MIT](LICENSE). Esta sección es una guía de uso completa; la documentación técnica adicional se mantiene en inglés.
 
@@ -541,7 +541,7 @@ Conserva gli originali e identifica separatamente le copie derivate. Condividi m
 
 Per passare a un’altra sessione o agente usa il [registro di continuazione](skills/academic-paper-audit/assets/continuation-template.md). Trasmetti articolo/versione, ambito, ID delle prove, posizioni esaminate, controlli conclusi, ID/stati dei rilievi, materiali mancanti e prossimi passi insieme alle fonti reali. Riesamina le prove cambiate. Conserva i rilievi corretti come storico risolto, fuori dal conteggio attivo. Un riepilogo non sostituisce una fonte non letta e non amplia i permessi.
 
-Nel codice sorgente attuale, l’esportazione JSON per la ripresa conserva il contesto di ricerca registrato, i limiti di ogni ambito e i collegamenti ai controlli completati. Se questi dati mancano nei vecchi record, `validate-checkpoint` li segnala in `warnings`; mantenete esplicite le lacune quando riprendete il lavoro. Questi aggiornamenti non sono inclusi negli archivi pubblicati della v.0.0.2.
+Nel codice sorgente attuale, l’esportazione JSON per la ripresa conserva il contesto di ricerca registrato, i limiti di ogni ambito e i collegamenti ai controlli completati. Se questi dati mancano nei vecchi record, `validate-checkpoint` li segnala in `warnings`; mantenete esplicite le lacune quando riprendete il lavoro. Questi aggiornamenti sono inclusi nella v.0.0.3; i record di ripresa coerenti della v.0.0.2 restano leggibili.
 
 ### Strumenti locali facoltativi
 
@@ -563,7 +563,7 @@ Gli esempi sono sintetici. L’inventario accetta percorsi relativi a `--root` e
 
 ### Verifica, assistenza e licenza
 
-Il progetto comprende 79 test comportamentali e una matrice CI Windows/Ubuntu con Python 3.10 e 3.14. La versione v.0.0.2 corregge il confronto temporale dell’inventario Windows, mantenendo i controlli sull’identità e sulle modifiche effettive dei file. Richiesta breve, protocollo completo e skill hanno superato ciascuno 16 casi sintetici e 48 criteri valutati da un modello, inclusi controlli senza problemi, prove insufficienti e un rilievo risolto. Non sono misure di accuratezza scientifica. Le prove effettive negli ambienti host e i relativi insuccessi sono documentati nella guida di validazione; i risultati valgono solo per tali esecuzioni. L’esecuzione macOS e le prestazioni esperte in ogni lingua, modalità e disciplina restano non verificate. La [guida di validazione](docs/VALIDATION.md) documenta prove, limiti e riproduzione.
+Il progetto comprende 81 test comportamentali e una matrice CI Windows/Ubuntu con Python 3.10 e 3.14. La versione v.0.0.2 corregge il confronto temporale dell’inventario Windows, mantenendo i controlli sull’identità e sulle modifiche effettive dei file. Richiesta breve, protocollo completo e skill hanno superato ciascuno 16 casi sintetici e 48 criteri valutati da un modello, inclusi controlli senza problemi, prove insufficienti e un rilievo risolto. Non sono misure di accuratezza scientifica. Le prove effettive negli ambienti host e i relativi insuccessi sono documentati nella guida di validazione; i risultati valgono solo per tali esecuzioni. L’esecuzione macOS e le prestazioni esperte in ogni lingua, modalità e disciplina restano non verificate. La [guida di validazione](docs/VALIDATION.md) documenta prove, limiti e riproduzione.
 
 Per problemi riproducibili usa il [modulo][issues] con un esempio minimo sintetico o condivisibile. [Contributing](CONTRIBUTING.md) descrive sviluppo e pubblicazioni, [CHANGELOG.md](CHANGELOG.md) le modifiche. Il progetto è sotto [licenza MIT](LICENSE). Questa sezione è una guida utente completa; i documenti tecnici aggiuntivi sono mantenuti in inglese.
 
@@ -634,7 +634,7 @@ Preserve os originais e identifique separadamente as cópias derivadas. Comparti
 
 Ao mudar de sessão ou agente, use o [registro de continuidade](skills/academic-paper-audit/assets/continuation-template.md). Leve artigo/versão, alcance, IDs de evidência, locais examinados, controles concluídos, IDs/estados dos achados, materiais ausentes e próximos passos junto com as fontes reais. Reexamine evidências alteradas. Preserve achados corrigidos como histórico resolvido e exclua-os das contagens ativas. Um resumo não substitui uma fonte não vista nem amplia permissões.
 
-No código-fonte atual, a exportação JSON de continuidade preserva o contexto de pesquisa registrado, as limitações de cada área e os vínculos com as verificações concluídas. Quando registros antigos não contêm esses dados, `validate-checkpoint` informa as lacunas em `warnings`; mantenha-as explícitas ao retomar. Estas atualizações não estão incluídas nos arquivos publicados da v.0.0.2.
+No código-fonte atual, a exportação JSON de continuidade preserva o contexto de pesquisa registrado, as limitações de cada área e os vínculos com as verificações concluídas. Quando registros antigos não contêm esses dados, `validate-checkpoint` informa as lacunas em `warnings`; mantenha-as explícitas ao retomar. Estas atualizações estão incluídas na v.0.0.3; registros de continuidade consistentes da v.0.0.2 continuam legíveis.
 
 ### Ferramentas locais opcionais
 
@@ -656,7 +656,7 @@ Os exemplos são sintéticos. O inventário aceita caminhos relativos a `--root`
 
 ### Validação, ajuda e licença
 
-O projeto inclui 79 testes de comportamento e uma matriz CI Windows/Ubuntu com Python 3.10 e 3.14. A versão v.0.0.2 corrige a comparação temporal do inventário Windows e mantém as verificações de identidade e alterações reais dos arquivos. Solicitação curta, protocolo completo e skill passaram, cada um, por 16 casos sintéticos e 48 critérios julgados por um modelo, incluindo controles legítimos, evidência insuficiente e um achado resolvido. Esses resultados não medem precisão científica. Os testes reais nos ambientes hospedeiros e suas falhas estão registrados no guia de validação; os resultados se limitam àquelas execuções. A execução em macOS e o desempenho especializado em todos os idiomas, modalidades e disciplinas continuam sem comprovação. O [guia de validação](docs/VALIDATION.md) apresenta evidências, limites e reprodução.
+O projeto inclui 81 testes de comportamento e uma matriz CI Windows/Ubuntu com Python 3.10 e 3.14. A versão v.0.0.2 corrige a comparação temporal do inventário Windows e mantém as verificações de identidade e alterações reais dos arquivos. Solicitação curta, protocolo completo e skill passaram, cada um, por 16 casos sintéticos e 48 critérios julgados por um modelo, incluindo controles legítimos, evidência insuficiente e um achado resolvido. Esses resultados não medem precisão científica. Os testes reais nos ambientes hospedeiros e suas falhas estão registrados no guia de validação; os resultados se limitam àquelas execuções. A execução em macOS e o desempenho especializado em todos os idiomas, modalidades e disciplinas continuam sem comprovação. O [guia de validação](docs/VALIDATION.md) apresenta evidências, limites e reprodução.
 
 Relate problemas reproduzíveis no [formulário][issues] com um exemplo mínimo sintético ou compartilhável. [Contributing](CONTRIBUTING.md) explica desenvolvimento e publicações; [CHANGELOG.md](CHANGELOG.md), as mudanças. O projeto usa a [licença MIT](LICENSE). Esta seção é um guia completo de uso; os documentos técnicos adicionais são mantidos em inglês.
 
@@ -727,7 +727,7 @@ Markdown أو النص العادي هو الخيار الافتراضي. يوض
 
 عند الانتقال إلى جلسة أو وكيل آخر، استخدم [سجل الاستئناف](skills/academic-paper-audit/assets/continuation-template.md). انقل الورقة ونسختها والنطاق ومعرّفات الأدلة والمواضع المفحوصة والفحوص المنجزة ومعرّفات الملاحظات وحالاتها والمواد المفقودة والخطوات التالية، مع المصادر الفعلية. أعد فحص الأدلة المتغيرة. احتفظ بالملاحظات المصححة كتاريخ محلول ولا تحتسبها ضمن النشطة. الملخص لا يعوض مصدراً غير مقروء ولا يمنح إذناً جديداً.
 
-في الشيفرة المصدرية الحالية، يحفظ تصدير سجل المتابعة بصيغة JSON سياق البحث المسجّل وقيود كل مجال وروابط الفحوص المكتملة. إذا افتقرت السجلات القديمة إلى هذه المعلومات، يوضحها `validate-checkpoint` في `warnings`؛ أبقِ هذه الفجوات صريحة عند الاستئناف. هذه التحديثات غير مشمولة في أرشيفات v.0.0.2 المنشورة.
+في الشيفرة المصدرية الحالية، يحفظ تصدير سجل المتابعة بصيغة JSON سياق البحث المسجّل وقيود كل مجال وروابط الفحوص المكتملة. إذا افتقرت السجلات القديمة إلى هذه المعلومات، يوضحها `validate-checkpoint` في `warnings`؛ أبقِ هذه الفجوات صريحة عند الاستئناف. هذه التحديثات مشمولة في v.0.0.3؛ وتظل سجلات المتابعة المتسقة من v.0.0.2 قابلة للقراءة.
 
 ### الأدوات المحلية الاختيارية
 
@@ -749,7 +749,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### التحقق والمساعدة والترخيص
 
-يتضمن المشروع 79 اختباراً سلوكياً ومصفوفة CI على Windows وUbuntu مع Python 3.10 و3.14. يصحح الإصدار v.0.0.2 مقارنة الحقول الزمنية في جرد Windows مع الحفاظ على فحوص هوية الملف والتغييرات الفعلية. اجتاز كل من الطلب المختصر والموجّه الكامل والـskill ست عشرة حالة اصطناعية و48 معياراً بتقييم نموذج، تشمل حالات سليمة وأدلة غير كافية وملاحظة حُلّت بتصحيح. هذه نتائج قبول وليست قياسات للدقة العلمية. يوثّق دليل التحقق اختبارات البيئات الفعلية وإخفاقاتها؛ وتنطبق النتائج على تلك التشغيلات فقط. لم يُثبت تشغيل macOS أو الأداء المتخصص في جميع اللغات والوسائط والتخصصات. يوثّق [دليل التحقق](docs/VALIDATION.md) الأدلة والقيود وإعادة التنفيذ.
+يتضمن المشروع 81 اختباراً سلوكياً ومصفوفة CI على Windows وUbuntu مع Python 3.10 و3.14. يصحح الإصدار v.0.0.2 مقارنة الحقول الزمنية في جرد Windows مع الحفاظ على فحوص هوية الملف والتغييرات الفعلية. اجتاز كل من الطلب المختصر والموجّه الكامل والـskill ست عشرة حالة اصطناعية و48 معياراً بتقييم نموذج، تشمل حالات سليمة وأدلة غير كافية وملاحظة حُلّت بتصحيح. هذه نتائج قبول وليست قياسات للدقة العلمية. يوثّق دليل التحقق اختبارات البيئات الفعلية وإخفاقاتها؛ وتنطبق النتائج على تلك التشغيلات فقط. لم يُثبت تشغيل macOS أو الأداء المتخصص في جميع اللغات والوسائط والتخصصات. يوثّق [دليل التحقق](docs/VALIDATION.md) الأدلة والقيود وإعادة التنفيذ.
 
 للأخطاء القابلة للتكرار، استخدم [النموذج][issues] مع مثال اصطناعي صغير أو مأذون بمشاركته. يشرح [دليل المساهمة](CONTRIBUTING.md) التطوير والإصدارات، ويسجل [CHANGELOG.md](CHANGELOG.md) التغييرات. يتاح المشروع وفق [ترخيص MIT](LICENSE). هذا القسم دليل استخدام كامل؛ تُصان الوثائق التقنية الإضافية بالإنجليزية.
 
@@ -820,7 +820,7 @@ MATERIALS = [列出提供的文件或摘录、版本及本次审查范围。]
 
 切换会话或代理时，可使用[续查记录](skills/academic-paper-audit/assets/continuation-template.md)。将文章/版本、范围、证据 ID、检查位置、已完成检查、发现 ID/状态、缺失材料和下一步任务与真实来源一起传递。变化的证据需要重新检查。被纠正的问题应保留为已解决历史，不计入活跃发现。摘要不能代替尚未看过的来源，也不构成扩大任务权限的依据。
 
-当前源代码中的 JSON 续接导出会保留已记录的研究背景、各领域的限制及已完成检查的链接。旧记录缺少这些信息时，`validate-checkpoint` 会在 `warnings` 中提示；恢复审查时应明确保留这些未知项。这些更新尚未包含在已发布的 v.0.0.2 压缩包中。
+当前源代码中的 JSON 续接导出会保留已记录的研究背景、各领域的限制及已完成检查的链接。旧记录缺少这些信息时，`validate-checkpoint` 会在 `warnings` 中提示；恢复审查时应明确保留这些未知项。这些更新已包含在 v.0.0.3 中；一致的 v.0.0.2 续接记录仍可读取。
 
 ### 可选的本地辅助工具
 
@@ -842,7 +842,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 验证、反馈与许可
 
-项目包含 79 项行为测试，以及覆盖 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩阵。v.0.0.2 修正了 Windows 清单工具的时间字段比较，同时保留文件身份和实际变更检查。简短请求、完整提示词和 skill 各通过 16 个合成案例与 48 项模型评判标准，包括正常对照、证据不足和已解决发现。这些是验收结果，不是科学准确率。验证指南记录了实际宿主测试及其失败情况，结果仅适用于这些运行。macOS 运行以及跨语言、媒介和学科的专家表现仍未验证。[验证指南](docs/VALIDATION.md) 提供证据、边界及复现步骤。
+项目包含 81 项行为测试，以及覆盖 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩阵。v.0.0.2 修正了 Windows 清单工具的时间字段比较，同时保留文件身份和实际变更检查。简短请求、完整提示词和 skill 各通过 16 个合成案例与 48 项模型评判标准，包括正常对照、证据不足和已解决发现。这些是验收结果，不是科学准确率。验证指南记录了实际宿主测试及其失败情况，结果仅适用于这些运行。macOS 运行以及跨语言、媒介和学科的专家表现仍未验证。[验证指南](docs/VALIDATION.md) 提供证据、边界及复现步骤。
 
 如遇可复现问题，请通过[问题表单][issues] 提供最小合成示例或获准公开的材料。[贡献指南](CONTRIBUTING.md) 介绍开发与发布，[CHANGELOG.md](CHANGELOG.md) 记录变更，项目采用 [MIT 许可](LICENSE)。本节是完整用户指南；补充技术文档以英语维护。
 
@@ -913,7 +913,7 @@ MATERIALS = [列出提供的檔案或摘錄、版本與本次審查範圍。]
 
 更換工作階段或代理時，可使用[接續紀錄](skills/academic-paper-audit/assets/continuation-template.md)。將文章/版本、範圍、證據 ID、檢查位置、已完成檢查、發現 ID/狀態、缺少資料及下一步工作，與實際來源一起移交。變動的證據需重新檢查。已修正的發現保留為已解決歷史，不計入目前有效發現。摘要不能取代尚未閱讀的來源，也不會擴大權限。
 
-目前原始碼中的 JSON 接續匯出會保留已記錄的研究脈絡、各領域的限制及已完成檢查的連結。舊紀錄缺少這些資訊時，`validate-checkpoint` 會在 `warnings` 中提示；恢復審查時應明確保留這些未知項。這些更新尚未包含在已發布的 v.0.0.2 壓縮檔中。
+目前原始碼中的 JSON 接續匯出會保留已記錄的研究脈絡、各領域的限制及已完成檢查的連結。舊紀錄缺少這些資訊時，`validate-checkpoint` 會在 `warnings` 中提示；恢復審查時應明確保留這些未知項。這些更新已包含在 v.0.0.3 中；一致的 v.0.0.2 接續紀錄仍可讀取。
 
 ### 選用本機輔助工具
 
@@ -935,7 +935,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 驗證、回饋與授權
 
-專案包含 79 項行為測試，以及涵蓋 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩陣。v.0.0.2 修正了 Windows 清單工具的時間欄位比較，同時保留檔案識別及實際變更檢查。簡短請求、完整提示詞與 skill 各通過 16 個合成案例及 48 項模型評判標準，包括正常對照、證據不足及已解決發現。這些是驗收結果，不是科學準確率。驗證指南記錄了實際宿主測試及其失敗情況，結果僅適用於這些執行。macOS 執行，以及跨語言、媒介與學科的專家表現仍未驗證。[驗證指南](docs/VALIDATION.md) 提供證據、界線及重現步驟。
+專案包含 81 項行為測試，以及涵蓋 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩陣。v.0.0.2 修正了 Windows 清單工具的時間欄位比較，同時保留檔案識別及實際變更檢查。簡短請求、完整提示詞與 skill 各通過 16 個合成案例及 48 項模型評判標準，包括正常對照、證據不足及已解決發現。這些是驗收結果，不是科學準確率。驗證指南記錄了實際宿主測試及其失敗情況，結果僅適用於這些執行。macOS 執行，以及跨語言、媒介與學科的專家表現仍未驗證。[驗證指南](docs/VALIDATION.md) 提供證據、界線及重現步驟。
 
 遇到可重現問題，請透過[問題表單][issues] 提供最小合成示例或獲准公開的資料。[貢獻指南](CONTRIBUTING.md) 說明開發與發布，[CHANGELOG.md](CHANGELOG.md) 記錄變更，專案採用 [MIT 授權](LICENSE)。本節為完整使用指南；補充技術文件以英文維護。
 
@@ -1006,7 +1006,7 @@ MATERIALS = [제공한 파일이나 발췌문, 버전, 요청하는 검토 범�
 
 다른 세션이나 에이전트로 옮길 때는 [이어가기 기록](skills/academic-paper-audit/assets/continuation-template.md)을 사용하세요. 논문/버전, 범위, 근거 ID, 검토 위치, 완료 검사, 발견 ID/상태, 빠진 자료, 다음 단계를 실제 출처와 함께 전달합니다. 변경된 근거는 다시 검토합니다. 수정으로 해소된 발견은 해결된 이력으로 남기고 현재 유효한 발견 수에서 제외합니다. 요약은 보지 않은 원자료나 새로운 작업 허가를 대신하지 않습니다.
 
-현재 소스 코드의 JSON 이어가기 내보내기는 기록된 연구 맥락, 영역별 한계와 완료된 검사에 대한 연결을 보존합니다. 이전 기록에 이 정보가 없으면 `validate-checkpoint`가 `warnings`로 알립니다. 작업을 이어갈 때 이러한 누락을 명시하세요. 이 업데이트는 배포된 v.0.0.2 압축 파일에는 포함되어 있지 않습니다.
+현재 소스 코드의 JSON 이어가기 내보내기는 기록된 연구 맥락, 영역별 한계와 완료된 검사에 대한 연결을 보존합니다. 이전 기록에 이 정보가 없으면 `validate-checkpoint`가 `warnings`로 알립니다. 작업을 이어갈 때 이러한 누락을 명시하세요. 이 업데이트는 v.0.0.3에 포함되며, 일관된 v.0.0.2 이어가기 기록도 읽을 수 있습니다.
 
 ### 선택적 로컬 도구
 
@@ -1028,7 +1028,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 검증, 문의와 라이선스
 
-프로젝트에는 행동 테스트 79개와 Windows·Ubuntu 및 Python 3.10·3.14를 대상으로 하는 CI 조합이 있습니다. v.0.0.2는 Windows 목록 도구의 시간 필드 비교를 수정하면서 파일 식별과 실제 변경 감지를 유지합니다. 짧은 요청문, 전체 프롬프트, skill은 각각 합성 사례 16개와 별도 모델이 평가한 기준 48개를 통과했으며, 정상 대조, 근거 부족, 해결된 발견도 포함합니다. 이는 수용 검사 결과이지 과학적 정확도 측정이 아닙니다. 실제 호스트 검사와 실패 사례는 검증 안내에 기록되어 있으며 결과는 해당 실행에만 적용됩니다. macOS 실행과 모든 언어·매체·분야에서의 전문가 성능은 검증되지 않았습니다. [검증 안내](docs/VALIDATION.md)에 근거, 한계, 재현 절차가 있습니다.
+프로젝트에는 행동 테스트 81개와 Windows·Ubuntu 및 Python 3.10·3.14를 대상으로 하는 CI 조합이 있습니다. v.0.0.2는 Windows 목록 도구의 시간 필드 비교를 수정하면서 파일 식별과 실제 변경 감지를 유지합니다. 짧은 요청문, 전체 프롬프트, skill은 각각 합성 사례 16개와 별도 모델이 평가한 기준 48개를 통과했으며, 정상 대조, 근거 부족, 해결된 발견도 포함합니다. 이는 수용 검사 결과이지 과학적 정확도 측정이 아닙니다. 실제 호스트 검사와 실패 사례는 검증 안내에 기록되어 있으며 결과는 해당 실행에만 적용됩니다. macOS 실행과 모든 언어·매체·분야에서의 전문가 성능은 검증되지 않았습니다. [검증 안내](docs/VALIDATION.md)에 근거, 한계, 재현 절차가 있습니다.
 
 재현 가능한 문제는 [버그 양식][issues]에 작은 합성 예시나 공유 허가를 받은 자료와 함께 제출하세요. [기여 안내](CONTRIBUTING.md)는 개발·배포를, [CHANGELOG.md](CHANGELOG.md)는 변경 사항을 설명합니다. [MIT 라이선스](LICENSE)를 사용합니다. 이 절은 완전한 사용자 안내이며 추가 기술 문서는 영어로 유지됩니다.
 
@@ -1099,7 +1099,7 @@ MATERIALS = [提供ファイルや抜粋、版、今回の確認範囲を記入�
 
 別のセッションやエージェントには[継続記録](skills/academic-paper-audit/assets/continuation-template.md)を使って引き継ぎます。論文/版、範囲、証拠 ID、確認位置、完了作業、指摘 ID/状態、不足資料、次の作業を実際の出典とともに渡します。変わった証拠は再確認し、訂正で解消した指摘は解決済み履歴として残して有効件数から除きます。要約は未閲覧の出典を置き換えず、新しい権限も与えません。
 
-現在のソースコードの JSON 引き継ぎ出力は、記録済みの研究背景、各領域の制約、完了した検査への参照を保持します。旧記録にこれらの情報がない場合、`validate-checkpoint` は `warnings` で知らせます。再開時も欠落を明示してください。この更新は公開済みの v.0.0.2 アーカイブには含まれていません。
+現在のソースコードの JSON 引き継ぎ出力は、記録済みの研究背景、各領域の制約、完了した検査への参照を保持します。旧記録にこれらの情報がない場合、`validate-checkpoint` は `warnings` で知らせます。再開時も欠落を明示してください。この更新は v.0.0.3 に含まれ、整合性のある v.0.0.2 の引き継ぎ記録も読み込めます。
 
 ### 任意のローカル補助ツール
 
@@ -1121,7 +1121,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 検証、問い合わせ、ライセンス
 
-プロジェクトには 79 件の動作テストと、Windows・Ubuntu、Python 3.10・3.14 を対象とする CI 構成があります。v.0.0.2 は Windows 一覧ツールの時刻項目の比較を修正し、ファイルの同一性と実際の変更の検査は維持します。短い依頼文、完全版、skill はそれぞれ、正常例、証拠不足、解消した指摘を含む合成 16 ケースと、別モデルが評価した 48 基準に合格しました。これは受け入れ確認であり科学的正確率ではありません。実際のホスト試験と失敗例は検証ガイドに記録しており、結果はその実行に限られます。macOS 実行と、すべての言語・媒体・分野での専門家水準の性能は未検証です。[検証ガイド](docs/VALIDATION.md)に根拠、限界、再現手順があります。
+プロジェクトには 81 件の動作テストと、Windows・Ubuntu、Python 3.10・3.14 を対象とする CI 構成があります。v.0.0.2 は Windows 一覧ツールの時刻項目の比較を修正し、ファイルの同一性と実際の変更の検査は維持します。短い依頼文、完全版、skill はそれぞれ、正常例、証拠不足、解消した指摘を含む合成 16 ケースと、別モデルが評価した 48 基準に合格しました。これは受け入れ確認であり科学的正確率ではありません。実際のホスト試験と失敗例は検証ガイドに記録しており、結果はその実行に限られます。macOS 実行と、すべての言語・媒体・分野での専門家水準の性能は未検証です。[検証ガイド](docs/VALIDATION.md)に根拠、限界、再現手順があります。
 
 再現できる問題は[不具合フォーム][issues]に、小さな合成例か公開許可のある資料を添えて報告してください。[貢献ガイド](CONTRIBUTING.md)は開発と公開、[CHANGELOG.md](CHANGELOG.md)は変更履歴を説明します。[MIT ライセンス](LICENSE)で利用できます。この節だけで利用に必要な説明を読めます。補足の技術文書は英語で管理しています。
 
@@ -1129,10 +1129,10 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ---
 
-[release]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.2
-[download-prompt]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/academic-paper-auditor-prompt-0.0.2.zip
-[download-skill]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/academic-paper-auditor-skill-0.0.2.zip
-[download-plugin]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/academic-paper-auditor-plugin-0.0.2.zip
-[checksums]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.2/SHA256SUMS.txt
+[release]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.3
+[download-prompt]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/academic-paper-auditor-prompt-0.0.3.zip
+[download-skill]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/academic-paper-auditor-skill-0.0.3.zip
+[download-plugin]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/academic-paper-auditor-plugin-0.0.3.zip
+[checksums]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/SHA256SUMS.txt
 [download-source]: https://github.com/IACBI/academic-paper-forensic-auditor/archive/refs/heads/main.zip
 [issues]: https://github.com/IACBI/academic-paper-forensic-auditor/issues/new?template=bug_report.yml

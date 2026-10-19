@@ -24,4 +24,4 @@ Use plain text when structured output is unavailable. This record summarizes wor
 
 For optional JSON use `checkpoint.schema.json`. The helper's `checkpoint REPORT.json` converts a valid report without inventing new inspection or current time; `validate-checkpoint` checks structure and links only. Neither operation reruns or authenticates the scientific analysis.
 
-Consistent older v.0.0.2 JSON records can omit research context, domain reasons or check links. The validator reports these gaps as warnings; preserve the uncertainty instead of inventing prior work. Newly exported records carry the reasons and links, and copy research context when the report records it.
+Consistent older v.0.0.2 JSON records can omit research context, domain reasons or check links. The validator reports these gaps as warnings; preserve the uncertainty instead of inventing prior work. New v.0.0.3 records require domain reasons and check links, with matching schema/protocol versions. Newly exported records carry these fields and copy research context when the report records it.

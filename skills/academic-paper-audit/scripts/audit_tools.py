@@ -20,7 +20,7 @@ import stat
 import sys
 from urllib.parse import urlsplit
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 DOMAINS = (
     "text_methods", "statistics_data", "figures_images", "metadata_provenance",
     "references_notices", "ethics_registration", "cross_paper",
@@ -303,6 +303,8 @@ def validate_checkpoint(checkpoint):
     errors = schema_errors(checkpoint, SCHEMA.with_name("checkpoint.schema.json"))
     if errors:
         return errors
+    if checkpoint["schema_version"] != checkpoint["protocol_version"]:
+        errors.append("Checkpoint schema and protocol versions must match")
     artifacts = _unique_ids(checkpoint["artifacts"], "artifact", errors)
     sources = _unique_ids(checkpoint["sources"], "source", errors)
     _unique_ids(checkpoint["findings"], "finding", errors)

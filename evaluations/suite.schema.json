@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Synthetic Audit Acceptance Suite v.0.0.2",
+  "title": "Synthetic Audit Acceptance Suite v.0.0.3",
   "type": "object", "additionalProperties": false,
   "required": ["schema_version", "id", "description", "common_checks", "cases"],
   "properties": {
-    "schema_version": {"const": "0.0.2"},
+    "schema_version": {"const": "0.0.3"},
     "id": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"},
     "common_checks": {"$ref": "#/$defs/checks"},
     "cases": {

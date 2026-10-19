@@ -1,14 +1,18 @@
 # Changelog
 
-## Unreleased
+## v.0.0.3 — 2026-10-19
 
 ### Reliable continuation records
 
-Preserve recorded research context, domain limitations and completed-check links when exporting a JSON continuation record. Reject completed or partial coverage without completed evidence-linked work and reject inconsistent declared links. Keep consistent older v.0.0.2 records readable, with explicit validation warnings for missing history. Add six regression tests, bringing the software suite to 79 tests, and update the continuation example and all 12 user guides. These changes are in source only; published release archives are unchanged.
+Preserve recorded research context, domain limitations and completed-check links when exporting a JSON continuation record. Reject completed or partial coverage without completed evidence-linked work and reject inconsistent declared links. New v.0.0.3 checkpoints require domain reasons and check links with matching schema/protocol versions. Keep consistent v.0.0.2 checkpoints readable without relabeling them, with explicit warnings for missing history. Eight added regression tests bring the software suite to 81 tests. Update the continuation example and all 12 user guides.
 
 ### Observed agent behavior
 
 Run isolated real Codex CLI checks for native skill discovery, explicit and implicit use, ordinary-summary non-activation, text-only operation and the three synthetic review routes. Retain failures rather than presenting format compatibility as complete behavioral acceptance. Clarify the quick request's numerical-comparison instructions after an observed omission of a required reverse unit conversion.
+
+### Release contracts and distribution
+
+Publish v.0.0.3 prompt, skill and plugin archives with SHA-256 checksums. Refresh all three blind acceptance routes against their actual v.0.0.3 snapshots. Preserve earlier native-host observations at their tested v.0.0.2 source versions, including the original successful quick response record, rather than pointing historical evidence to a replaced baseline. New reports use the v.0.0.3 contract; retain older reports with their matching release helper. Previous tags and release assets remain unchanged.
 
 ## v.0.0.2 — 2026-10-19
 

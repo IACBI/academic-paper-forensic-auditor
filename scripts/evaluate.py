@@ -234,7 +234,7 @@ def assemble(packet, responses_directory, judgements_path, host, model, judge, o
             raise ValueError("Reparse response file")
         text = response_path.read_text(encoding="utf-8")
         responses.append({"case_id": case_id, "text": text, "sha256": digest(text.encode("utf-8"))})
-    run = {"schema_version": "0.0.2", **manifest, "recorded_at": datetime.now(timezone.utc).isoformat(),
+    run = {"schema_version": "0.0.3", **manifest, "recorded_at": datetime.now(timezone.utc).isoformat(),
            "host": host, "model": model, "judge": judge, "responses": responses,
            "judgements": AUDIT.load_json(judgements_path)}
     errors = validate_run(run)

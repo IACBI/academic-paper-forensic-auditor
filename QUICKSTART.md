@@ -1,6 +1,6 @@
 # Use with your preferred AI agent
 
-**Version:** v.0.0.2
+**Version:** v.0.0.3
 
 No plugin, provider account integration or Python setup is required for a scoped text review. Give the agent readable material and the instructions below. For the full workflow, paste or attach `master_prompt.md`. If it supports the open Agent Skills format, it can instead load the `academic-paper-audit` folder. Use only one delivery format per review.
 

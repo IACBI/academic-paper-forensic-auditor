@@ -3,7 +3,7 @@ name: academic-paper-audit
 description: Screen research and scholarly works across disciplines for evidence, argument, method and research-integrity concerns. Use for requested paper integrity audits, proof/claim consistency, qualitative or source-based analysis, computational results, figure reuse, statistics or cross-paper comparisons. Adapt to the actual methods and available capabilities; ordinary summaries do not require this workflow.
 license: MIT
 metadata:
-  version: "0.0.2"
+  version: "0.0.3"
 ---
 
 # Academic Paper Audit
@@ -69,4 +69,4 @@ Use [continuation-template.md](assets/continuation-template.md) to carry a bound
 
 Optional JSON uses [checkpoint.schema.json](assets/checkpoint.schema.json). `python scripts/audit_tools.py checkpoint report.json` prints a continuation record from a valid report; `python scripts/audit_tools.py validate-checkpoint checkpoint.json` checks structure and links. Neither reruns the analysis or supplies new authorization, provenance or current-time observations. Unknown time/hashes stay explicitly unknown with limitations.
 
-Checkpoint export carries recorded research context, every domain's limitations/reason and links to its completed checks. Validation rejects assessed coverage without completed evidence-linked work. Older v.0.0.2 records remain readable when consistent; validation warnings identify missing context, reasons or per-domain links. Carry those gaps as unknown history and consult source evidence before resuming; do not fill them by assumption.
+Checkpoint export carries recorded research context, every domain's limitations/reason and links to its completed checks. Validation rejects assessed coverage without completed evidence-linked work. New v.0.0.3 records require per-domain reasons and check links; schema and protocol versions must match. Older v.0.0.2 records remain readable when consistent; validation warnings identify missing context, reasons or per-domain links. Carry those gaps as unknown history and consult source evidence before resuming; do not fill them by assumption.
