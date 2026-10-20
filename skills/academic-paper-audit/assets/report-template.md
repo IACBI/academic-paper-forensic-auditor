@@ -38,6 +38,8 @@ For each finding record: ID; category; active/resolved/withdrawn status; evidenc
 
 Distinguish a reporting gap, methodological limitation, reproducible inconsistency, specific integrity concern and externally documented issue. Reasonable scholarly disagreement is not itself an integrity finding.
 
+Every active finding's artifact/source IDs must appear in its assessed domain coverage. For resolved/withdrawn findings record `closure` with reason and artifact/source IDs while retaining the historical observation. If human review occurred, record `human_review` separately: pending / confirmed / rejected, reviewer, observed timestamp and notes. Do not infer approval from a model's confidence or automatically change evidence levels.
+
 ## Domain assessments
 
 Include applicable text/methods, statistics/data, figures/images, metadata/provenance, references/notices, ethics/registration and cross-paper assessments. State omissions explicitly. Distinguish visual suspicion from pixel-level testing; bibliographic metadata lookup from reading citation support; notice existence from its actual reason.

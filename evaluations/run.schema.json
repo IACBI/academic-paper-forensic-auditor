@@ -10,6 +10,8 @@
     "variant": {"enum": ["quick", "master", "skill"]},
     "recorded_at": {"type": "string", "format": "date-time"},
     "host": {"$ref": "#/$defs/text"},
+    "execution_mode": {"enum": ["isolated"]},
+    "case_sessions": {"type": "object", "additionalProperties": {"$ref": "#/$defs/text"}},
     "model": {"type": ["string", "null"], "minLength": 1},
     "judge": {
       "type": "object", "additionalProperties": false,

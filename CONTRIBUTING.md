@@ -28,6 +28,8 @@ Add meaningful behavior tests when arithmetic, file boundaries, schemas, validat
 
 Protocol, fixture or rubric changes can invalidate baseline snapshots. Before the project check, rerun the affected blind routes following [the evaluation procedure](docs/VALIDATION.md#prepare-a-blind-evaluation). A fresh responder receives the packet without expected answers; a separate judge inspects its actual output. Retain failures and uncertainty. Do not edit old response text, silently relax a criterion or change hashes to preserve a passing score. Scorer unit fixtures test the software and must not be reported as real scientific observations.
 
+For unreleased work without fresh model access or expert review, retain original evaluated bytes in the release snapshot and validate old baselines explicitly as historical. State that current behavioral acceptance is pending; never substitute software tests for a new model evaluation. New robustness runs should use `--isolated` packets and distinct observed case-session IDs. The optional PDF tests require `requirements-pdf.txt`; CI runs them. README workflow markers allow command-coverage checks across 12 languages, not automatic translation certification.
+
 ## Prepare reviewable commits and releases
 
 Use focused commits with clear purposes and inspect the staged diff before committing. Explain what changed, why it matters, what was checked and any remaining limits. Do not include real manuscripts, participant records, credentials or private findings. A minimal synthetic reproduction is preferable to a large unreviewable attachment. Do not create remotes, push or publish without owner authorization.

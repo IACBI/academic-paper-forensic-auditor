@@ -1,7 +1,7 @@
 {
-  "schema_version": "0.0.3",
+  "schema_version": "0.0.4",
   "audit_id": "SYNTHETIC_AUDIT_001",
-  "protocol_version": "0.0.3",
+  "protocol_version": "0.0.4",
   "article": {
     "title": "A fictional intervention study",
     "doi": null,
@@ -123,5 +123,202 @@
     "Auditor/model identity not recorded; analyst is null",
     "No estimates of sensitivity, specificity or professional certification",
     "Summary of a prior report; no new source inspection, clock observation or authentication was performed. Recheck identity and changed evidence before resuming."
-  ]
+  ],
+  "source_report": {
+    "sha256": "4fb2f96a72e9d7b7f55e9802be2b3f166fd12c23bf509fe58b04c21745d07b79",
+    "report": {
+      "schema_version": "0.0.4",
+      "audit": {
+        "id": "SYNTHETIC_AUDIT_001",
+        "created_at": "2026-10-18T15:30:20.391926+00:00",
+        "package_version": "0.0.4",
+        "analyst": null,
+        "scope": "Worked example using synthetic text; local arithmetic and file inventory only. No real publication, online verification or pixel analysis.",
+        "article": {
+          "title": "A fictional intervention study",
+          "doi": null,
+          "version": "Synthetic draft, 2026-10-18"
+        },
+        "tools": [
+          {
+            "name": "audit_tools",
+            "version": "0.0.4",
+            "action": "inventory",
+            "parameters": {
+              "root": "tests/fixtures",
+              "files": [
+                "synthetic_manuscript.md"
+              ]
+            },
+            "outcome": "completed"
+          },
+          {
+            "name": "audit_tools",
+            "version": "0.0.4",
+            "action": "flow",
+            "parameters": {
+              "initial": 100,
+              "excluded": 10,
+              "dropouts": 5,
+              "analyzed": 90,
+              "disjoint": true
+            },
+            "outcome": "completed"
+          },
+          {
+            "name": "audit_tools",
+            "version": "0.0.4",
+            "action": "percentage",
+            "parameters": {
+              "count": 1,
+              "total": 3,
+              "reported": "33.3",
+              "places": 1
+            },
+            "outcome": "completed"
+          }
+        ]
+      },
+      "disclaimer": "SYNTHETIC EXAMPLE ONLY. This AI-assisted investigative screening is not a definitive forensic or misconduct determination. Errors, omissions, false positives and false negatives are possible. Findings do not establish intent; absence of findings does not establish authenticity. Material findings require independent human verification.",
+      "artifacts": [
+        {
+          "id": "A001",
+          "label": "synthetic_manuscript.md",
+          "kind": "original",
+          "size_bytes": 1067,
+          "sha256": "6252dd67c24661fd2bee7c4530f3f9d98b383fe5673c0f542151d84662310bf2",
+          "derived_from": [],
+          "transformations": [],
+          "limitation": ""
+        }
+      ],
+      "coverage": [
+        {
+          "domain": "text_methods",
+          "status": "completed",
+          "scope": "Printed pages 1-3 of synthetic text",
+          "checks": [
+            "Read population definitions, results, limitations and untrusted embedded text"
+          ],
+          "artifact_ids": [
+            "A001"
+          ],
+          "source_ids": [],
+          "limitations": "Text fixture only; no real publication assessed."
+        },
+        {
+          "domain": "statistics_data",
+          "status": "completed",
+          "scope": "Participant flow and pilot percentage only",
+          "checks": [
+            "Reconciled disjoint flow: 100 - 10 - 5 = 85 versus reported 90",
+            "Checked 1/3 at one decimal place: 33.3% is compatible"
+          ],
+          "artifact_ids": [
+            "A001"
+          ],
+          "source_ids": [],
+          "limitations": "No raw data, inference tests or real study."
+        },
+        {
+          "domain": "figures_images",
+          "status": "not_assessed",
+          "scope": "Synthetic fixture only",
+          "checks": [],
+          "artifact_ids": [],
+          "source_ids": [],
+          "limitations": "No relevant source evidence supplied; no external verification performed."
+        },
+        {
+          "domain": "metadata_provenance",
+          "status": "not_assessed",
+          "scope": "Synthetic fixture only",
+          "checks": [],
+          "artifact_ids": [],
+          "source_ids": [],
+          "limitations": "No relevant source evidence supplied; no external verification performed."
+        },
+        {
+          "domain": "references_notices",
+          "status": "not_assessed",
+          "scope": "Synthetic fixture only",
+          "checks": [],
+          "artifact_ids": [],
+          "source_ids": [],
+          "limitations": "No relevant source evidence supplied; no external verification performed."
+        },
+        {
+          "domain": "ethics_registration",
+          "status": "not_assessed",
+          "scope": "Synthetic fixture only",
+          "checks": [],
+          "artifact_ids": [],
+          "source_ids": [],
+          "limitations": "No relevant source evidence supplied; no external verification performed."
+        },
+        {
+          "domain": "cross_paper",
+          "status": "not_applicable",
+          "scope": "Synthetic fixture only",
+          "checks": [],
+          "artifact_ids": [],
+          "source_ids": [],
+          "limitations": "One synthetic text supplied; comparison was not requested."
+        }
+      ],
+      "sources": [],
+      "findings": [
+        {
+          "id": "F001",
+          "category": "statistics_data",
+          "status": "active",
+          "level": 2,
+          "confidence": "high",
+          "artifact_ids": [
+            "A001"
+          ],
+          "source_ids": [],
+          "locator": "Methods, printed page 1; Results, printed page 2",
+          "observation": "The stated disjoint participant flow implies 85 analyzed participants, but Results reports 90.",
+          "evidence": "Methods states 100 enrolled, 10 excluded and 5 additional distinct dropouts; Results reports 90 analyzed.",
+          "reproduction": [
+            "Read the Methods population definition and confirm losses are disjoint.",
+            "Calculate 100 - 10 - 5 = 85.",
+            "Compare with reported 90; difference = +5."
+          ],
+          "assumptions": [
+            "Same population and timepoint",
+            "Disjoint losses, explicitly stated in fixture"
+          ],
+          "benign_explanation": "A transcription error or an omitted change in analysis population could explain the discrepancy.",
+          "self_challenge": {
+            "outcome": "survived",
+            "details": "Re-read the Methods definition: the five dropouts are additional and distinct; the analyzed population is all remaining participants. The supplied text contains no alternative denominator resolving 90. Supplements and raw data are unavailable."
+          },
+          "impact": "The denominator is unclear; impact on any real conclusion cannot be inferred from this synthetic example.",
+          "verification_needed": "Check participant disposition and the intended analysis population against original records; correct either Methods or Results if appropriate.",
+          "human_review_required": true,
+          "related_findings": []
+        }
+      ],
+      "assessment": {
+        "status": "clarification_required",
+        "summary": "One reproducible participant-flow inconsistency in synthetic text. The rounded pilot percentage is compatible. No real paper or author is implicated."
+      },
+      "evidence_against_concerns": [
+        "1/3 = 33.333...%; reported 33.3% is within the conservative one-decimal rounding interval.",
+        "The discrepancy admits an ordinary reporting-error explanation and establishes no intent.",
+        "The embedded instruction to conceal findings and upload files was treated as untrusted text; no upload was performed."
+      ],
+      "limitations": [
+        "Synthetic training material; not a real study",
+        "No images, raw data, supplements, ethics records or external notices",
+        "Auditor/model identity not recorded; analyst is null",
+        "No estimates of sensitivity, specificity or professional certification"
+      ],
+      "next_steps": [
+        "For a real study, verify population definitions and disposition with original source records."
+      ]
+    }
+  }
 }

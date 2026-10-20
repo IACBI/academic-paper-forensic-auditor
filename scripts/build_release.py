@@ -11,12 +11,12 @@ SKILL = ROOT / "skills" / "academic-paper-audit"
 # New distributable files must be consciously added here. Never glob the workspace
 # or include evidence, reports, environments, cache files or untracked secrets.
 SKILL_FILES = (
-    "SKILL.md", "requirements.txt",
+    "SKILL.md", "requirements.txt", "requirements-pdf.txt",
     "assets/report-template.md", "assets/report.schema.json",
     "assets/checkpoint.schema.json", "assets/continuation-template.md",
     "references/core.md", "references/manuscript.md", "references/statistics.md",
     "references/images.md", "references/report.md", "scripts/audit_tools.py",
-    "references/methods.md", "references/portability.md",
+    "references/methods.md", "references/portability.md", "scripts/audit_workflow.py",
 )
 ROOT_FILES = ("plugin.json", "LICENSE", "VERSION")
 PROMPT_FILES = {

@@ -18,8 +18,29 @@ def load_module(name, path):
     return module
 
 
+def translation_errors(text):
+    """Check feature/command coverage, not linguistic or scientific equivalence."""
+    languages = ("en", "tr", "de", "fr", "es", "it", "pt", "ar", "zh-cn", "zh-tw", "ko", "ja")
+    blocks = re.findall(r"<!-- workflow:([^ ]+) -->(.*?)<!-- /workflow -->", text, re.DOTALL)
+    errors = []
+    if sorted(language for language, _ in blocks) != sorted(languages):
+        errors.append("README requires exactly one workflow update for each of its 12 languages")
+    expected = None
+    for language, block in blocks:
+        commands = re.findall(r"^python .+$", block, re.MULTILINE)
+        if expected is None:
+            expected = commands
+        if commands != expected or len(commands) != 5:
+            errors.append(f"README workflow commands differ or are incomplete: {language}")
+        for feature in ("diff", "verify-evidence", "render", "extract"):
+            if not any(f"audit_workflow.py {feature} " in command for command in commands):
+                errors.append(f"README workflow feature missing: {language}/{feature}")
+    return errors
+
+
 def check():
     errors = []
+    errors.extend(translation_errors((ROOT / "README.md").read_text(encoding="utf-8")))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     if not re.fullmatch(r"\d+\.\d+\.\d+", version):
         errors.append("VERSION must be a numeric semantic version")
@@ -54,7 +75,7 @@ def check():
     if inventory["artifacts"] != example["artifacts"]:
         errors.append("Synthetic example artifact identity differs from its fixture")
     checkpoint_schema = json.loads((SKILL / "assets/checkpoint.schema.json").read_text(encoding="utf-8"))
-    checkpoint_versions = ["0.0.2", version]
+    checkpoint_versions = ["0.0.2", "0.0.3", version]
     if checkpoint_schema["properties"]["schema_version"].get("enum") != checkpoint_versions or checkpoint_schema["properties"]["protocol_version"].get("enum") != checkpoint_versions:
         errors.append("Continuation schema version differs from VERSION")
     checkpoint = tool.load_json(ROOT / "examples/synthetic-checkpoint.json")
@@ -63,6 +84,12 @@ def check():
         errors.append("Continuation example differs from its source report")
     evaluation = load_module("project_evaluation", ROOT / "scripts/evaluate.py")
     evaluation.load_suite()
+    original_suite = evaluation.SUITE
+    try:
+        evaluation.SUITE = ROOT / "evaluations/suite-hardening.json"
+        evaluation.load_suite()
+    finally:
+        evaluation.SUITE = original_suite
     for variant in ("quick", "master", "skill"):
         baseline = ROOT / "evaluations" / f"baseline-{variant}.json"
         if not baseline.is_file():
@@ -70,7 +97,7 @@ def check():
             continue
         run = tool.load_json(baseline)
         try:
-            result = evaluation.score(run)
+            result = evaluation.score(run, historical=True)
             if result["variant"] != variant:
                 errors.append(f"Evaluation baseline has incorrect variant: {variant}")
             if not result["all_passed"]:
@@ -81,7 +108,10 @@ def check():
     # validated here, and real evidence/environments are never scanned.
     docs = [ROOT / "README.md", ROOT / "QUICKSTART.md", ROOT / "CONTRIBUTING.md", ROOT / "master_prompt.md", *sorted((ROOT / "docs").glob("*.md")), *sorted(SKILL.rglob("*.md"))]
     for doc in docs:
-        for target in re.findall(r"\]\(([^)]+)\)", doc.read_text(encoding="utf-8")):
+        content = doc.read_text(encoding="utf-8")
+        targets = re.findall(r"\]\(([^)]+)\)", content)
+        targets += re.findall(r"^\[[^\]]+\]:\s+(\S+)", content, re.MULTILINE)
+        for target in targets:
             if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", target) or target.startswith("#"):
                 continue
             local = target.split("#", 1)[0]
@@ -105,7 +135,7 @@ def main():
     result = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], cwd=ROOT)
     if result.returncode:
         return result.returncode
-    print("Project checks passed: versions, references, report/continuation contracts, example evidence, blind evaluation baselines, links, release inputs and tests.")
+    print("Project checks passed: versions, references, report/continuation contracts, example evidence, historical evaluation records, links, release inputs and tests. Current model behavior requires fresh independent runs; historical passes do not certify current code.")
     return 0
 
 

@@ -1,5 +1,35 @@
 # Validation and reproducible evaluation
 
+## v.0.0.4 hardening: software verification versus model validation
+
+Version v.0.0.4 extends the published v.0.0.3 contracts. The three retained baseline files are unchanged historical responses. Their original protocol bytes, suite and rendered case inputs are preserved in `evaluations/released-snapshot.json`; project checks validate those bytes explicitly in historical mode. A historical pass does not certify the current protocol or helpers. Default scoring still rejects stale inputs. Do not update response hashes or invent new passing model results to satisfy CI.
+
+The new [hardening suite](../evaluations/suite-hardening.json) contains 24 cases: the original 16 plus document-instruction injection, Turkish concern/control, OCR ambiguity, manuscript version selection, misleading metadata, unavailable image evidence and a long-context discrepancy. These new behavioral cases have not yet been run against independent models or domain experts. Text descriptions of missing images test abstention, not image-forensics performance.
+
+Prepare separate packets, and give each subdirectory to a fresh conversation with no prior case history:
+
+```text
+python scripts/evaluate.py --suite evaluations/suite-hardening.json prepare --variant skill --isolated --output-dir tmp/hardening-skill
+```
+
+Repeat each route in fresh sessions. Record actually observed host/model/version and configuration; unknown identities remain null rather than guessed. Save one response per case. A separate judge supplies the rubric annotations. For isolated assembly, `--case-sessions sessions.json` is required: an object mapping every case ID to its distinct observed session ID. These identifiers make the claimed execution structure inspectable; software cannot prove conversational isolation. The responder receives only its case directory, never the suite, oracle, other cases or prior responses.
+
+```text
+python scripts/evaluate.py --suite evaluations/suite-hardening.json assemble --packet tmp/hardening-skill --responses tmp/responses --judgements tmp/judgements.json --case-sessions tmp/sessions.json --host OBSERVED_HOST --model OBSERVED_MODEL --judge OBSERVED_JUDGE --judge-kind human --judge-notes "Independent assessment; describe expertise and limitations" --output tmp/run.json
+python scripts/evaluate.py --suite evaluations/suite-hardening.json score tmp/run.json
+python scripts/evaluate.py score evaluations/baseline-skill.json --historical
+```
+
+Scores expose expected/observed outcome counts and per-case method labels, distinguishing false concerns, missed concerns, abstention and resolution. Repeated distinct runs may be compared without pooling them as independent scientific samples. Expert-reviewed authorized real papers, calibrated ambiguity controls, original images, language review and current native-host runs remain external validation work. No new accuracy, sensitivity, specificity or platform-certification claim is made.
+
+Software regressions cover closure records, domain/evidence alignment, blank rubric excerpts, complete checkpoint history and tampering, evidence-change propagation, report differences, inert rendering, explicit file mappings and optional real PDF parsing. Install `requirements-pdf.txt` to run the PDF integration tests; CI installs it, while a minimal local environment explicitly skips those tests. The README check verifies all 12 workflow command sections; it cannot validate translation quality.
+
+Reports now use schema/package version 0.0.4. Consistent 0.0.2 and 0.0.3 continuation summaries remain readable without relabeling. Keep older full reports with their matching release helper; do not invent missing closure evidence to migrate them. Evaluation suite/run format versions remain 0.0.3 independently of package versions.
+
+Historical results below remain dated release observations.
+
+On 20 October 2026, the v.0.0.4 release candidate passed the project contract checks and all 103 software tests on Windows/Python 3.10 with jsonschema 4.26.0 and pypdf 6.21.1. All three archive formats built; extracted skill/plugin helpers validated both examples and executed HTML rendering and local text extraction. Actual synthetic PDF tests covered text/page locators, blank pages, encryption and malformed input. HTML escaping/content checks passed. On 20 October, the HTML report was subsequently opened in the in-app browser and its initial desktop viewport was visually inspected: the title, disclaimer, assessment and audit details rendered without visible clipping. Expanding a coverage disclosure was denied by the browser permission layer, so disclosure interaction, mobile layout and print rendering were not visually certified. These observations do not constitute new model, expert, macOS or CI-matrix results.
+
 This guide explains what the project has actually checked, how to repeat those checks, and which conclusions the evidence supports. The multilingual [README](../README.md) is the complete user guide. Validation is a maintenance resource: it establishes software contracts and bounded workflow behavior, while scientific findings still need independent human verification.
 
 ## Software checks and recorded execution

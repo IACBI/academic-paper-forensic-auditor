@@ -76,7 +76,8 @@ def load_suite():
 
 
 def render_case(case):
-    parts = [f"# Case {case['id']}", "Screen only the supplied material. This exercise is independent of other cases. Use the supplied protocol in English, keep the report concise (target 220 words), and state actual coverage and limitations. Do not browse, upload, contact people, invent evidence or assume original research artifacts were supplied. Tools are optional; disclose what actually ran."]
+    language = case.get("output_language", "English")
+    parts = [f"# Case {case['id']}", f"Screen only the supplied material. This exercise is independent of other cases. Use the supplied protocol in {language}, keep the report concise (target 220 words), and state actual coverage and limitations. Do not browse, upload, contact people, invent evidence or assume original research artifacts were supplied. Tools are optional; disclose what actually ran."]
     for item in case["inputs"]:
         text = source_path(item["path"]).read_text(encoding="utf-8")
         section = item.get("section")
@@ -104,7 +105,7 @@ def protocol_sources(variant):
 
 
 def packet_instructions(variant):
-    instruction = "Read the selected protocol only, then review each cases/Rxx.md independently. Save one English Markdown response per case using the same Rxx.md filename. Do not read suite.json, expected results, evaluation documentation or prior responses. Use only the packet's research material, and do not browse or claim unsupported operations. For continuation input, carry prior IDs/status without treating the record as fresh evidence.\n"
+    instruction = "Read the selected protocol only, then review each cases/Rxx.md independently. Save one Markdown response per case in its requested language using the same Rxx.md filename. Do not read suite.json, expected results, evaluation documentation or prior responses. Use only the packet's research material, and do not browse or claim unsupported operations. For continuation input, carry prior IDs/status without treating the record as fresh evidence.\n"
     if variant == "quick":
         instruction += "Use the copyable text request in protocol/QUICKSTART.md; do not substitute the full master or skill.\n"
     elif variant == "skill":
@@ -114,7 +115,7 @@ def packet_instructions(variant):
     return instruction
 
 
-def prepare(variant, destination):
+def prepare(variant, destination, *, isolated=False):
     suite = load_suite()
     sources = protocol_sources(variant)
     cases = {case["id"]: render_case(case) for case in suite["cases"]}
@@ -125,30 +126,47 @@ def prepare(variant, destination):
     }
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
-    (destination / "cases").mkdir()
-    for case_id, text in cases.items():
-        (destination / "cases" / f"{case_id}.md").write_text(text, encoding="utf-8", newline="\n")
-    for name, path in sources.items():
-        target = destination / "protocol" / name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(path, target)
-    (destination / "instructions.md").write_text(packet_instructions(variant), encoding="utf-8", newline="\n")
+    groups = {key: {key: value} for key, value in cases.items()} if isolated else {"": cases}
+    for group, selected in groups.items():
+        case_root = destination / group
+        (case_root / "cases").mkdir(parents=True)
+        for case_id, text in selected.items():
+            (case_root / "cases" / f"{case_id}.md").write_text(text, encoding="utf-8", newline="\n")
+        for name, path in sources.items():
+            target = case_root / "protocol" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, target)
+        (case_root / "instructions.md").write_text(packet_instructions(variant), encoding="utf-8", newline="\n")
+    if isolated:
+        manifest["execution_mode"] = "isolated"
     (destination / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
     return manifest
 
 
-def validate_run(run):
+def validate_run(run, *, historical=False):
     errors = AUDIT.schema_errors(run, ROOT / "evaluations/run.schema.json")
     if errors:
         return errors
     suite = load_suite()
-    if run["suite_id"] != suite["id"] or run["suite_sha256"] != digest(SUITE.read_bytes()):
+    suite_bytes = SUITE.read_bytes()
+    snapshot = None
+    if historical:
+        snapshot = AUDIT.load_json(ROOT / "evaluations/released-snapshot.json")
+        suite_bytes = snapshot["suite"].encode("utf-8")
+        suite = json.loads(snapshot["suite"])
+    if run["suite_id"] != suite["id"] or run["suite_sha256"] != digest(suite_bytes):
         errors.append("Run does not match the current evaluation suite")
     sources = protocol_sources(run["variant"])
     expected_protocol = {name: digest(path.read_bytes()) for name, path in sources.items()}
+    if snapshot is not None:
+        # Use the exact original member list; never relabel historical hashes.
+        baseline = AUDIT.load_json(ROOT / f"evaluations/baseline-{run['variant']}.json")
+        expected_protocol = {name: digest(snapshot["protocol_files"][name].encode("utf-8")) for name in baseline["protocol_hashes"]}
     if run["protocol_hashes"] != expected_protocol:
         errors.append("Protocol snapshot is stale or incomplete")
     expected_inputs = {case["id"]: digest(render_case(case).encode("utf-8")) for case in suite["cases"]}
+    if snapshot is not None:
+        expected_inputs = {name: digest(value.encode("utf-8")) for name, value in snapshot["cases"].items()}
     if run["input_hashes"] != expected_inputs:
         errors.append("Case evidence snapshot is stale or incomplete")
     responses = {item["case_id"]: item for item in run["responses"]}
@@ -158,6 +176,10 @@ def validate_run(run):
         errors.append("Responses must include every case exactly once")
     if set(judgements) != case_ids or len(judgements) != len(run["judgements"]):
         errors.append("Judgements must include every case exactly once")
+    if run.get("execution_mode") == "isolated":
+        sessions = run.get("case_sessions", {})
+        if set(sessions) != case_ids or len(set(sessions.values())) != len(case_ids):
+            errors.append("Isolated runs require one distinct observed session ID for every case")
     for case in suite["cases"]:
         response = responses.get(case["id"])
         judgement = judgements.get(case["id"])
@@ -172,35 +194,42 @@ def validate_run(run):
         for item in judgement["checks"]:
             if item["quote"] is not None and item["quote"] not in response["text"]:
                 errors.append(f"{case['id']}/{item['id']}: quote is absent from response")
-            if item["status"] == "pass" and item["quote"] is None:
+            if item["status"] == "pass" and (item["quote"] is None or not item["quote"].strip()):
                 errors.append(f"{case['id']}/{item['id']}: a passing check needs an actual response excerpt")
     return errors
 
 
-def score(run):
-    errors = validate_run(run)
+def score(run, *, historical=False):
+    errors = validate_run(run, historical=historical)
     if errors:
         raise ValueError("Invalid evaluation run: " + "; ".join(errors))
-    suite = load_suite()
+    suite = (json.loads(AUDIT.load_json(ROOT / "evaluations/released-snapshot.json")["suite"])
+             if historical else load_suite())
     judgements = {item["case_id"]: item for item in run["judgements"]}
     counts = Counter()
+    confusion = {}
     cases = []
     for case in suite["cases"]:
         judgement = judgements[case["id"]]
         counts.update(item["status"] for item in judgement["checks"])
         matched = judgement["observed_outcome"] == case["expected_outcome"]
+        row = confusion.setdefault(case["expected_outcome"], {})
+        observed = judgement["observed_outcome"]
+        row[observed] = row.get(observed, 0) + 1
         passed = matched and all(item["status"] == "pass" for item in judgement["checks"])
-        cases.append({"id": case["id"], "expected": case["expected_outcome"], "observed": judgement["observed_outcome"], "passed": passed})
+        cases.append({"id": case["id"], "method": case["method"], "expected": case["expected_outcome"], "observed": judgement["observed_outcome"], "passed": passed})
     return {
         "suite_id": suite["id"], "variant": run["variant"], "host": run["host"], "model": run["model"],
         "cases_passed": sum(case["passed"] for case in cases), "cases_total": len(cases),
         "checks_passed": counts["pass"], "checks_failed": counts["fail"], "checks_not_assessed": counts["not_assessed"],
         "all_passed": all(case["passed"] for case in cases), "cases": cases,
+        "historical": historical,
+        "outcome_counts": confusion, "execution_mode": run.get("execution_mode", "unrecorded"),
         "limitation": "Synthetic rubric acceptance based on the named judge, not measured scientific accuracy, independent expert adjudication or cross-provider certification.",
     }
 
 
-def assemble(packet, responses_directory, judgements_path, host, model, judge, output):
+def assemble(packet, responses_directory, judgements_path, host, model, judge, output, *, case_sessions=None):
     manifest = AUDIT.load_json(Path(packet) / "manifest.json")
     if not isinstance(manifest, dict):
         raise ValueError("Packet manifest must be an object")
@@ -211,6 +240,11 @@ def assemble(packet, responses_directory, judgements_path, host, model, judge, o
         "protocol_hashes": {name: digest(path.read_bytes()) for name, path in sources.items()},
         "input_hashes": {case["id"]: digest(render_case(case).encode("utf-8")) for case in suite["cases"]},
     }
+    isolated = manifest.get("execution_mode") == "isolated"
+    if isolated:
+        expected["execution_mode"] = "isolated"
+        if case_sessions is None:
+            raise ValueError("Isolated assembly requires observed case session IDs")
     if manifest != expected:
         raise ValueError("Packet manifest is stale or altered; no responses were read")
     # The manifest alone cannot establish which bytes the responder received.
@@ -218,6 +252,10 @@ def assemble(packet, responses_directory, judgements_path, host, model, judge, o
     packet_files = {f"protocol/{name}": path.read_bytes() for name, path in sources.items()}
     packet_files.update({f"cases/{case['id']}.md": render_case(case).encode("utf-8") for case in suite["cases"]})
     packet_files["instructions.md"] = packet_instructions(manifest["variant"]).encode("utf-8")
+    if isolated:
+        common = {name: value for name, value in packet_files.items() if not name.startswith("cases/")}
+        packet_files = {f"{case_id}/{name}": value for case_id in manifest["input_hashes"] for name, value in common.items()}
+        packet_files.update({f"{case['id']}/cases/{case['id']}.md": render_case(case).encode("utf-8") for case in suite["cases"]})
     for name, expected_bytes in packet_files.items():
         path = packet_root / name
         if path.is_symlink() or not path.resolve(strict=True).is_relative_to(packet_root):
@@ -237,6 +275,8 @@ def assemble(packet, responses_directory, judgements_path, host, model, judge, o
     run = {"schema_version": "0.0.3", **manifest, "recorded_at": datetime.now(timezone.utc).isoformat(),
            "host": host, "model": model, "judge": judge, "responses": responses,
            "judgements": AUDIT.load_json(judgements_path)}
+    if case_sessions is not None:
+        run["case_sessions"] = case_sessions
     errors = validate_run(run)
     if errors:
         raise ValueError("Cannot assemble run: " + "; ".join(errors))
@@ -247,13 +287,17 @@ def assemble(packet, responses_directory, judgements_path, host, model, judge, o
 
 
 def main():
+    global SUITE
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--suite", type=Path, default=SUITE, help="Explicit suite; never mixes results between suites")
     commands = parser.add_subparsers(dest="command", required=True)
     prepare_command = commands.add_parser("prepare", help="Create a new blind packet without expected answers")
     prepare_command.add_argument("--variant", choices=("quick", "master", "skill"), required=True)
     prepare_command.add_argument("--output-dir", type=Path, required=True)
+    prepare_command.add_argument("--isolated", action="store_true", help="One independently dispatchable packet per case")
     score_command = commands.add_parser("score", help="Validate and score a judged run")
     score_command.add_argument("run", type=Path)
+    score_command.add_argument("--historical", action="store_true", help="Validate against retained release bytes, not current code")
     assemble_command = commands.add_parser("assemble", help="Bind raw responses and independent judgements to a packet")
     for name in ("packet", "responses", "judgements", "output"):
         assemble_command.add_argument(f"--{name}", type=Path, required=True)
@@ -262,24 +306,27 @@ def main():
     assemble_command.add_argument("--judge", required=True)
     assemble_command.add_argument("--judge-kind", choices=("human", "model"), required=True)
     assemble_command.add_argument("--judge-notes", required=True)
+    assemble_command.add_argument("--case-sessions", type=Path, help="JSON map of case IDs to observed independent session IDs")
     compare_command = commands.add_parser("compare", help="Compare complete runs without treating missing checks as passing")
     compare_command.add_argument("runs", type=Path, nargs="+")
     args = parser.parse_args()
+    SUITE = args.suite
     try:
         if args.command == "prepare":
-            manifest = prepare(args.variant, args.output_dir)
+            manifest = prepare(args.variant, args.output_dir, isolated=args.isolated)
             print(f"Prepared {len(manifest['input_hashes'])} blind cases for {args.variant}.")
             return 0
         if args.command == "assemble":
             result = assemble(args.packet, args.responses, args.judgements, args.host, args.model,
-                              {"identity": args.judge, "kind": args.judge_kind, "notes": args.judge_notes}, args.output)
+                              {"identity": args.judge, "kind": args.judge_kind, "notes": args.judge_notes}, args.output,
+                              case_sessions=AUDIT.load_json(args.case_sessions) if args.case_sessions else None)
         elif args.command == "score":
-            result = score(AUDIT.load_json(args.run))
+            result = score(AUDIT.load_json(args.run), historical=args.historical)
         else:
             summaries = [score(AUDIT.load_json(path)) for path in args.runs]
-            identities = [(item["variant"], item["host"], item["model"]) for item in summaries]
+            identities = [digest(path.read_bytes()) for path in args.runs]
             if len(identities) != len(set(identities)):
-                raise ValueError("Comparison contains duplicate variant/host/model runs")
+                raise ValueError("Comparison contains duplicate runs")
             result = {"runs": summaries, "all_passed": all(item["all_passed"] for item in summaries),
                       "complete_variant_comparison": {item["variant"] for item in summaries} == {"quick", "master", "skill"}}
         print(json.dumps(result, indent=2, ensure_ascii=True))

@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Academic Paper Audit Continuation v.0.0.3",
+  "title": "Academic Paper Audit Continuation v.0.0.4",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "audit_id", "protocol_version", "article", "scope", "last_observed_at", "artifacts", "sources", "coverage", "completed_checks", "findings", "pending_steps", "limitations"],
   "properties": {
-    "schema_version": {"enum": ["0.0.2", "0.0.3"]},
+    "schema_version": {"enum": ["0.0.2", "0.0.3", "0.0.4"]},
     "audit_id": {"$ref": "#/$defs/id"},
-    "protocol_version": {"enum": ["0.0.2", "0.0.3"]},
+    "protocol_version": {"enum": ["0.0.2", "0.0.3", "0.0.4"]},
     "article": {
       "type": "object", "additionalProperties": false,
       "required": ["title", "doi", "version"],
@@ -91,12 +91,13 @@
         }
       }
     },
+    "source_report": {"type": "object", "additionalProperties": false, "required": ["sha256", "report"], "properties": {"sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "report": {"type": "object"}}},
     "pending_steps": {"$ref": "#/$defs/strings"},
     "limitations": {"$ref": "#/$defs/strings"}
   },
   "allOf": [
     {
-      "if": {"properties": {"schema_version": {"const": "0.0.3"}}},
+      "if": {"properties": {"schema_version": {"enum": ["0.0.3", "0.0.4"]}}},
       "then": {"properties": {"coverage": {"items": {"required": ["limitations", "check_ids"]}}}}
     }
   ],

@@ -6,7 +6,7 @@
 [English](#lang-en) · [Türkçe](#lang-tr) · [Deutsch](#lang-de) · [Français](#lang-fr) · [Español](#lang-es) · [Italiano](#lang-it) · [Português](#lang-pt) · [العربية](#lang-ar) · [简体中文](#lang-zh-cn) · [繁體中文](#lang-zh-tw) · [한국어](#lang-ko) · [日本語](#lang-ja)
 
 <p align="center">
-  <a href="https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.3"><img alt="Version: v.0.0.3" src="https://img.shields.io/badge/version-v.0.0.3-2563eb?style=flat"></a>
+  <a href="https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.4"><img alt="Version: v.0.0.4" src="https://img.shields.io/badge/version-v.0.0.4-2563eb?style=flat"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-16a34a?style=flat"></a>
   <a href="https://github.com/IACBI/academic-paper-forensic-auditor/actions/workflows/validate.yml"><img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/IACBI/academic-paper-forensic-auditor/validate.yml?branch=main&amp;event=push&amp;label=checks&amp;style=flat"></a>
 </p>
@@ -15,6 +15,23 @@
 
 <a id="lang-en"></a>
 ## English
+
+<!-- workflow:en -->
+### v.0.0.4 — Workflow updates
+
+The current working tree adds evidence-change checks, report comparisons, Markdown/HTML output and local PDF/text extraction. Checkpoints now retain the complete source report and its canonical JSON hash. Closing a finding requires a reason and evidence; human review is recorded separately. Downloads now provide v.0.0.4. The 16-case/48-check model acceptance results below are historical v.0.0.3 results; they do not validate these new changes. New robustness/model runs and expert validation remain pending. PDF extraction requires the optional dependency below; it performs no OCR or image forensics. Empty pages need visual review. Untrusted PDFs require an isolated resource-limited environment. Mapping files explicitly associate evidence IDs with paths inside the selected root; report labels never select files. Outputs must be new files.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Purpose and scope
 
@@ -98,7 +115,7 @@ These examples use synthetic material. Inventory accepts paths relative to `--ro
 
 ### Verification, support and license
 
-The project has 81 behavior tests and a Windows/Ubuntu CI matrix for Python 3.10 and 3.14. Version v.0.0.2 corrects the Windows inventory timestamp comparison while preserving file-identity and change-detection checks. Quick, master and skill routes each passed 16 synthetic cases and 48 model-judged checks, including legitimate controls, insufficient evidence and a resolved finding. These are acceptance results, not measured scientific accuracy. Observed native-host tests and their failures are recorded in the validation guide; results apply only to those runs. macOS execution and expert performance across languages, modalities and disciplines remain unverified. The [validation guide](docs/VALIDATION.md) documents evidence, limits and reproduction steps.
+The project has 103 behavior tests and a Windows/Ubuntu CI matrix for Python 3.10 and 3.14. Version v.0.0.2 corrects the Windows inventory timestamp comparison while preserving file-identity and change-detection checks. Quick, master and skill routes each passed 16 synthetic cases and 48 model-judged checks, including legitimate controls, insufficient evidence and a resolved finding. These are acceptance results, not measured scientific accuracy. Observed native-host tests and their failures are recorded in the validation guide; results apply only to those runs. macOS execution and expert performance across languages, modalities and disciplines remain unverified. The [validation guide](docs/VALIDATION.md) documents evidence, limits and reproduction steps.
 
 For a reproducible problem, use the [bug form][issues] with a minimal synthetic or authorized shareable example. [Contributing](CONTRIBUTING.md) covers development and releases; [CHANGELOG.md](CHANGELOG.md) records changes. The project is available under the [MIT license](LICENSE). This language section is a complete user guide; the additional technical documents are maintained in English.
 
@@ -108,6 +125,23 @@ For a reproducible problem, use the [bug form][issues] with a minimal synthetic 
 
 <a id="lang-tr"></a>
 ## Türkçe
+
+<!-- workflow:tr -->
+### v.0.0.4 — İş akışı geliştirmeleri
+
+Çalışma ağacına kanıt değişikliği kontrolü, rapor karşılaştırma, Markdown/HTML çıktısı ve yerel PDF/metin çıkarma eklendi. Devam kayıtları tam kaynak raporu ve kanonik JSON hash değerini korur. Bulgu kapatmak gerekçe ve kanıt gerektirir; insan incelemesi ayrı kaydedilir. İndirmeler artık v.0.0.4 sürümünü sunar. Aşağıdaki 16 vaka/48 ölçüt model sonuçları geçmiş v.0.0.3 koşularına aittir; yeni değişiklikleri doğrulamaz. Yeni dayanıklılık/model koşuları ve uzman doğrulaması bekliyor. PDF çıkarma aşağıdaki isteğe bağlı bağımlılığı gerektirir; OCR veya görüntü incelemesi yapmaz. Boş sayfalar görsel inceleme gerektirir. Güvenilmeyen PDF dosyaları kaynak sınırları olan yalıtılmış ortamda işlenmelidir. Eşleme dosyası kanıt kimliklerini seçilen kök içindeki yollara açıkça bağlar; rapor etiketleri dosya seçmez. Çıktı dosyaları yeni olmalıdır.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Amaç ve kapsam
 
@@ -191,7 +225,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### Doğrulama, destek ve lisans
 
-Projede 81 davranış testi ve Windows/Ubuntu üzerinde Python 3.10 ve 3.14 ile çalışan bir CI matrisi bulunur. v.0.0.2, Windows envanterindeki zaman alanı karşılaştırmasını düzeltir; dosya kimliği ve gerçek değişiklik kontrollerini korur. Kısa istek, tam prompt ve skill yollarının her biri 16 sentetik vaka ve 48 model-yargıç ölçütünü geçmiştir; sorunsuz kontroller, yetersiz kanıt ve çözülen bulgu da sınanmıştır. Bunlar bilimsel doğruluk oranı değildir. Gerçek ajan testleri ve başarısızlıkları doğrulama rehberinde kayıtlıdır; sonuçlar yalnız sınanan çalıştırmalar için geçerlidir. macOS ve tüm dil, materyal ve disiplinlerde uzman performansı doğrulanmış değildir. [Doğrulama rehberi](docs/VALIDATION.md) kanıtları, sınırları ve tekrar adımlarını içerir.
+Projede 103 davranış testi ve Windows/Ubuntu üzerinde Python 3.10 ve 3.14 ile çalışan bir CI matrisi bulunur. v.0.0.2, Windows envanterindeki zaman alanı karşılaştırmasını düzeltir; dosya kimliği ve gerçek değişiklik kontrollerini korur. Kısa istek, tam prompt ve skill yollarının her biri 16 sentetik vaka ve 48 model-yargıç ölçütünü geçmiştir; sorunsuz kontroller, yetersiz kanıt ve çözülen bulgu da sınanmıştır. Bunlar bilimsel doğruluk oranı değildir. Gerçek ajan testleri ve başarısızlıkları doğrulama rehberinde kayıtlıdır; sonuçlar yalnız sınanan çalıştırmalar için geçerlidir. macOS ve tüm dil, materyal ve disiplinlerde uzman performansı doğrulanmış değildir. [Doğrulama rehberi](docs/VALIDATION.md) kanıtları, sınırları ve tekrar adımlarını içerir.
 
 Tekrarlanabilir bir sorun için [hata formuna][issues] küçük bir sentetik veya paylaşılabilir örnek ekleyin. Geliştirme ve yayın süreci [katkı rehberinde](CONTRIBUTING.md), sürüm değişiklikleri [CHANGELOG.md](CHANGELOG.md) içinde açıklanır. Proje [MIT lisanslıdır](LICENSE). Bu bölüm tam kullanıcı rehberidir; ek teknik belgeler İngilizce tutulur.
 
@@ -201,6 +235,23 @@ Tekrarlanabilir bir sorun için [hata formuna][issues] küçük bir sentetik vey
 
 <a id="lang-de"></a>
 ## Deutsch
+
+<!-- workflow:de -->
+### v.0.0.4 — Workflow-Neuerungen
+
+Der Arbeitsstand ergänzt Evidenzänderungsprüfung, Berichtsvergleich, Markdown/HTML-Ausgabe und lokale PDF/Textextraktion. Fortsetzungsdateien bewahren den vollständigen Quellbericht und seinen kanonischen JSON-Hash. Das Schließen eines Befunds verlangt Begründung und Evidenz; menschliche Prüfung wird separat erfasst. Die Downloads enthalten jetzt v.0.0.4. Die folgenden Modellergebnisse mit 16 Fällen und 48 Kriterien stammen aus v.0.0.3 und validieren diese Änderungen nicht. Neue Modelltests und Expertenvalidierung stehen aus. PDF-Extraktion benötigt die optionale Abhängigkeit unten; sie bietet keine OCR oder Bildforensik. Leere Seiten erfordern Sichtprüfung. Nicht vertrauenswürdige PDFs benötigen eine isolierte Umgebung mit Ressourcenlimits. Mapping-Dateien verbinden Evidenz-IDs ausdrücklich mit Pfaden innerhalb des gewählten Stammordners; Berichtsbezeichnungen wählen keine Dateien. Ausgabedateien müssen neu sein.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Zweck und Anwendungsbereich
 
@@ -284,7 +335,7 @@ Die Beispiele sind synthetisch. Das Inventar erwartet Pfade relativ zu `--root` 
 
 ### Prüfung, Hilfe und Lizenz
 
-Das Projekt enthält 81 Verhaltenstests und eine CI-Matrix für Windows/Ubuntu mit Python 3.10 und 3.14. Version v.0.0.2 korrigiert den Zeitstempelvergleich im Windows-Inventar und bewahrt die Prüfung von Dateiidentität und tatsächlichen Änderungen. Kurzanfrage, Hauptprotokoll und Skill bestanden jeweils 16 synthetische Fälle und 48 modellbewertete Kriterien, darunter unauffällige Kontrollen, unzureichende Evidenz und ein gelöster Befund. Das sind Abnahmeresultate, keine wissenschaftlichen Genauigkeitsmessungen. Beobachtete native Hosttests und ihre Fehlschläge sind im Validierungsleitfaden dokumentiert; die Ergebnisse gelten nur für diese Durchläufe. macOS sowie fachliche Leistung über alle Sprachen, Medien und Disziplinen sind nicht nachgewiesen. Der [Validierungsleitfaden](docs/VALIDATION.md) enthält Belege, Grenzen und Wiederholungsschritte.
+Das Projekt enthält 103 Verhaltenstests und eine CI-Matrix für Windows/Ubuntu mit Python 3.10 und 3.14. Version v.0.0.2 korrigiert den Zeitstempelvergleich im Windows-Inventar und bewahrt die Prüfung von Dateiidentität und tatsächlichen Änderungen. Kurzanfrage, Hauptprotokoll und Skill bestanden jeweils 16 synthetische Fälle und 48 modellbewertete Kriterien, darunter unauffällige Kontrollen, unzureichende Evidenz und ein gelöster Befund. Das sind Abnahmeresultate, keine wissenschaftlichen Genauigkeitsmessungen. Beobachtete native Hosttests und ihre Fehlschläge sind im Validierungsleitfaden dokumentiert; die Ergebnisse gelten nur für diese Durchläufe. macOS sowie fachliche Leistung über alle Sprachen, Medien und Disziplinen sind nicht nachgewiesen. Der [Validierungsleitfaden](docs/VALIDATION.md) enthält Belege, Grenzen und Wiederholungsschritte.
 
 Melden Sie reproduzierbare Probleme im [Fehlerformular][issues] mit einem kleinen synthetischen oder freigegebenen Beispiel. [Contributing](CONTRIBUTING.md) beschreibt Entwicklung und Releases, [CHANGELOG.md](CHANGELOG.md) die Änderungen. Es gilt die [MIT-Lizenz](LICENSE). Dieser Abschnitt ist ein vollständiger Benutzerleitfaden; ergänzende technische Dokumente werden auf Englisch gepflegt.
 
@@ -294,6 +345,23 @@ Melden Sie reproduzierbare Probleme im [Fehlerformular][issues] mit einem kleine
 
 <a id="lang-fr"></a>
 ## Français
+
+<!-- workflow:fr -->
+### v.0.0.4 — Améliorations du flux de travail
+
+La version de travail ajoute la vérification des changements de preuves, la comparaison des rapports, les sorties Markdown/HTML et l’extraction locale PDF/texte. Les reprises conservent le rapport source complet et son empreinte JSON canonique. Clore un constat exige une raison et des preuves ; la revue humaine reste distincte. Les téléchargements proposent désormais v.0.0.4. Les résultats de modèles ci-dessous (16 cas, 48 critères) sont ceux de v.0.0.3 et ne valident pas ces changements. Les nouveaux essais de modèles et la validation experte restent à réaliser. L’extraction PDF exige la dépendance facultative ci-dessous, sans OCR ni analyse d’images. Les pages vides nécessitent une inspection visuelle. Traitez les PDF non fiables dans un environnement isolé à ressources limitées. Le fichier de correspondance associe explicitement les identifiants aux chemins sous la racine choisie ; les libellés du rapport ne sélectionnent aucun fichier. Les sorties doivent être nouvelles.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Objectif et périmètre
 
@@ -377,7 +445,7 @@ Les exemples sont synthétiques. L’inventaire accepte des chemins relatifs à 
 
 ### Vérification, aide et licence
 
-Le projet comprend 81 tests de comportement et une matrice CI Windows/Ubuntu avec Python 3.10 et 3.14. La version v.0.0.2 corrige la comparaison temporelle de l’inventaire Windows tout en conservant les contrôles d’identité et de modification des fichiers. Demande courte, protocole complet et skill ont chacun passé 16 cas synthétiques et 48 critères évalués par un modèle, dont des contrôles sans anomalie, des preuves insuffisantes et une observation résolue. Ces résultats ne mesurent pas la précision scientifique. Les essais réels dans les environnements hôtes et leurs échecs sont consignés dans le guide de validation ; les résultats ne valent que pour ces exécutions. L’exécution macOS et l’expertise dans toutes les langues, modalités et disciplines restent non établies. Le [guide de validation](docs/VALIDATION.md) fournit preuves, limites et procédure de reproduction.
+Le projet comprend 103 tests de comportement et une matrice CI Windows/Ubuntu avec Python 3.10 et 3.14. La version v.0.0.2 corrige la comparaison temporelle de l’inventaire Windows tout en conservant les contrôles d’identité et de modification des fichiers. Demande courte, protocole complet et skill ont chacun passé 16 cas synthétiques et 48 critères évalués par un modèle, dont des contrôles sans anomalie, des preuves insuffisantes et une observation résolue. Ces résultats ne mesurent pas la précision scientifique. Les essais réels dans les environnements hôtes et leurs échecs sont consignés dans le guide de validation ; les résultats ne valent que pour ces exécutions. L’exécution macOS et l’expertise dans toutes les langues, modalités et disciplines restent non établies. Le [guide de validation](docs/VALIDATION.md) fournit preuves, limites et procédure de reproduction.
 
 Signalez un problème reproductible dans le [formulaire][issues] avec un petit exemple synthétique ou partageable. [Contributing](CONTRIBUTING.md) décrit développement et versions, [CHANGELOG.md](CHANGELOG.md) les changements. Le projet est sous [licence MIT](LICENSE). Cette section constitue un guide utilisateur complet ; les documents techniques complémentaires sont maintenus en anglais.
 
@@ -387,6 +455,23 @@ Signalez un problème reproductible dans le [formulaire][issues] avec un petit e
 
 <a id="lang-es"></a>
 ## Español
+
+<!-- workflow:es -->
+### v.0.0.4 — Mejoras del flujo de trabajo
+
+La versión de trabajo añade verificación de cambios en evidencias, comparación de informes, salida Markdown/HTML y extracción local de PDF/texto. Los registros de continuación conservan el informe completo y su hash JSON canónico. Cerrar un hallazgo requiere motivo y evidencia; la revisión humana se registra aparte. Las descargas ofrecen ahora v.0.0.4. Los resultados de modelos siguientes (16 casos, 48 criterios) son históricos de v.0.0.3 y no validan estos cambios. Quedan pendientes nuevas pruebas de modelos y validación experta. La extracción PDF requiere la dependencia opcional indicada; no realiza OCR ni análisis de imágenes. Las páginas vacías requieren revisión visual. Procese PDF no fiables en un entorno aislado con recursos limitados. El archivo de correspondencias vincula explícitamente los identificadores con rutas bajo la raíz elegida; las etiquetas no seleccionan archivos. Los archivos de salida deben ser nuevos.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Propósito y alcance
 
@@ -470,7 +555,7 @@ Los ejemplos son sintéticos. El inventario acepta rutas relativas a `--root` y 
 
 ### Verificación, ayuda y licencia
 
-El proyecto incluye 81 tests de comportamiento y una matriz CI para Windows/Ubuntu con Python 3.10 y 3.14. La versión v.0.0.2 corrige la comparación temporal del inventario en Windows y conserva los controles de identidad y cambios reales de los archivos. Solicitud breve, protocolo completo y skill superaron cada uno 16 casos sintéticos y 48 criterios juzgados por un modelo, incluidos controles legítimos, pruebas insuficientes y un hallazgo resuelto. No son medidas de precisión científica. Las pruebas reales en los entornos anfitriones y sus fallos constan en la guía de validación; los resultados se limitan a esas ejecuciones. La ejecución en macOS y el rendimiento experto en todos los idiomas, modalidades y disciplinas siguen sin verificarse. La [guía de validación](docs/VALIDATION.md) documenta pruebas, límites y reproducción.
+El proyecto incluye 103 tests de comportamiento y una matriz CI para Windows/Ubuntu con Python 3.10 y 3.14. La versión v.0.0.2 corrige la comparación temporal del inventario en Windows y conserva los controles de identidad y cambios reales de los archivos. Solicitud breve, protocolo completo y skill superaron cada uno 16 casos sintéticos y 48 criterios juzgados por un modelo, incluidos controles legítimos, pruebas insuficientes y un hallazgo resuelto. No son medidas de precisión científica. Las pruebas reales en los entornos anfitriones y sus fallos constan en la guía de validación; los resultados se limitan a esas ejecuciones. La ejecución en macOS y el rendimiento experto en todos los idiomas, modalidades y disciplinas siguen sin verificarse. La [guía de validación](docs/VALIDATION.md) documenta pruebas, límites y reproducción.
 
 Para problemas reproducibles, utilice el [formulario][issues] con un ejemplo mínimo sintético o compartible. [Contributing](CONTRIBUTING.md) explica desarrollo y publicaciones; [CHANGELOG.md](CHANGELOG.md), los cambios. El proyecto tiene [licencia MIT](LICENSE). Esta sección es una guía de uso completa; la documentación técnica adicional se mantiene en inglés.
 
@@ -480,6 +565,23 @@ Para problemas reproducibles, utilice el [formulario][issues] con un ejemplo mí
 
 <a id="lang-it"></a>
 ## Italiano
+
+<!-- workflow:it -->
+### v.0.0.4 — Miglioramenti del flusso di lavoro
+
+La versione di lavoro aggiunge verifica delle modifiche alle evidenze, confronto dei rapporti, output Markdown/HTML ed estrazione locale PDF/testo. I checkpoint conservano il rapporto completo e il relativo hash JSON canonico. Chiudere un rilievo richiede motivazione ed evidenze; la revisione umana è separata. I download offrono ora v.0.0.4. I risultati dei modelli riportati sotto (16 casi, 48 criteri) sono storici della v.0.0.3 e non convalidano queste modifiche. Nuovi test dei modelli e validazione esperta restano da eseguire. L’estrazione PDF richiede la dipendenza opzionale indicata; non esegue OCR né analisi delle immagini. Pagine vuote richiedono verifica visiva. Elaborare PDF non affidabili in un ambiente isolato con risorse limitate. Il file di mappatura associa esplicitamente gli ID a percorsi sotto la radice scelta; le etichette non selezionano file. Gli output devono essere nuovi.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Scopo e ambito
 
@@ -563,7 +665,7 @@ Gli esempi sono sintetici. L’inventario accetta percorsi relativi a `--root` e
 
 ### Verifica, assistenza e licenza
 
-Il progetto comprende 81 test comportamentali e una matrice CI Windows/Ubuntu con Python 3.10 e 3.14. La versione v.0.0.2 corregge il confronto temporale dell’inventario Windows, mantenendo i controlli sull’identità e sulle modifiche effettive dei file. Richiesta breve, protocollo completo e skill hanno superato ciascuno 16 casi sintetici e 48 criteri valutati da un modello, inclusi controlli senza problemi, prove insufficienti e un rilievo risolto. Non sono misure di accuratezza scientifica. Le prove effettive negli ambienti host e i relativi insuccessi sono documentati nella guida di validazione; i risultati valgono solo per tali esecuzioni. L’esecuzione macOS e le prestazioni esperte in ogni lingua, modalità e disciplina restano non verificate. La [guida di validazione](docs/VALIDATION.md) documenta prove, limiti e riproduzione.
+Il progetto comprende 103 test comportamentali e una matrice CI Windows/Ubuntu con Python 3.10 e 3.14. La versione v.0.0.2 corregge il confronto temporale dell’inventario Windows, mantenendo i controlli sull’identità e sulle modifiche effettive dei file. Richiesta breve, protocollo completo e skill hanno superato ciascuno 16 casi sintetici e 48 criteri valutati da un modello, inclusi controlli senza problemi, prove insufficienti e un rilievo risolto. Non sono misure di accuratezza scientifica. Le prove effettive negli ambienti host e i relativi insuccessi sono documentati nella guida di validazione; i risultati valgono solo per tali esecuzioni. L’esecuzione macOS e le prestazioni esperte in ogni lingua, modalità e disciplina restano non verificate. La [guida di validazione](docs/VALIDATION.md) documenta prove, limiti e riproduzione.
 
 Per problemi riproducibili usa il [modulo][issues] con un esempio minimo sintetico o condivisibile. [Contributing](CONTRIBUTING.md) descrive sviluppo e pubblicazioni, [CHANGELOG.md](CHANGELOG.md) le modifiche. Il progetto è sotto [licenza MIT](LICENSE). Questa sezione è una guida utente completa; i documenti tecnici aggiuntivi sono mantenuti in inglese.
 
@@ -573,6 +675,23 @@ Per problemi riproducibili usa il [modulo][issues] con un esempio minimo sinteti
 
 <a id="lang-pt"></a>
 ## Português
+
+<!-- workflow:pt -->
+### v.0.0.4 — Melhorias do fluxo de trabalho
+
+A versão de trabalho acrescenta verificação de alterações nas evidências, comparação de relatórios, saída Markdown/HTML e extração local PDF/texto. Os registros de continuação preservam o relatório completo e seu hash JSON canônico. Encerrar um achado exige motivo e evidência; a revisão humana é separada. Os downloads agora oferecem v.0.0.4. Os resultados de modelos abaixo (16 casos, 48 critérios) são históricos da v.0.0.3 e não validam estas alterações. Novos testes de modelos e validação especializada estão pendentes. A extração PDF exige a dependência opcional indicada; não faz OCR nem análise de imagens. Páginas vazias precisam de revisão visual. Processe PDFs não confiáveis em ambiente isolado com recursos limitados. O arquivo de mapeamento associa explicitamente IDs a caminhos sob a raiz escolhida; rótulos não selecionam arquivos. Os arquivos de saída devem ser novos.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### Objetivo e alcance
 
@@ -656,7 +775,7 @@ Os exemplos são sintéticos. O inventário aceita caminhos relativos a `--root`
 
 ### Validação, ajuda e licença
 
-O projeto inclui 81 testes de comportamento e uma matriz CI Windows/Ubuntu com Python 3.10 e 3.14. A versão v.0.0.2 corrige a comparação temporal do inventário Windows e mantém as verificações de identidade e alterações reais dos arquivos. Solicitação curta, protocolo completo e skill passaram, cada um, por 16 casos sintéticos e 48 critérios julgados por um modelo, incluindo controles legítimos, evidência insuficiente e um achado resolvido. Esses resultados não medem precisão científica. Os testes reais nos ambientes hospedeiros e suas falhas estão registrados no guia de validação; os resultados se limitam àquelas execuções. A execução em macOS e o desempenho especializado em todos os idiomas, modalidades e disciplinas continuam sem comprovação. O [guia de validação](docs/VALIDATION.md) apresenta evidências, limites e reprodução.
+O projeto inclui 103 testes de comportamento e uma matriz CI Windows/Ubuntu com Python 3.10 e 3.14. A versão v.0.0.2 corrige a comparação temporal do inventário Windows e mantém as verificações de identidade e alterações reais dos arquivos. Solicitação curta, protocolo completo e skill passaram, cada um, por 16 casos sintéticos e 48 critérios julgados por um modelo, incluindo controles legítimos, evidência insuficiente e um achado resolvido. Esses resultados não medem precisão científica. Os testes reais nos ambientes hospedeiros e suas falhas estão registrados no guia de validação; os resultados se limitam àquelas execuções. A execução em macOS e o desempenho especializado em todos os idiomas, modalidades e disciplinas continuam sem comprovação. O [guia de validação](docs/VALIDATION.md) apresenta evidências, limites e reprodução.
 
 Relate problemas reproduzíveis no [formulário][issues] com um exemplo mínimo sintético ou compartilhável. [Contributing](CONTRIBUTING.md) explica desenvolvimento e publicações; [CHANGELOG.md](CHANGELOG.md), as mudanças. O projeto usa a [licença MIT](LICENSE). Esta seção é um guia completo de uso; os documentos técnicos adicionais são mantidos em inglês.
 
@@ -666,6 +785,23 @@ Relate problemas reproduzíveis no [formulário][issues] com um exemplo mínimo 
 
 <a id="lang-ar"></a>
 ## العربية
+
+<!-- workflow:ar -->
+### v.0.0.4 — تحسينات سير العمل
+
+تضيف نسخة العمل فحص تغيّر الأدلة ومقارنة التقارير وإخراج Markdown/HTML واستخراج النص محليًا من PDF أو الملفات النصية. تحفظ سجلات الاستئناف التقرير الكامل وبصمة JSON معيارية. يتطلب إغلاق الملاحظة سببًا وأدلة، وتُسجل المراجعة البشرية منفصلة. توفر التنزيلات الآن v.0.0.4. نتائج النماذج أدناه (16 حالة و48 معيارًا) تاريخية من v.0.0.3 ولا تثبت صحة التغييرات الجديدة. اختبارات النماذج الجديدة والتحقق المتخصص لم تُنجز بعد. يتطلب استخراج PDF الاعتماد الاختياري أدناه، ولا ينفذ OCR أو تحليل الصور. تحتاج الصفحات الفارغة إلى فحص بصري. عالج PDF غير الموثوق في بيئة معزولة ذات موارد محدودة. يربط ملف التعيين معرفات الأدلة صراحة بمسارات داخل الجذر المختار، ولا تختار تسميات التقرير ملفات. يجب أن تكون ملفات الإخراج جديدة.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### الهدف ونطاق الاستخدام
 
@@ -749,7 +885,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### التحقق والمساعدة والترخيص
 
-يتضمن المشروع 81 اختباراً سلوكياً ومصفوفة CI على Windows وUbuntu مع Python 3.10 و3.14. يصحح الإصدار v.0.0.2 مقارنة الحقول الزمنية في جرد Windows مع الحفاظ على فحوص هوية الملف والتغييرات الفعلية. اجتاز كل من الطلب المختصر والموجّه الكامل والـskill ست عشرة حالة اصطناعية و48 معياراً بتقييم نموذج، تشمل حالات سليمة وأدلة غير كافية وملاحظة حُلّت بتصحيح. هذه نتائج قبول وليست قياسات للدقة العلمية. يوثّق دليل التحقق اختبارات البيئات الفعلية وإخفاقاتها؛ وتنطبق النتائج على تلك التشغيلات فقط. لم يُثبت تشغيل macOS أو الأداء المتخصص في جميع اللغات والوسائط والتخصصات. يوثّق [دليل التحقق](docs/VALIDATION.md) الأدلة والقيود وإعادة التنفيذ.
+يتضمن المشروع 103 اختباراً سلوكياً ومصفوفة CI على Windows وUbuntu مع Python 3.10 و3.14. يصحح الإصدار v.0.0.2 مقارنة الحقول الزمنية في جرد Windows مع الحفاظ على فحوص هوية الملف والتغييرات الفعلية. اجتاز كل من الطلب المختصر والموجّه الكامل والـskill ست عشرة حالة اصطناعية و48 معياراً بتقييم نموذج، تشمل حالات سليمة وأدلة غير كافية وملاحظة حُلّت بتصحيح. هذه نتائج قبول وليست قياسات للدقة العلمية. يوثّق دليل التحقق اختبارات البيئات الفعلية وإخفاقاتها؛ وتنطبق النتائج على تلك التشغيلات فقط. لم يُثبت تشغيل macOS أو الأداء المتخصص في جميع اللغات والوسائط والتخصصات. يوثّق [دليل التحقق](docs/VALIDATION.md) الأدلة والقيود وإعادة التنفيذ.
 
 للأخطاء القابلة للتكرار، استخدم [النموذج][issues] مع مثال اصطناعي صغير أو مأذون بمشاركته. يشرح [دليل المساهمة](CONTRIBUTING.md) التطوير والإصدارات، ويسجل [CHANGELOG.md](CHANGELOG.md) التغييرات. يتاح المشروع وفق [ترخيص MIT](LICENSE). هذا القسم دليل استخدام كامل؛ تُصان الوثائق التقنية الإضافية بالإنجليزية.
 
@@ -759,6 +895,23 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 <a id="lang-zh-cn"></a>
 ## 简体中文
+
+<!-- workflow:zh-cn -->
+### v.0.0.4 — 工作流程更新
+
+当前工作版本新增证据变更检查、报告比较、Markdown/HTML 输出和本地 PDF/文本提取。续审记录保存完整源报告及其规范化 JSON 哈希。关闭发现项必须提供理由和证据；人工复核单独记录。下载现提供 v.0.0.4。下方模型验收结果（16 个案例、48 项标准）来自历史 v.0.0.3 运行，不验证新改动。新模型测试及专家验证尚待完成。PDF 提取需要下列可选依赖，不提供 OCR 或图像取证。空白文本页需人工查看。不可信 PDF 应在资源受限的隔离环境中处理。映射文件明确将证据 ID 对应到所选根目录中的路径；报告标签不会自动选择文件。输出文件必须为新文件。
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### 项目用途与适用范围
 
@@ -842,7 +995,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 验证、反馈与许可
 
-项目包含 81 项行为测试，以及覆盖 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩阵。v.0.0.2 修正了 Windows 清单工具的时间字段比较，同时保留文件身份和实际变更检查。简短请求、完整提示词和 skill 各通过 16 个合成案例与 48 项模型评判标准，包括正常对照、证据不足和已解决发现。这些是验收结果，不是科学准确率。验证指南记录了实际宿主测试及其失败情况，结果仅适用于这些运行。macOS 运行以及跨语言、媒介和学科的专家表现仍未验证。[验证指南](docs/VALIDATION.md) 提供证据、边界及复现步骤。
+项目包含 103 项行为测试，以及覆盖 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩阵。v.0.0.2 修正了 Windows 清单工具的时间字段比较，同时保留文件身份和实际变更检查。简短请求、完整提示词和 skill 各通过 16 个合成案例与 48 项模型评判标准，包括正常对照、证据不足和已解决发现。这些是验收结果，不是科学准确率。验证指南记录了实际宿主测试及其失败情况，结果仅适用于这些运行。macOS 运行以及跨语言、媒介和学科的专家表现仍未验证。[验证指南](docs/VALIDATION.md) 提供证据、边界及复现步骤。
 
 如遇可复现问题，请通过[问题表单][issues] 提供最小合成示例或获准公开的材料。[贡献指南](CONTRIBUTING.md) 介绍开发与发布，[CHANGELOG.md](CHANGELOG.md) 记录变更，项目采用 [MIT 许可](LICENSE)。本节是完整用户指南；补充技术文档以英语维护。
 
@@ -852,6 +1005,23 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 <a id="lang-zh-tw"></a>
 ## 繁體中文
+
+<!-- workflow:zh-tw -->
+### v.0.0.4 — 工作流程更新
+
+目前工作版本新增證據變更檢查、報告比較、Markdown/HTML 輸出及本機 PDF/文字擷取。續審紀錄保存完整來源報告及其規範化 JSON 雜湊。關閉發現項目必須提供理由與證據；人工複核另行記錄。下載現提供 v.0.0.4。下方模型驗收結果（16 個案例、48 項標準）來自歷史 v.0.0.3 執行，不驗證新改動。新模型測試及專家驗證尚待完成。PDF 擷取需要下列選用相依套件，不提供 OCR 或影像鑑識。無文字頁面需目視檢查。不可信 PDF 應於資源受限的隔離環境中處理。對應檔明確將證據 ID 連結至所選根目錄內的路徑；報告標籤不會自動選取檔案。輸出檔案必須是新檔案。
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### 專案目的與適用範圍
 
@@ -935,7 +1105,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 驗證、回饋與授權
 
-專案包含 81 項行為測試，以及涵蓋 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩陣。v.0.0.2 修正了 Windows 清單工具的時間欄位比較，同時保留檔案識別及實際變更檢查。簡短請求、完整提示詞與 skill 各通過 16 個合成案例及 48 項模型評判標準，包括正常對照、證據不足及已解決發現。這些是驗收結果，不是科學準確率。驗證指南記錄了實際宿主測試及其失敗情況，結果僅適用於這些執行。macOS 執行，以及跨語言、媒介與學科的專家表現仍未驗證。[驗證指南](docs/VALIDATION.md) 提供證據、界線及重現步驟。
+專案包含 103 項行為測試，以及涵蓋 Windows/Ubuntu 和 Python 3.10、3.14 的 CI 矩陣。v.0.0.2 修正了 Windows 清單工具的時間欄位比較，同時保留檔案識別及實際變更檢查。簡短請求、完整提示詞與 skill 各通過 16 個合成案例及 48 項模型評判標準，包括正常對照、證據不足及已解決發現。這些是驗收結果，不是科學準確率。驗證指南記錄了實際宿主測試及其失敗情況，結果僅適用於這些執行。macOS 執行，以及跨語言、媒介與學科的專家表現仍未驗證。[驗證指南](docs/VALIDATION.md) 提供證據、界線及重現步驟。
 
 遇到可重現問題，請透過[問題表單][issues] 提供最小合成示例或獲准公開的資料。[貢獻指南](CONTRIBUTING.md) 說明開發與發布，[CHANGELOG.md](CHANGELOG.md) 記錄變更，專案採用 [MIT 授權](LICENSE)。本節為完整使用指南；補充技術文件以英文維護。
 
@@ -945,6 +1115,23 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 <a id="lang-ko"></a>
 ## 한국어
+
+<!-- workflow:ko -->
+### v.0.0.4 — 워크플로 업데이트
+
+작업 버전에 증거 변경 확인, 보고서 비교, Markdown/HTML 출력, 로컬 PDF/텍스트 추출을 추가했습니다. 이어가기 기록은 전체 원본 보고서와 정규 JSON 해시를 보존합니다. 발견 사항을 종료하려면 이유와 증거가 필요하며 사람의 검토는 별도로 기록됩니다. 다운로드는 이제 v.0.0.4를 제공합니다. 아래 모델 결과(16개 사례, 48개 기준)는 과거 v.0.0.3 실행 결과이며 새 변경을 검증하지 않습니다. 새로운 모델 시험과 전문가 검증은 아직 필요합니다. PDF 추출에는 아래 선택 의존성이 필요하며 OCR이나 이미지 분석은 수행하지 않습니다. 텍스트가 없는 페이지는 육안 검토가 필요합니다. 신뢰할 수 없는 PDF는 자원이 제한된 격리 환경에서 처리하세요. 매핑 파일은 증거 ID를 선택한 루트 아래의 경로에 명시적으로 연결하며 보고서 라벨은 파일을 선택하지 않습니다. 출력은 새 파일이어야 합니다.
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### 목적과 적용 범위
 
@@ -1028,7 +1215,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 검증, 문의와 라이선스
 
-프로젝트에는 행동 테스트 81개와 Windows·Ubuntu 및 Python 3.10·3.14를 대상으로 하는 CI 조합이 있습니다. v.0.0.2는 Windows 목록 도구의 시간 필드 비교를 수정하면서 파일 식별과 실제 변경 감지를 유지합니다. 짧은 요청문, 전체 프롬프트, skill은 각각 합성 사례 16개와 별도 모델이 평가한 기준 48개를 통과했으며, 정상 대조, 근거 부족, 해결된 발견도 포함합니다. 이는 수용 검사 결과이지 과학적 정확도 측정이 아닙니다. 실제 호스트 검사와 실패 사례는 검증 안내에 기록되어 있으며 결과는 해당 실행에만 적용됩니다. macOS 실행과 모든 언어·매체·분야에서의 전문가 성능은 검증되지 않았습니다. [검증 안내](docs/VALIDATION.md)에 근거, 한계, 재현 절차가 있습니다.
+프로젝트에는 행동 테스트 103개와 Windows·Ubuntu 및 Python 3.10·3.14를 대상으로 하는 CI 조합이 있습니다. v.0.0.2는 Windows 목록 도구의 시간 필드 비교를 수정하면서 파일 식별과 실제 변경 감지를 유지합니다. 짧은 요청문, 전체 프롬프트, skill은 각각 합성 사례 16개와 별도 모델이 평가한 기준 48개를 통과했으며, 정상 대조, 근거 부족, 해결된 발견도 포함합니다. 이는 수용 검사 결과이지 과학적 정확도 측정이 아닙니다. 실제 호스트 검사와 실패 사례는 검증 안내에 기록되어 있으며 결과는 해당 실행에만 적용됩니다. macOS 실행과 모든 언어·매체·분야에서의 전문가 성능은 검증되지 않았습니다. [검증 안내](docs/VALIDATION.md)에 근거, 한계, 재현 절차가 있습니다.
 
 재현 가능한 문제는 [버그 양식][issues]에 작은 합성 예시나 공유 허가를 받은 자료와 함께 제출하세요. [기여 안내](CONTRIBUTING.md)는 개발·배포를, [CHANGELOG.md](CHANGELOG.md)는 변경 사항을 설명합니다. [MIT 라이선스](LICENSE)를 사용합니다. 이 절은 완전한 사용자 안내이며 추가 기술 문서는 영어로 유지됩니다.
 
@@ -1038,6 +1225,23 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 <a id="lang-ja"></a>
 ## 日本語
+
+<!-- workflow:ja -->
+### v.0.0.4 — ワークフローの更新
+
+作業版に証拠変更の確認、報告書比較、Markdown/HTML 出力、ローカル PDF/テキスト抽出を追加しました。継続記録は完全な元報告書と正規 JSON ハッシュを保持します。指摘を終了するには理由と証拠が必要で、人による確認は別に記録します。ダウンロードは v.0.0.4 を提供します。以下のモデル結果（16 ケース、48 基準）は過去の v.0.0.3 の実行結果であり、新しい変更を検証するものではありません。新たなモデル試験と専門家検証は未実施です。PDF 抽出には下記の任意依存関係が必要で、OCR や画像鑑識は行いません。文字のないページは目視確認が必要です。信頼できない PDF はリソースを制限した隔離環境で処理してください。対応ファイルは証拠 ID を選択したルート内のパスに明示的に結び付け、報告書のラベルはファイルを選択しません。出力先は新しいファイルにしてください。
+
+```text
+python -m pip install -r skills/academic-paper-audit/requirements-pdf.txt
+python skills/academic-paper-audit/scripts/audit_workflow.py diff before.json after.json
+python skills/academic-paper-audit/scripts/audit_workflow.py verify-evidence report.json --root evidence --mapping mapping.json
+python skills/academic-paper-audit/scripts/audit_workflow.py render report.json --format html --output report.html
+python skills/academic-paper-audit/scripts/audit_workflow.py extract paper.pdf --root evidence --output extracted.json
+```
+
+`mapping.json`: `{"A001": "paper.pdf"}`
+
+<!-- /workflow -->
 
 ### 目的と対象範囲
 
@@ -1121,7 +1325,7 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ### 検証、問い合わせ、ライセンス
 
-プロジェクトには 81 件の動作テストと、Windows・Ubuntu、Python 3.10・3.14 を対象とする CI 構成があります。v.0.0.2 は Windows 一覧ツールの時刻項目の比較を修正し、ファイルの同一性と実際の変更の検査は維持します。短い依頼文、完全版、skill はそれぞれ、正常例、証拠不足、解消した指摘を含む合成 16 ケースと、別モデルが評価した 48 基準に合格しました。これは受け入れ確認であり科学的正確率ではありません。実際のホスト試験と失敗例は検証ガイドに記録しており、結果はその実行に限られます。macOS 実行と、すべての言語・媒体・分野での専門家水準の性能は未検証です。[検証ガイド](docs/VALIDATION.md)に根拠、限界、再現手順があります。
+プロジェクトには 103 件の動作テストと、Windows・Ubuntu、Python 3.10・3.14 を対象とする CI 構成があります。v.0.0.2 は Windows 一覧ツールの時刻項目の比較を修正し、ファイルの同一性と実際の変更の検査は維持します。短い依頼文、完全版、skill はそれぞれ、正常例、証拠不足、解消した指摘を含む合成 16 ケースと、別モデルが評価した 48 基準に合格しました。これは受け入れ確認であり科学的正確率ではありません。実際のホスト試験と失敗例は検証ガイドに記録しており、結果はその実行に限られます。macOS 実行と、すべての言語・媒体・分野での専門家水準の性能は未検証です。[検証ガイド](docs/VALIDATION.md)に根拠、限界、再現手順があります。
 
 再現できる問題は[不具合フォーム][issues]に、小さな合成例か公開許可のある資料を添えて報告してください。[貢献ガイド](CONTRIBUTING.md)は開発と公開、[CHANGELOG.md](CHANGELOG.md)は変更履歴を説明します。[MIT ライセンス](LICENSE)で利用できます。この節だけで利用に必要な説明を読めます。補足の技術文書は英語で管理しています。
 
@@ -1129,10 +1333,10 @@ python skills/academic-paper-audit/scripts/audit_tools.py validate-checkpoint ex
 
 ---
 
-[release]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.3
-[download-prompt]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/academic-paper-auditor-prompt-0.0.3.zip
-[download-skill]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/academic-paper-auditor-skill-0.0.3.zip
-[download-plugin]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/academic-paper-auditor-plugin-0.0.3.zip
-[checksums]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.3/SHA256SUMS.txt
+[release]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/tag/v.0.0.4
+[download-prompt]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.4/academic-paper-auditor-prompt-0.0.4.zip
+[download-skill]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.4/academic-paper-auditor-skill-0.0.4.zip
+[download-plugin]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.4/academic-paper-auditor-plugin-0.0.4.zip
+[checksums]: https://github.com/IACBI/academic-paper-forensic-auditor/releases/download/v.0.0.4/SHA256SUMS.txt
 [download-source]: https://github.com/IACBI/academic-paper-forensic-auditor/archive/refs/heads/main.zip
 [issues]: https://github.com/IACBI/academic-paper-forensic-auditor/issues/new?template=bug_report.yml

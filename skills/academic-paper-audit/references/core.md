@@ -4,7 +4,7 @@
 
 **Author:** 𝓐.𝓒.𝓑  
 **License:** MIT  
-**Version:** v.0.0.3
+**Version:** v.0.0.4
 
 ---
 
@@ -80,6 +80,8 @@ If the full material cannot be covered, deliver a clearly marked partial report 
 ## Findings and classification
 
 Use stable IDs for findings, artifacts and external sources. Every material finding needs a precise locator (including printed/PDF page distinction where relevant), observable evidence, reproduction steps, assumptions, confidence in the observation, the strongest benign explanation, a challenge result, impact and next verification step. Preserve supporting excerpts and calculation inputs without exposing unnecessary personal data.
+
+Link each active finding's evidence to its assessed domain coverage. Closing or withdrawing a finding requires an explicit reason and evidence IDs; preserve the historical observation. Human review is a separate recorded decision (pending, confirmed or rejected), with reviewer identity, observed time and notes for completed reviews. Do not invent human approval or treat it as an automatic evidence-level change.
 
 Group dependent observations under the same underlying issue. Several detectors applied to the same compressed image are not automatically independent signals. Retain resolved or withdrawn observations in the audit record, separate from active finding counts. Order active findings by effect on conclusions and evidence strength; do not calculate a fraud probability or sum levels into a misconduct score.
 

@@ -19,7 +19,7 @@ SPEC.loader.exec_module(audit)
 class CheckpointTests(unittest.TestCase):
     def setUp(self):
         self.report = audit.load_json(ROOT / "examples/synthetic-report.json")
-        self.checkpoint = audit.checkpoint_from_report(self.report)
+        self.checkpoint = audit.checkpoint_from_report(self.report, include_source=False)
 
     def test_conversion_preserves_identity_scope_time_status_and_original(self):
         original = copy.deepcopy(self.report)
@@ -35,7 +35,7 @@ class CheckpointTests(unittest.TestCase):
         self.assertEqual(audit.validate_checkpoint(result), [])
 
     def test_saved_example_is_the_conversion_of_its_report(self):
-        self.assertEqual(self.checkpoint, audit.load_json(ROOT / "examples/synthetic-checkpoint.json"))
+        self.assertEqual(audit.checkpoint_from_report(self.report), audit.load_json(ROOT / "examples/synthetic-checkpoint.json"))
 
     def test_conversion_preserves_method_context_and_domain_limits_without_aliasing(self):
         context = {
@@ -101,10 +101,12 @@ class CheckpointTests(unittest.TestCase):
         self.assertTrue(any("versions must match" in error for error in audit.validate_checkpoint(self.checkpoint)))
 
     def test_reading_previous_version_does_not_relabel_or_mutate_history(self):
-        self.checkpoint.update(schema_version="0.0.2", protocol_version="0.0.2")
-        original = copy.deepcopy(self.checkpoint)
-        self.assertEqual(audit.validate_checkpoint(self.checkpoint), [])
-        self.assertEqual(self.checkpoint, original)
+        for version in ("0.0.2", "0.0.3"):
+            with self.subTest(version=version):
+                self.checkpoint.update(schema_version=version, protocol_version=version)
+                original = copy.deepcopy(self.checkpoint)
+                self.assertEqual(audit.validate_checkpoint(self.checkpoint), [])
+                self.assertEqual(self.checkpoint, original)
         self.checkpoint.update(schema_version="0.0.1", protocol_version="0.0.1")
         self.assertTrue(audit.validate_checkpoint(self.checkpoint))
 
@@ -174,6 +176,7 @@ class CheckpointTests(unittest.TestCase):
             self.assertEqual(validated.returncode, 0, validated.stderr)
             self.assertTrue(json.loads(validated.stdout)["valid"])
             legacy = json.loads(result.stdout)
+            legacy.pop("source_report")  # Historical records predate the full-source extension.
             legacy.update(schema_version="0.0.2", protocol_version="0.0.2")
             for item in legacy["coverage"]:
                 item.pop("limitations")

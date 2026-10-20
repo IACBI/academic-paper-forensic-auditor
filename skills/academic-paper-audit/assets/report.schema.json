@@ -1,18 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Academic Paper Audit Report v.0.0.3",
+  "title": "Academic Paper Audit Report v.0.0.4",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "audit", "disclaimer", "artifacts", "coverage", "sources", "findings", "assessment", "evidence_against_concerns", "limitations", "next_steps"],
   "properties": {
-    "schema_version": {"const": "0.0.3"},
+    "schema_version": {"const": "0.0.4"},
     "audit": {
       "type": "object", "additionalProperties": false,
       "required": ["id", "created_at", "package_version", "analyst", "scope", "article", "tools"],
       "properties": {
         "id": {"$ref": "#/$defs/id"},
         "created_at": {"type": "string", "format": "date-time"},
-        "package_version": {"const": "0.0.3"},
+        "package_version": {"const": "0.0.4"},
         "analyst": {"type": ["string", "null"], "minLength": 1},
         "scope": {"$ref": "#/$defs/text"},
         "research_context": {
@@ -150,6 +150,8 @@
         "impact": {"$ref": "#/$defs/text"},
         "verification_needed": {"$ref": "#/$defs/text"},
         "human_review_required": {"type": "boolean"},
+        "closure": {"type": "object", "additionalProperties": false, "required": ["reason", "artifact_ids", "source_ids"], "properties": {"reason": {"$ref": "#/$defs/text"}, "artifact_ids": {"$ref": "#/$defs/ids"}, "source_ids": {"$ref": "#/$defs/ids"}}},
+        "human_review": {"type": "object", "additionalProperties": false, "required": ["status", "reviewer", "reviewed_at", "notes"], "properties": {"status": {"enum": ["pending", "confirmed", "rejected"]}, "reviewer": {"type": ["string", "null"], "minLength": 1, "pattern": "\\S"}, "reviewed_at": {"type": ["string", "null"], "format": "date-time"}, "notes": {"$ref": "#/$defs/text"}}},
         "related_findings": {"$ref": "#/$defs/ids"}
       }
     }

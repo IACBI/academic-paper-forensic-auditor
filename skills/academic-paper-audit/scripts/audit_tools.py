@@ -20,7 +20,7 @@ import stat
 import sys
 from urllib.parse import urlsplit
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 DOMAINS = (
     "text_methods", "statistics_data", "figures_images", "metadata_provenance",
     "references_notices", "ethics_registration", "cross_paper",
@@ -272,6 +272,11 @@ def validate_report(report):
                 errors.append(f"{item['id']}: active finding requires available evidence")
             if item["category"] not in assessed:
                 errors.append(f"{item['id']}: active finding requires assessed domain coverage")
+            else:
+                domain = coverage[item["category"]]
+                for key in ("artifact_ids", "source_ids"):
+                    if set(item[key]) - set(domain[key]):
+                        errors.append(f"{item['id']}: {key} must belong to the finding's assessed domain")
             if item["self_challenge"]["outcome"] == "resolved":
                 errors.append(f"{item['id']}: resolved challenge cannot remain active")
             if item["level"] in (2, 3):
@@ -279,6 +284,20 @@ def validate_report(report):
                     errors.append(f"{item['id']}: Level 2/3 requires a completed self-challenge")
                 if not item["human_review_required"]:
                     errors.append(f"{item['id']}: Level 2/3 requires independent human review")
+        elif "closure" not in item:
+            errors.append(f"{item['id']}: resolved/withdrawn finding requires a closure record")
+        if "closure" in item:
+            closure = item["closure"]
+            if item["status"] == "active":
+                errors.append(f"{item['id']}: active finding cannot have a closure record")
+            check_links(closure, "artifact_ids", artifacts)
+            check_links(closure, "source_ids", sources)
+            if not closure["artifact_ids"] and not closure["source_ids"]:
+                errors.append(f"{item['id']}: closure requires evidence references")
+        if "human_review" in item and item["human_review"]["status"] != "pending":
+            review = item["human_review"]
+            if review["reviewer"] is None or review["reviewed_at"] is None:
+                errors.append(f"{item['id']}: completed human review requires reviewer and observed time")
         if item["level"] == 4:
             corroboration = [source_by_id[key] for key in item["source_ids"] if key in source_by_id]
             if not any(s["authoritative"] and s["article_match"] and s["access_status"] == "read" for s in corroboration):
@@ -342,12 +361,25 @@ def validate_checkpoint(checkpoint):
     if checkpoint["last_observed_at"] is None or any(item["sha256"] is None for item in checkpoint["artifacts"]):
         if not checkpoint["limitations"]:
             errors.append("Unknown checkpoint time/hash requires explicit limitations")
+    if "source_report" in checkpoint:
+        source = checkpoint["source_report"]
+        source_errors = validate_report(source["report"])
+        errors.extend(f"Source report: {error}" for error in source_errors)
+        if source["sha256"] != report_digest(source["report"]):
+            errors.append("Source report digest mismatch")
+        if not source_errors:
+            expected = checkpoint_from_report(source["report"], include_source=False)
+            actual = {key: value for key, value in checkpoint.items() if key != "source_report"}
+            if actual != expected:
+                errors.append("Checkpoint summary differs from its source report; update the report and export again")
     return errors
 
 
 def checkpoint_warnings(checkpoint):
     """Describe missing legacy context after successful checkpoint validation."""
     warnings = []
+    if "source_report" not in checkpoint:
+        warnings.append("Full source report was not retained; detailed finding and derivation history must be obtained separately.")
     if "research_context" not in checkpoint:
         warnings.append("Research context was not recorded; establish methods from source evidence before resuming.")
     for field, message in (
@@ -360,7 +392,13 @@ def checkpoint_warnings(checkpoint):
     return warnings
 
 
-def checkpoint_from_report(report):
+def report_digest(report):
+    """Digest canonical UTF-8 JSON, not the original report file bytes."""
+    data = json.dumps(report, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(data.encode("utf-8")).hexdigest()
+
+
+def checkpoint_from_report(report, *, include_source=True):
     errors = validate_report(report)
     if errors:
         raise ValueError("Cannot checkpoint invalid report: " + "; ".join(errors))
@@ -401,6 +439,8 @@ def checkpoint_from_report(report):
     }
     if "research_context" in report["audit"]:
         checkpoint["research_context"] = copy.deepcopy(report["audit"]["research_context"])
+    if include_source:
+        checkpoint["source_report"] = {"sha256": report_digest(report), "report": copy.deepcopy(report)}
     errors = validate_checkpoint(checkpoint)
     if errors:
         raise ValueError("Checkpoint conversion failed: " + "; ".join(errors))

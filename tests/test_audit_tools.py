@@ -240,6 +240,7 @@ class ReportTests(unittest.TestCase):
         }
         self.report["sources"] = [source]
         self.report["findings"][0]["source_ids"] = ["S001"]
+        self.report["coverage"][1]["source_ids"] = ["S001"]
         self.assertEqual(audit.validate_report(self.report), [])
         for field, value in [("authoritative", False), ("article_match", False), ("access_status", "metadata_only")]:
             changed = copy.deepcopy(self.report)

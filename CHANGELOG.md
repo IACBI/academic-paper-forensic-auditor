@@ -1,5 +1,13 @@
 # Changelog
 
+## v.0.0.4 — 2026-10-20
+
+- Reject active findings whose evidence is outside the assessed domain, closed findings without evidence-backed reasons, and whitespace-only evaluation excerpts. Add independent human-review records without changing model evidence levels.
+- Embed the complete source report and a canonical JSON digest in checkpoint exports; reject conflicting/tampered summaries and warn on missing legacy source history. Existing released archives/tags remain unchanged. Older reports needing closure history must be corrected from actual evidence; do not invent migration data.
+- Add explicit-path evidence rechecking with dependency propagation, same-audit report differences, inert Markdown/HTML output, and optional local PDF/UTF-8 extraction with page/line locators. PDF extraction is not OCR, image analysis or a sandbox.
+- Add a 24-case robustness suite and isolated per-case packet preparation/session bookkeeping. Preserve original v.0.0.3 model baselines with their actual source snapshots; new model/expert evaluations remain pending.
+- Extend regression and optional PDF integration tests, CI and all 12 user guides. Check translated workflow command coverage and reference-style local links.
+
 ## v.0.0.3 — 2026-10-19
 
 ### Reliable continuation records

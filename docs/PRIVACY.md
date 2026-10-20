@@ -24,6 +24,8 @@ A continuation record can contain a title, source identifier, precise locator, e
 
 Checkpoint export works locally and does not upload anything. It summarizes the prior report without a new source inspection or authentication. Supply original evidence separately when a resumed task needs it, verify changed versions, and preserve corrected findings as resolved history. Dispose of unnecessary working copies according to the agreed retention period rather than assuming that closing a conversation removes them.
 
+Current exports also embed the complete source report, including quotations and reviewer records. Apply the source report's access and retention policy to the entire checkpoint. Canonical JSON hashes are consistency checks, not signatures. Local HTML reports contain escaped inert data and no external assets. PDF/text extraction produces another sensitive derived record; it does not remove identifiers or perform OCR. PDF byte/page limits are not resource isolation: process untrusted PDFs in an appropriately restricted environment. Evidence verification uses explicit ID/path mappings rather than trusting filenames embedded in reports.
+
 ## Keep public development material synthetic
 
 Examples, fixtures and committed acceptance responses use synthetic research material. The current baseline files retain the evidence behind published local acceptance results; runtime release archives exclude them. Public bug reports should likewise use a minimal synthetic example or material whose disclosure is authorized. Do not post confidential papers, participant data, private findings, credentials or identifiable allegations in an issue.

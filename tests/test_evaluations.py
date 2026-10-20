@@ -135,7 +135,7 @@ class ScoringTests(unittest.TestCase):
                     evaluation.score(run)
 
     def test_quotes_must_exist_and_passing_checks_need_evidence(self):
-        for quote in (None, "This phrase does not occur in the response"):
+        for quote in (None, " ", "\t\n", "This phrase does not occur in the response"):
             run = fake_run()
             run["judgements"][0]["checks"][0]["quote"] = quote
             with self.assertRaises(ValueError):

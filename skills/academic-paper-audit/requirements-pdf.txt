@@ -1,0 +1,2 @@
+# Optional: only local PDF text extraction requires this dependency.
+pypdf==6.21.1
